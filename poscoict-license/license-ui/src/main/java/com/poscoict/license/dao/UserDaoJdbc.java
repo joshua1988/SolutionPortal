@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -12,7 +14,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.poscoict.license.consts.Consts.SubCategory;
 import com.poscoict.license.vo.Board;
 import com.poscoict.license.vo.Reply;
 import com.poscoict.license.vo.UserInfo;
@@ -26,10 +27,15 @@ public class UserDaoJdbc implements UserDao {
     public void setMessageSourceAccessor(MessageSourceAccessor msAccessor) {
      this.msAccessor = msAccessor;
     }
+    
 
     public void setJdbcTemplate( JdbcTemplate jdbcTemplate ) {
         this.jdbcTemplate = jdbcTemplate;
     }
+    
+/*    public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+    }*/
 
     private RowMapper<UserInfo> userMapper = new RowMapper<UserInfo>() {
         public UserInfo mapRow( ResultSet rs, int rowNum ) throws SQLException {

@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.poscoict.license.consts.Consts;
 import com.poscoict.license.dao.ManagementDao;
+import com.poscoict.license.exception.UserException;
 import com.poscoict.license.security.CustomUserDetails;
 import com.poscoict.license.util.LmsUtil;
 import com.poscoict.license.vo.ContractPersonInfo;
@@ -374,6 +375,12 @@ public class ManagementService extends LmsUtil {
     		String codes = (String) map.get("codes");
 			String codeTypes = (String) map.get("codeTypes");
 			int size = (Integer) map.get("size");
+			
+			logger.info("codes : "+codes);
+			logger.info("codeTypes : "+codeTypes);
+			logger.info("size : "+size);
+			logger.info("userNo : "+userNo);
+			
 			managementDao.insert_user_permission(codes, codeTypes, userNo, size);
             
             // 설치일자 따로 업데이트
@@ -888,7 +895,15 @@ public class ManagementService extends LmsUtil {
 		String userNo = "";
 		if(mode.equals("info")){
 			userNo=userInfo.getUSER_NO().trim();
+			
+			// 16.11.08 17:37 디버깅
+			logger.info("@@ userInfo : " + userInfo);
+			logger.info("@@ adminUser : " + adminUser);
+			logger.info("@@ customUserNo : " + customUserNo);
+			
 			managementDao.updateCustomUserInfo(userInfo, adminUser, customUserNo);
+			logger.info("@@ passed");
+			
 		}else if(mode.equals("permission")){
 			userNo=customUserNo;
 			TransactionStatus status = transactionManager.getTransaction(new DefaultTransactionDefinition());

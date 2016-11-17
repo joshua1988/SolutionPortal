@@ -29,6 +29,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.poscoict.license.consts.Consts;
 import com.poscoict.license.dao.ManagementDao;
+import com.poscoict.license.exception.UserException;
 
 import javax.servlet.http.HttpServletRequest;
 

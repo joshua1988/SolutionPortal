@@ -205,7 +205,7 @@ if (window.jQuery)(function ($) {
 				// Bind a new element
 				MultiFile.addSlave = function (slave, slave_count) {
 					//if(window.console) console.log('MultiFile.addSlave',slave_count);
-					
+
 					// Keep track of how many elements have been displayed
 					MultiFile.n++;
 					// Add reference to master element
@@ -331,12 +331,12 @@ if (window.jQuery)(function ($) {
 							if(customError && customError!=''){
 								ERROR[ERROR.length] = p(customError);
 							};
-								
+
 							// add up size of files selected
 							newfs_size += file.size;
 
 						});
-						
+
 						// add up total for all files selected (existing and new)
 						total_size += newfs_size;
 
@@ -370,7 +370,7 @@ if (window.jQuery)(function ($) {
 							// Handle error
 							MultiFile.error(ERROR.join('\n\n'));
 
-							// 2007-06-24: BUG FIX - Thanks to Adrian Wróbel <adrian [dot] wrobel [at] gmail.com>
+							// 2007-06-24: BUG FIX - Thanks to Adrian Wrï¿½bel <adrian [dot] wrobel [at] gmail.com>
 							// Ditch the trouble maker and add a fresh new element
 							MultiFile.n--;
 							MultiFile.addSlave(newEle[0], slave_count);
@@ -437,13 +437,13 @@ if (window.jQuery)(function ($) {
 					//# Trigger Event! onFileAppend
 					MultiFile.trigger('FileAppend', slave, MultiFile, files);
 					//# End Event!
-					
+
 					var names = [];
 					$.each(files, function (i, file) {
 						var v = String(file.name || '' );
 						names[names.length] =
 							(
-								'<span class="MultiFile-title" title="' + MultiFile.STRING.selected + '">'
+								'<span class="MultiFile-title" title="' + MultiFile.STRING.selected + '"><i class="material-icons" style="vertical-align:bottom;">attach_file</i>'
 									+ MultiFile.STRING.file +
 								'</span>'
 							)
@@ -654,7 +654,7 @@ if (window.jQuery)(function ($) {
 			// automatically re-enable for novice users
 			window.clearTimeout($.fn.MultiFile.reEnableTimeout);
 			$.fn.MultiFile.reEnableTimeout = window.setTimeout($.fn.MultiFile.reEnableEmpty, 500);
-			
+
 			return $(o).each(function () {
 				this.disabled = true
 			}).addClass(klass);

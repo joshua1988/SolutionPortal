@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.Date" %>        
+<%@ page import="java.util.Date" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <style type="text/css">
 .impo {
-	border: 0; 
+	border: 0;
 	border-top: 1px solid #dddddd;
 }
 a.impo:hover {
@@ -47,18 +47,18 @@ a.impo:hover {
 		</c:if>
 		<c:if test="${temp > 1 }">
 			<c:set var="startChartNum" value="${param.chartNum - temp +1 }"/>
-		</c:if>	
+		</c:if>
 		<c:remove var="temp"/>
 	</c:otherwise>
 </c:choose>
 <title>게시판</title>
 </head>
-<body>	
+<body>
 <!-- 		<div class="row">	 -->
 			<label style="color: gray;">&nbsp; 자료실 &gt; ${boardName }</label>
 			<div class="list-group">
 				<c:if test="${ empty boardList || boardList == null }">&nbsp;&nbsp;게시물이 없습니다</c:if>
-				
+
 				<c:if test="${not empty boardList && boardList.size()>0 }">
 				<c:forEach items="${boardList }" var="list" varStatus="status">
 				  <a href="#" class="list-group-item" onclick="javascript:cViewPost('${list.BOARD_ID }','${list.CONTENT_NO }','${param.chartNum==null?1:param.chartNum }','${param.search }','${param.select }'); return false;">
@@ -80,10 +80,10 @@ a.impo:hover {
 					  </small>
 				  </a>
 				</c:forEach>
-				</c:if>		  			  
+				</c:if>
 			</div>
 <!-- 		</div> -->
-		
+
 <!-- 		<div class="row"> -->
 			<div class="row">
 				<div class="col-xs-6 text-right">
@@ -105,13 +105,13 @@ a.impo:hover {
 		  				</c:if>
 					</ul>
 				</div>
-				<div class="col-xs-6 text-right">  
+				<div class="col-xs-6 text-right">
 				    <div class="navbar-form" role="search" style="border: 0; margin-left: -40px;">
 					    <select class="input-sm" id="select" name="select">
 						  <option selected="selected" value="0">제목</option>
 						  <option value="2">제목+본문</option>
 						</select>
-		
+
 						<input type="text" id="text" name="text" class="input-sm" placeholder="Search" onkeydown="javascript:if(event.keyCode == 13){cSearchList('${boardId }');}">
 						<div class="btn-group">
 						<button type="button" class="btn btn-default btn-sm" onclick="javascript:cSearchList('${boardId }'); return false;">검색</button>

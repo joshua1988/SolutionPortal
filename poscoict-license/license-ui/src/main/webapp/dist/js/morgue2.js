@@ -4,7 +4,7 @@ function createBoardC(){
 		alertPopup("게시판 명을 입력해 주세요.");
 		return false;
 	}
-	
+
 	f.submit();
 }
 
@@ -12,14 +12,14 @@ function deleteCustomBoard(id){
 	var inst = confirmPopup("게시판을 삭제 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
-		form.setAttribute("method","post");  
+		var form = document.createElement("form");
+		form.setAttribute("method","post");
 		form.setAttribute("action","deleteCustomBoard");
 		var param1 = createEl("boardId", id);
-		
-		document.body.appendChild(form); 
+
+		document.body.appendChild(form);
 		form.appendChild(param1);
-		form.submit(); 
+		form.submit();
 	});
 }
 
@@ -29,31 +29,31 @@ function renameCustomBoard(id,ind){
 		alertPopup("수정 할 이름을 입력해 주세요.");
 		return false;
 	}
-	
+
 	var inst = confirmPopup("게시판명을 수정 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
-		form.setAttribute("method","post");  
+		var form = document.createElement("form");
+		form.setAttribute("method","post");
 		form.setAttribute("action","renameCustomBoard");
 		var param1 = createEl("boardId", id);
 		var param2 = createEl("boardName", temp);
-		document.body.appendChild(form); 
+		document.body.appendChild(form);
 		form.appendChild(param1);
 		form.appendChild(param2);
-		form.submit(); 
+		form.submit();
 	});
 }
 
 function getCustomBoardList(id){
-	saveLocalStoragy(id);
-	
-	var form = document.createElement("form");     
+	// saveLocalStoragy(id);
+
+	var form = document.createElement("form");
 	form.setAttribute("action","customBoard");
-	form.setAttribute("method","POST");      
+	form.setAttribute("method","POST");
 	var child1 = createEl("boardId", id);
-	document.body.appendChild(form); 
-	form.appendChild(child1);                         
+	document.body.appendChild(form);
+	form.appendChild(child1);
 	form.submit();
 }
 
@@ -85,13 +85,13 @@ function cInsertReply(boardId, contentNo){
 	content = document.getElementById("replyText").value;
 
 	var url = "cInsertReply";
-    $.post(url, 
-            {boardId:boardId, 
-    		 contentNo:contentNo, 
+    $.post(url,
+            {boardId:boardId,
+    		 contentNo:contentNo,
              mainContent:encodeURIComponent(content)},
             function(data){
             	// 내용 비우기
-                $('#replyText').val(''); 
+                $('#replyText').val('');
                 // 입력이 완료가 됐으므로 다시 리스트 불러오기
                 cCmtList(contentNo, boardId);
                 alertPopup("덧글이 등록 되었습니다.");
@@ -103,7 +103,7 @@ function cDeleteReply(boardId, reContentNo, contentNo){
 	var inst = confirmPopup("삭제 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		$.post(url, 
+		$.post(url,
 			{boardId:boardId, reContentNo:reContentNo, contentNo:contentNo},
 			function(data){
 				cCmtList(contentNo, boardId);
@@ -126,11 +126,11 @@ function cCmtList(no, boardId) {
 }
 
 function cModifyBoard(){
-	var form = document.insertCModifyBoard;     
-	form.setAttribute("method","post");                    
+	var form = document.insertCModifyBoard;
+	form.setAttribute("method","post");
 	form.setAttribute("action","cModifyBoard");
 	var title = document.getElementById("modify_title").value.replace(/\s/g, "");
-	
+
 	oEditors.getById["modify_content"].exec("UPDATE_CONTENTS_FIELD", [ ]);
 	var content = document.getElementById("modify_content").value.replace(/\s/g, "");
 	if(content == ""){
@@ -146,31 +146,31 @@ function cModifyBoard(){
 }
 
 function getCustomWritingForm(id){
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","customWriting");
 	document.body.appendChild(form);
 	var param1 = createEl("boardId", id);
 	form.appendChild(param1);
-	form.submit(); 
+	form.submit();
 }
 
 function cViewPost(id, no, chartNum, search, select){
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","cViewPost");
 	document.body.appendChild(form);
 	var param1 = createEl("boardId", id);
 	var param2 = createEl("contentNo", no);
 	var param3 = createEl("chartNum", chartNum);
-	
+
 	if(search != null || search != ""){
 		var param4 = createEl("search", search);
 		var param5 = createEl("select", select);
 		form.appendChild(param4);
 		form.appendChild(param5);
 	}
-	
+
 	form.appendChild(param1);
 	form.appendChild(param2);
 	form.appendChild(param3);
@@ -182,18 +182,18 @@ function cDeleteBoard(id, no, sear, sel, chart){
 	var inst = confirmPopup("게시물을 삭제 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
-		form.setAttribute("method","post");                    
+		var form = document.createElement("form");
+		form.setAttribute("method","post");
 		form.setAttribute("action","cDeleteBoard");
-		document.body.appendChild(form);      
-		
+		document.body.appendChild(form);
+
 		var param1 = createEl("boardId", id);
 		var param2 = createEl("contentNo", no);
 		var param3 = createEl("chartNum",chart);
 		form.appendChild(param1);
 		form.appendChild(param2);
-		form.appendChild(param3);   
-		
+		form.appendChild(param3);
+
 		if(sear != null || sear != ""){
 			var param4 = createEl("search", sear);
 			var param5 = createEl("select", sel);
@@ -201,30 +201,30 @@ function cDeleteBoard(id, no, sear, sel, chart){
 			form.appendChild(param5);
 		}
 
-		form.submit(); 
+		form.submit();
 	});
 }
 
 function cModifyForm(id, no, chart, sear, sel){
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","cModifyBoardForm");
-	
+
 	document.body.appendChild(form);
-	
+
 	var param1 = createEl("boardId", id);
 	var param2 = createEl("contentNo", no);
 	var param3 = createEl("search", sear);
 	var param4 = createEl("select", sel);
 	var param5 = createEl("chartNum", chart);
-	
+
 	form.appendChild(param1);
 	form.appendChild(param2);
 	form.appendChild(param3);
 	form.appendChild(param4);
 	form.appendChild(param5);
-	
-	form.submit(); 
+
+	form.submit();
 }
 
 function customWriteSubmit(){
@@ -241,20 +241,20 @@ function customWriteSubmit(){
 		$(".WRITE_MAIN_CONTENT").focus();
 		return;
 	}
-	
+
 	document.customW.submit();
 }
 
 //네비게이터 페이지 숫자 선택시 처리
 function cMovePage(chart, id, sear, sel){
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");  
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","customBoard");
-	
+
 	document.body.appendChild(form);
 	var param1 = createEl("chartNum", chart);
 	var param2 = createEl("boardId", id);
-	
+
 	if(sear != null){
 		var param3 = createEl("search", sear);
 		var param4 = createEl("select", sel);
@@ -264,7 +264,7 @@ function cMovePage(chart, id, sear, sel){
 
 	form.appendChild(param1);
 	form.appendChild(param2);
-	form.submit();  
+	form.submit();
 }
 
 //네비게이터 10페이지씩 이동, 맨처음, 맨끝 이동
@@ -288,22 +288,22 @@ function cJumpPage(id, mode, totalPage, sear, sel){
 	}else{
 		return false;
 	}
-	
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");  
+
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","customBoard");
-	
+
 	document.body.appendChild(form);
 	var param1 = createEl("chartNum", chart);
 	var param2 = createEl("boardId", id);
-	
+
 	if(sear != null){
 		var param3 = createEl("search", sear);
 		var param4 = createEl("select", sel);
 		form.appendChild(param3);
 		form.appendChild(param4);
 	}
-	
+
 	form.appendChild(param1);
 	form.appendChild(param2);
 	form.submit();
@@ -311,64 +311,64 @@ function cJumpPage(id, mode, totalPage, sear, sel){
 
 function cSearchList(id){
 	var temp = document.getElementById("text").value.replace(/\s/g, "");
-	
+
 	if(temp == "" || temp.length <= 1){
 		alertPopup("두 글자 이상 입력해 주세요");
 		return;
 	}
-	
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","customBoard");
-	
+
 	document.body.appendChild(form);
 	var choose = document.getElementById("select").value;
 	var text = document.getElementById("text").value;
-	
+
 	var category = createEl("boardId", id);
 	var search = createEl("search", text);
 	var select = createEl("select", choose);
 	form.appendChild(category);
 	form.appendChild(search);
 	form.appendChild(select);
-	form.submit(); 
+	form.submit();
 }
 
 function cSearchList1(id){
 	var temp = document.getElementById("text1").value.replace(/\s/g, "");
-	
+
 	if(temp == "" || temp.length <= 1){
 		alertPopup("두 글자 이상 입력해 주세요");
 		return;
 	}
-	
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","customBoard");
-	
+
 	document.body.appendChild(form);
 	var choose = document.getElementById("select1").value;
 	var text = document.getElementById("text1").value;
-	
+
 	var category = createEl("boardId", id);
 	var search = createEl("search1", text);
 	var select = createEl("select1", choose);
 	form.appendChild(category);
 	form.appendChild(search);
 	form.appendChild(select);
-	form.submit(); 
+	form.submit();
 }
 
 function projectManagement(id, localId){
-	saveLocalStoragy(localId);
-	
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");  
+	// saveLocalStoragy(localId);
+
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","boardManagement");
 	document.body.appendChild(form);
 	var param1 = createEl("solution", id);
 	form.appendChild(param1);
-	form.submit(); 
+	form.submit();
 }
 
 function createProjectFun(mode, id){
@@ -378,24 +378,37 @@ function createProjectFun(mode, id){
 	if(mode=='B') mo='게시판 생성';
 	if(mode=='EF') mo='폴더명 변경';
 	if(mode=='DF') mo='폴더 삭제';
-	if(mode=='EB') mo='게시판명 변경';
+	if(mode=='EB') mo='이름 변경';
 	if(mode=='DB') mo='게시판 삭제';
 	var temp = ''
-			  +'<div class="modal-header">'
-			  +'<h4 class="modal-title"><p class="text-muted"><strong>'+mo+'</strong></p></h4>'
-			  +'</div><div class="modal-body">'
-			  +'<form name="creatProject" class="form-horizontal" role="form">'
-			  +'<div class="form-group"><label class="col-xs-3 control-label">'+mo+'</label>'
-			  +'<div class="col-xs-9">';
-			  if(mode!='DF' && mode!='DB') temp+='<input type="text" class="form-control" name="projectName" id="projectName" placeholder="'+mo+'">';
-			  if(mode=='DF') temp+='<div class="alert alert-danger">폴더 삭제시 하위폴더 및 게시판을 이용 할 수 없습니다.</div>';
-			  if(mode=='DB') temp+='<div class="alert alert-danger">게시판이 제거됩니다.</div>';
-			  temp+='</div></div>';
-			  temp+='</form></div><div class="modal-footer">';
-			  temp+='<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>';
-			  temp+='<button type="button" class="btn btn-primary" onclick="javascript:createProjectSubmit(\''+mode+'\',\''+id+'\')">'+mo+'</button></div>';
-	
-	
+			  // +'<div class="modal-header">'
+			  // +'<h4 class="modal-title"><p class="text-muted"><strong>'+mo+'</strong></p></h4>'
+			  // +'</div><div class="modal-body">'
+			  // +'<form name="creatProject" class="form-horizontal" role="form">'
+			  // +'<div class="form-group"><label class="col-xs-3 control-label">'+mo+'</label>'
+			  // +'<div class="col-xs-9">';
+			  // if(mode!='DF' && mode!='DB') temp+='<input type="text" class="form-control" name="projectName" id="projectName" placeholder="'+mo+'">';
+			  // if(mode=='DF') temp+='<div class="alert alert-danger">폴더 삭제시 하위폴더 및 게시판을 이용 할 수 없습니다.</div>';
+			  // if(mode=='DB') temp+='<div class="alert alert-danger">게시판이 제거됩니다.</div>';
+			  // temp+='</div></div>';
+			  // temp+='</form></div><div class="modal-footer">';
+			  // temp+='<button type="button" class="btn btn-default" data-dismiss="modal">취소</button>';
+			  // temp+='<button type="button" class="btn btn-primary" onclick="javascript:createProjectSubmit(\''+mode+'\',\''+id+'\')">'+mo+'</button></div>';
+				+ '<div class="modal-content">'
+				+	'<form name="creatProject" class="form-horizontal" role="form">'
+				+ '<h4>'+mo+'</h4>'
+				+	'<p style="display:flex; align-items:baseline;"><span style="font-size:18px; width:25%;">'+mo+ ' : </span>';
+				if(mode!='DF' && mode!='DB') temp+='<input type="text" class="form-control" name="projectName" id="projectName" placeholder="'+mo+'">';
+			  if(mode=='DF') temp+='<span class="red-text">폴더 삭제시 하위폴더 및 게시판을 이용 할 수 없습니다.<span>';
+			  if(mode=='DB') temp+='<span class="red-text">게시판이 제거됩니다.<span>';
+				temp += '</p>';
+				temp += '</form>';
+				temp += '</div>';
+				temp += '<div class="modal-footer">';
+				temp += '<a href="#!" onclick="javascript:createProjectSubmit(\''+mode+'\',\''+id+'\')" class="modal-action modal-close waves-effect waves-green btn-flat">'+mo+'</a>';
+				temp += '<a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">취소</a>';
+				temp += '</div>';
+
 	$("#projectFolderContent").append(temp);
 }
 
@@ -416,12 +429,12 @@ function createProjectSubmit(mode, id) {
 		alertPopup("게시판명을 입력하세요.");
 		return false;
 	}
-	
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");  
+
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","projectFolders");
 	document.body.appendChild(form);
-	
+
 	var param1 = createEl("mode", mode);
 	var param2 = createEl("upperId", id);
 	var param3 = createEl("solution", $("#solution").val());
@@ -430,6 +443,6 @@ function createProjectSubmit(mode, id) {
 	form.appendChild(param2);
 	form.appendChild(param3);
 	form.appendChild(param4);
-	form.submit(); 
-	
+	form.submit();
+
 }

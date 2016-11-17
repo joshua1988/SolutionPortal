@@ -2,9 +2,9 @@ function newRomoveProduct(){
 	$(".contract1:last").remove();
 }
 
-function generateExcel(){	
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+function generateExcel(){
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","generateExcel");
 	document.body.appendChild(form);
 	form.submit();
@@ -12,22 +12,22 @@ function generateExcel(){
 
 function getInfomation(no){
 	var userNo = createEl("userNo", no);
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");  
-	form.setAttribute("action","userInfom");
-	document.body.appendChild(form); 
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
+	form.setAttribute("action","userInform");
+	document.body.appendChild(form);
 	form.appendChild(userNo);
-	form.submit(); 
+	form.submit();
 }
 
 function getProgressInfomation(no){
 	var userNo = createEl("objectId", no);
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");  
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","progressUserInfom");
-	document.body.appendChild(form); 
+	document.body.appendChild(form);
 	form.appendChild(userNo);
-	form.submit(); 
+	form.submit();
 }
 
 function insertComment(id){
@@ -46,34 +46,34 @@ function insertComment(id){
 	var inst = confirmPopup("등록 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
-		form.setAttribute("method","post");  
+		var form = document.createElement("form");
+		form.setAttribute("method","post");
 		form.setAttribute("action","insertComment");
 		var obid = createEl("objectId", id);
 		var comm = createEl("comment", comment);
-		
-		document.body.appendChild(form); 
+
+		document.body.appendChild(form);
 		form.appendChild(obid);
 		form.appendChild(comm);
-		form.submit(); 
+		form.submit();
 	});
-	
+
 }
 
 function changeUserStatus(id, st, text){
 	var inst = confirmPopup(text+" 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
-		form.setAttribute("method","post");  
+		var form = document.createElement("form");
+		form.setAttribute("method","post");
 		form.setAttribute("action","changeUserStatus");
 		var obid = createEl("objectId", id);
 		var status = createEl("uStatus", st);
-		
-		document.body.appendChild(form); 
+
+		document.body.appendChild(form);
 		form.appendChild(obid);
 		form.appendChild(status);
-		form.submit(); 
+		form.submit();
 	});
 }
 
@@ -98,11 +98,12 @@ function modifyInfo(){
 }
 
 function modifyPro(){
-	var f = document.modifyProfile;     
+	var f = document.modifyProfile;
+	console.log("modifyPro f.USER_NO.value : ", f.USER_NO.value);
 	var no = f.USER_NO.value.replace(/\s/g, "");
 	var name = f.USER_NAME.value.replace(/\s/g, "");
 	var date = f.USER_START_DATE.value.replace(/\s/g, "");
-	
+
 	if(no == ""){
 		alertPopup("계약번호를 입력해 주세요.");
 		return;
@@ -115,9 +116,9 @@ function modifyPro(){
 		alertPopup("계약일자를 입력해 주세요.");
 		return;
 	}
-	
+
 	f.action="modifyProfile";
-	f.submit(); 
+	f.submit();
 }
 
 function modifyProgressButton(){
@@ -126,10 +127,13 @@ function modifyProgressButton(){
 	$(".modify_button").css("display","none");
 	$(".modify_submit_button").css("display","");
 	$(".modify_cancle").css("display","");
+
+	// 추가
+	$("select").material_select();
 }
 
 function modifyProgress(){
-	var f = document.modifyProgressInfo;     
+	var f = document.modifyProgressInfo;
 	var name = f.P_USER_NAME.value.replace(/\s/g, "");
 	var pro = f.P_PROJECT_NAME.value.replace(/\s/g, "");
 
@@ -141,12 +145,12 @@ function modifyProgress(){
 		alertPopup("프로젝트명을 입력해 주세요.");
 		return;
 	}
-	
+
 	var inst = confirmPopup("수정 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
 		f.action="modifyProgressInfo";
-		f.submit(); 
+		f.submit();
 	});
 }
 
@@ -154,7 +158,7 @@ function addProgressUser(){
 	var f = document.addProgressContract;
 	var user = f.USER_NAME.value.replace(/\s/g, "");
 	var project = f.PROJECT_NAME.value.replace(/\s/g, "");
-	
+
 	if(user == ""){
 		alertPopup("회사명을 입력해 주세요.");
 		return;
@@ -163,17 +167,17 @@ function addProgressUser(){
 		alertPopup("프로젝트명을 입력해 주세요.");
 		return;
 	}
-	
+
 	f.submit();
 }
 
 function addUser(){
-	var f = document.addContract;     
+	var f = document.addContract;
 	var no = f.USER_NO.value.replace(/\s/g, "");
 	var name = f.USER_NAME.value.replace(/\s/g, "");
 	var date = f.USER_START_DATE.value.replace(/\s/g, "");
 	var check = true;
-	
+
 	if(no == ""){
 		alertPopup("계약번호를 입력해 주세요.");
 		return;
@@ -196,7 +200,7 @@ function addUser(){
 				check = false;
 				return false;
 			}
-			
+
 			var temp = $(".fileCheck"+i).is(":checked");
 			if(!temp){
 				if($(".file"+i).val()==""){
@@ -210,7 +214,7 @@ function addUser(){
 
 	if(check == true){
 		var form = document.addContract;
-		form.submit();	
+		form.submit();
 	};
 }
 
@@ -222,7 +226,7 @@ function displayFileSection(mode){
 }
 
 function modifyFileCheck(){
-	var ischecked = $(".modifyFileCheck").is(":checked");
+	var ischecked = $("#modifyFileCheck").is(":checked");
 	if(ischecked){
 		$(".modifyFile").attr("disabled","disabled");
 		$(".modifyFileCheck").val("false");
@@ -245,7 +249,7 @@ function product(mode){
 function moreProduct(){
 	var user = $(".oldUserNo").val();
 	var check = true;
-	
+
 	var no = $("#plus .contract1").length;
 	if(no>0){
 		for(var i=0; i<no; i++){
@@ -255,8 +259,8 @@ function moreProduct(){
 				check = false;
 				return false;
 			}
-			
-			var temp = $(".fileCheck"+i).is(":checked");
+
+			var temp = $("#fileCheck"+i).prop("checked");
 			if(!temp){
 				if($(".file"+i).val()==""){
 					alertPopup("파일을 선택해 주세요.");
@@ -268,12 +272,12 @@ function moreProduct(){
 	}
 
 	if(check==true){
-		var form = document.plusProduct;     
+		var form = document.plusProduct;
 		var userNo = createEl("userNo", user);
 		form.appendChild(userNo);
-		form.setAttribute("method","post");                    
+		form.setAttribute("method","post");
 		form.setAttribute("action","plusProduct");
-		form.submit(); 
+		form.submit();
 	}
 }
 
@@ -281,9 +285,9 @@ function userExpire(user){
 	var inst = confirmPopup("유저를 삭제 하시겠습니까? 리스트에서만 제거 되고 데이터는 서버에 남게 됩니다.");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
+		var form = document.createElement("form");
 		var userNo = createEl("userNo", user);
-		form.setAttribute("method","post");                    
+		form.setAttribute("method","post");
 		form.setAttribute("action","userExpire");
 		document.body.appendChild(form);
 		form.appendChild(userNo);
@@ -295,9 +299,9 @@ function progressUserExpire(id){
 	var inst = confirmPopup("유저를 삭제 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
+		var form = document.createElement("form");
 		var objectId = createEl("objectId", id);
-		form.setAttribute("method","post");                    
+		form.setAttribute("method","post");
 		form.setAttribute("action","progressUserExpire");
 		document.body.appendChild(form);
 		form.appendChild(objectId);
@@ -327,37 +331,37 @@ function destroyProduct(user, key){
 	var inst = confirmPopup("정말 삭제 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
-		form.setAttribute("method","post");                    
+		var form = document.createElement("form");
+		form.setAttribute("method","post");
 		form.setAttribute("action","destroyProduct");
-		
+
 		document.body.appendChild(form);
-		
+
 		var userNo = createEl("userNo", user);
 		var licenseKey = createEl("licenseKey", key);
 		form.appendChild(userNo);
 		form.appendChild(licenseKey);
-		
-		form.submit(); 
+
+		form.submit();
 	});
 }
 
 function searchCompany(){
 	var temp = document.getElementById("managementText").value.replace(/\s/g, "");
-	
+
 	if(temp == "" || temp.length <= 1){
 		alertPopup("두 글자 이상 입력해 주세요");
 		return;
 	}
-	
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","management");
-	
+
 	document.body.appendChild(form);
 	var choose = $("#managementSelect > option:selected").val();
 	var text = document.getElementById("managementText").value;
-	
+
 	var search = createEl("search", text);
 	var select = createEl("select", choose);
 	form.appendChild(search);
@@ -367,14 +371,14 @@ function searchCompany(){
 
 function searchProgressCompany(){
 	var temp = document.getElementById("progressText").value.replace(/\s/g, "");
-	
+
 	if(temp == "" || temp.length <= 1){
 		alertPopup("두 글자 이상 입력해 주세요");
 		return;
 	}
 
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","progress");
 
 	document.body.appendChild(form);
@@ -388,31 +392,31 @@ function searchProgressCompany(){
 }
 
 function getSubCategoryList(sub){
-	var form = document.createElement("form");     
+	var form = document.createElement("form");
 	form.setAttribute("action","progress");
-	form.setAttribute("method","POST");                    
-	document.body.appendChild(form);    
+	form.setAttribute("method","POST");
+	document.body.appendChild(form);
 	var subCategory = createEl("subCategory", sub);
 	form.appendChild(subCategory);
 
-	form.submit();  
+	form.submit();
 }
 
 function deleteComment(id, no){
 	var inst = confirmPopup("정말 삭제 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
+		var form = document.createElement("form");
 		form.setAttribute("action","deleteComment");
-		form.setAttribute("method","POST");                    
-		document.body.appendChild(form);    
+		form.setAttribute("method","POST");
+		document.body.appendChild(form);
 		var objectId = createEl("objectId", id);
 		var commentNo = createEl("commentNo", no);
 		form.appendChild(objectId);
 		form.appendChild(commentNo);
 
 		form.submit();
-	}); 
+	});
 }
 
 function modifyCommentForm(f,id,no,index){
@@ -433,26 +437,26 @@ function modifyCancel(index){
 
 function modifyComment(index,id,no){
 	var text = document.getElementById('newComment'+index).value.replace(/\s/g, "");
-	
+
 	if(checkBytes(text) > 2000){
 		alertPopup("글자 수가 2000byte를 넘었습니다.");
 		return false;
 	}
-	
+
 	if(text == ""){
 		alertPopup("메모를 입력해 주세요");
 		return;
 	}
-	
+
 	text = document.getElementById('newComment'+index).value.replace(/\s/g, "&nbsp;");
-	
+
 	var inst = confirmPopup("수정 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
+		var form = document.createElement("form");
 		form.setAttribute("action","modifyComment");
-		form.setAttribute("method","POST");                    
-		document.body.appendChild(form);    
+		form.setAttribute("method","POST");
+		document.body.appendChild(form);
 		var objectId = createEl("objectId", id);
 		var commentNo = createEl("commentNo", no);
 		var comment = createEl("comment", text);
@@ -461,7 +465,7 @@ function modifyComment(index,id,no){
 		form.appendChild(comment);
 
 		form.submit();
-	}); 
+	});
 }
 
 function getUserContractForm(id){
@@ -478,11 +482,11 @@ function getUserContractForm(id){
 }
 
 function convertUser111(){
-	var f = document.convertUser;     
+	var f = document.convertUser;
 	var no = f.USER_NO.value.replace(/\s/g, "");
 	var name = f.USER_NAME.value.replace(/\s/g, "");
 	var date = f.USER_START_DATE.value.replace(/\s/g, "");
-	
+
 	if(no == ""){
 		alertPopup("계약번호를 입력해 주세요.");
 		return;
@@ -504,7 +508,7 @@ function convertUser111(){
 				alertPopup("제품키를 입력해 주세요.");
 				return false;
 			}
-			
+
 			var temp = $(".fileCheck"+i).is(":checked");
 			if(!temp){
 				if($(".file"+i).val()==""){
@@ -519,6 +523,18 @@ function convertUser111(){
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
 		var form = document.convertUser;
-		form.submit();	
-	}); 
+		form.submit();
+	});
+}
+
+
+function fileCheck(no){
+	var ischecked = $(".fileCheck"+no).is(":checked");
+	if(ischecked){
+		$(".file"+no).attr("disabled","disabled");
+		$(".fileCheckVal"+no).val("true");
+	}else{
+		$(".file"+no).removeAttr("disabled");
+		$(".fileCheckVal"+no).val("false");
+	}
 }

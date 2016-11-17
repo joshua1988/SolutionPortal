@@ -5,33 +5,141 @@
 <head>
 <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <meta name="viewport" content="width=device-width, initial-scale=0.7"> -->
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-<!-- 부트스트랩 -->
-<link href="${contextPath }/dist/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-<link href="${contextPath }/dist/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+<!--Import Google Icon Font-->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!--Import materialize.css-->
+<link type="text/css" rel="stylesheet" href="${contextPath}/dist/materialize/css/materialize.min.css"  media="screen,projection"/>
+<!--Let browser know website is optimized for mobile-->
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
 <!-- jquery-ui css -->
 <link rel="stylesheet" href="${contextPath }/dist/jquery-ui/jquery-ui.css">
 <link rel="stylesheet" href="${contextPath }/dist/modal/jquery.remodal.css">
 <link rel="stylesheet" href="${contextPath }/dist/css/docs.css">
-<link rel="stylesheet" href="${contextPath }/dist/jstree/themes/default/style.min.css" />
-<link rel="stylesheet" href="${contextPath }/dist/bootstrap/css/non-reponsive.css" />
 <style type="text/css">
-.top { position:fixed;right:5%;bottom:15%; z-index:999; display:none; }
+.top { position:fixed;right:5%;bottom:10%; z-index:999; display:none; }
 .top IMG {
 	width: 30px; height: 30px;
 	zoom: 1;
     filter: alpha(opacity=50);
     opacity: 0.5;
 }
-#treemenu {
+/*#treemenu {
 	font-size: 12px;
 	padding-right: 0;
     padding-left: 0;
+}*/
+
+/* fixed footer*/
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+	font-size: 14px;
+}
+footer.page-footer {
+	margin-top: 0;
+}
+/*container*/
+.container {
+	width: 90%;
+	max-width: 1600px;
+	/*margin: 0 5%;*/
+}
+.row {
+	/*margin-top: 20px;*/
+	/*margin-bottom: 1rem;*/
+	margin-bottom: 0;
+}
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 90%;
+  }
+	.brand-logo {
+		margin-left:0.75em;
+	}
+}
+/*table layout*/
+td {
+	padding: 5px 5px;
+}
+/*tree collection padding*/
+.collection .collection-item {
+	padding: 10px 30px;
+}
+/*side nav icon alignment*/
+.side-nav a {
+	display: flex;
+}
+/*mobile 비공개 button*/
+@media (max-width:600px) {
+	header, nav, nav .button-collapse i {
+		height:40px;
+		line-height: 40px;
+	}
+	[type="checkbox"]+label {
+		padding-left: 1.8rem;
+		font-size: 0.8rem;
+	}
+	#unopened {
+		width:32% !important;
+		padding-left:5px !important;
+	}
+}
+/*mobile button*/
+@media (max-width:736px) {
+	.btn {
+		padding : 0 1.5rem;
+	}
+	.btnSection {
+		text-align: center;
+	}
+	.btnGroup {
+		float: none !important;
+	}
+	.viewInfo {
+		text-align: center;
+		padding: 0;
+	}
+	.replyInfo {
+		padding: 0;
+	}
+	/*mobile UI*/
+	.container {
+		width: 100%;
+	}
+	.card-panel {
+		padding: 0;
+	}
+	/*layout optimization based on mobile width*/
+	.card .card-title {
+		font-size:20px;
+		font-weight:600 !important;
+	}
+	.card .card-content {
+		padding:10px;
+	}
+	/*side nav divider*/
+	.side-nav .divider {
+		margin: 0;
+	}
+}
+@media (min-width:800px) {
+	.btnGroup {
+		padding-top:5px;
+	}
+	.viewInfo {
+		padding:5px;
+	}
 }
 </style>
 <c:choose>
@@ -49,94 +157,126 @@
 	if( session.getAttribute("jstree") != null ){
 %>
 <script type="text/javascript">
- 		localStorage.setItem('myJstree','{"state":{"core":{"open":[],"scroll":{"left":0,"top":0},"selected":["notice"]}},"ttl":false,"sec":'+new Date().getTime()+'}');
+ 	// 	localStorage.setItem('myJstree',
+		// 	'{"state":{"core":{"open":[],"scroll":{"left":0,"top":0},"selected":["notice"]}},"ttl":false,"sec":'+new Date().getTime()+'}');
 </script>
-<%
-	session.removeAttribute("jstree");
+<%	session.removeAttribute("jstree");
  	}
 %>
-	  <div class="top"><a href="#"><label style="font-size: 12px; color: gray;">맨위</label><img src="${contextPath }/dist/img/arrow_top.gif" alt="맨위"/></a></div>
-     <!-- Fixed navbar -->
-      <header class="navbar navbar-inverse" style="z-index: 100;">
-      	  <div class="container">
-	          <div class="navbar-header">
-	            <a class="navbar-brand" href="#" onclick="javascript:boardList('notice','NOTICE'); return false;" style="color: white;">LICENSE MANAGEMENT</a>
-	            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	              <span class="icon-bar"></span>
-	              <span class="icon-bar"></span>
-	              <span class="icon-bar"></span>
-	            </button>
-	          </div>
-	          <div class="collapse navbar-collapse">
-	            <div class="navbar-form navbar-right">
-		            <security:authorize ifAnyGranted="ROLE_U,ROLE_S,ROLE_D, ROLE_C">
-		            <div class="form-group">
-		              	<button type="button" class="btn btn-info" onclick="javascript:passPop('1'); return false;" data-toggle="modal" data-target="#passwordPop">
-				  			<span class="glyphicon glyphicon-cog"></span> 비밀번호 변경
-						</button>
-		            </div>
-		            </security:authorize>
-		            <form class="form-group" action="logout">
-		                <button type="submit" class="btn btn-primary">
-				  			<span class="glyphicon glyphicon-off"></span> 로그아웃
-						</button>
-		            </form>
-	            </div>
-	          </div>
-          </div>
-      </header>
+  <div class="top"><a href="#"><label style="font-size: 12px; color: gray;">맨위</label><img src="${contextPath }/dist/img/arrow_top.gif" alt="맨위"/></a></div>
+	<header>
+		<nav class="blue darken-1">
+	    <div class="nav-wrapper">
+	      <a href="#!" class="brand-logo" onclick="javascript:boardList('notice','NOTICE'); return false;">Solution Portal</a>
+				<a href="#" data-activates="sidebar" class="button-collapse"><i class="material-icons">menu</i></a>
+	      <ul class="right hide-on-med-and-down">
+					<security:authorize ifAnyGranted="ROLE_U,ROLE_S,ROLE_D, ROLE_C">
+		        <li>
+							<a href="#" onclick="javascript:passPop('1'); return false;">
+								<i class="material-icons left">lock</i>
+								비밀번호 변경
+							</a>
+						</li>
+					</security:authorize>
+					<li><a href="logout"><i class="material-icons left">input</i>로그아웃</a></li>
+	      </ul>
+				<ul class="side-nav" id="sidebar">
+					<li><a href="logout"><i class="material-icons">input</i>로그아웃</a></li>
+					<%-- <div class="divider"></div> --%>
+					${sessionScope.userNavMenu}
+	      </ul>
+	    </div>
+	  </nav>
+	</header>
 
-      <article>
-        <div class="container">
-	      	<div id="treemenu" class="col-xs-2" style="padding-bottom: 70px;">
-	      		<div class="panel panel-default" style="overflow-x: scroll;">
-				    <div class="panel-heading">
-			            <label><strong>CATEGORY</strong></label>
-				    </div>
-				    <div class="panel-body">
-					    <div id="myJstree">
-					    	${sessionScope.userMenu }
-						</div>
-				    </div>
+	<main>
+		<div class="row container">
+			<div class="container">
+				<div class="col l3 m4 s12 hide-on-small-only" id="tree">
+					<ul class="collapsible" data-collapsible="accordion">
+					${sessionScope.userMenu}
+
+						<!--
+				    <li>
+				      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Outer Collapsible</div>
+				      <div class="collapsible-body">
+								<%-- <div class="collection">
+					        <a href="#!" class="collection-item active">Out List 1</a>
+					        <a href="#!" class="collection-item">
+										<ul class="collapsible" data-collapsible="accordion">
+											<li>
+											  <div class="collapsible-header"><i class="material-icons">filter_drama</i>Outer Collapsible</div>
+												<div class="collapsible-body">
+													<div class="collection">
+										        <a href="#!" class="collection-item active">1</a>
+										        <a href="#!" class="collection-item">2</a>
+										      </div>
+												</div>
+											</li>
+										</ul>
+									</a>
+					        <a href="#!" class="collection-item">Out List 3</a>
+					      </div> --%>
+
+								<%-- Doulbe Collapsible (Outer & Inner) --%>
+								<%-- <ul class="collapsible" data-collapsible="accordion">
+									<li>
+										<div class="collapsible-header"><i class="material-icons">filter_drama</i>Outer Collapsible</div>
+										<div class="collapsible-body">
+											<div class="collection">
+												<a href="#!" class="collection-item active">1</a>
+												<a href="#!" class="collection-item">2</a>
+											</div>
+										</div>
+									</li>
+								</ul> --%>
+							</div>
+				    </li>
+						-->
+
+						<%-- sb.append("<li>");
+						sb.append("<div class=\"collapsible-header\"><i class=\"material-icons\">filter_drama</i>자료실</div>");
+						sb.append("<div class=\"collapsible-body\">");
+						sb.append("<div class=\"collection\">"); --%>
+
+				  </ul>
 				</div>
-	      	</div>
-	      	<div class="col-xs-10" style="padding-bottom: 70px;">
-				<jsp:include page="${sPage }"></jsp:include>
-	      	</div>
-      	</div>
-	  </article>
+				<div class="col l9 m8 s12">
+					<jsp:include page="${sPage }"></jsp:include>
+				</div>
+			</div>
+	  </div>
+	</main>
+	<footer class="page-footer blue darken-1" style="padding:18px 0;">
+		<div class="container center-align white-text">
+			ⓒ2014 POSCO ICT, All Rights Reserved.
+			<%-- <a href="mailto:help@solutionpot.co.kr">help@solutionpot.co.kr</a> --%>
+		</div>
+  </footer>
 
-      <footer class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-      	  <div class="container">
-            <p class="text-muted credit pager" style="font-size: 12px;">
-            	ⓒ2014 POSCO ICT, All Rights Reserved. <a href="mailto:help@solutionpot.co.kr">help@solutionpot.co.kr</a> |
-            	Fabulous icons from <a href="http://glyphicons.com" target="_blank">Glyphicons</a>
-            </p>
-          </div>
-      </footer>
+	<%-- 비번 변경 팝업 --%>
+	<!-- Modal Trigger -->
+	<a id="modalTest" class="waves-effect waves-light btn modal-trigger" href="#modal1" style="display:none;">Modal</a>
+	<!-- Modal Structure -->
+	<div id="modal1" class="modal">
+	</div>
 
-	<div class="modal fade" id="passwordPop" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true" data-backdrop="static"></div>
-
+	<%-- <div class="modal fade" id="passwordPop" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true" data-backdrop="static"></div> --%>
 	<div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false"></div>
 
- <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요한) -->
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-<script src="${contextPath }/dist/jquery-ui/jquery-1.10.2-jquery.min.js"></script>
-<!-- 모든 합쳐진 플러그인을 포함하거나 (아래) 필요한 각각의 파일들을 포함하세요 -->
-<script src="${contextPath }/dist/bootstrap/js/bootstrap.min.js"></script>
-<!-- Respond.js 으로 IE8 에서 반응형 기능을 활성화하세요 (https://github.com/scottjehl/Respond) -->
-<!-- <script src="js/respond.js"></script> -->
-<%-- <script src="${contextPath }/dist/jquery-ui/jquery-1.10.2.js"></script> --%>
-<!-- <script src="http://code.jquery.com/jquery-latest.js"></script> -->
-<script src="${contextPath }/dist/jquery-ui/jquery-ui.js"></script>
+<%-- Materialize CSS --%>
+<script src="${contextPath }/dist/jquery/jquery.min.js"></script>
+<script src="${contextPath }/dist/materialize/js/materialize.min.js"></script>
+<%-- etc libraries --%>
+<script async src="${contextPath }/dist/jquery-ui/jquery-ui-compressed.js"></script>
 <script src="${contextPath }/dist/js/common.js"></script>
 <script src="${contextPath }/dist/js/board.js"></script>
 <script src="${contextPath }/dist/js/file.js"></script>
-<script src="${contextPath }/dist/js/morgue2.js"></script>
-<script src="${contextPath }/dist/js/licenseManagement.js"></script>
-<script src="${contextPath }/dist/js/customUser.js"></script>
-<script src="${contextPath }/dist/modal/jquery.remodal.js"></script>
-<script src="${contextPath }/dist/jstree/jstree.js"></script>
+<script async src="${contextPath }/dist/js/morgue2.js"></script>
+<script async src="${contextPath }/dist/js/licenseManagement.js"></script>
+<script async src="${contextPath }/dist/js/customUser.js"></script>
+<script async src="${contextPath }/dist/modal/jquery.remodal.js"></script>
+<script src="${contextPath }/dist/js/tree.js"></script>
 <script type="text/javascript">
 $(function() {
     $.ajaxSetup({
@@ -156,34 +296,54 @@ $(function() {
 		passCheck();
 	}
 
-	$( "#startDatepicker" ).datepicker();
-	$( "#startDatepicker" ).change(function() {
-		$( "#startDatepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	});
+  $(window).scroll(function(){
+    if($(window).scrollTop()>100) $('.top').fadeIn('slow'); // 100 픽셀을 초과하여 스크롤 된 다음 표시
+    else $('.top').fadeOut('slow'); // 100 픽셀 이하인 경우 숨김
+  });
+  $('.top a').click(function () {
+    $('html, body').animate({ scrollTop:0 }, 'slow');
+    return false;
+  });
 
-	$( "#setUpDatepicker" ).datepicker();
-	$( "#setUpDatepicker" ).change(function() {
-		$( "#setUpDatepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	});
+});
 
-	$( "#startDatepicker2" ).datepicker();
-	$( "#startDatepicker2" ).change(function() {
-		$( "#startDatepicker2" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	});
+	var treeKey = sessionStorage.getItem("treeKey");
+	var navActiveKey = sessionStorage.getItem("navActiveKey");
+	var activeKey = sessionStorage.getItem("treeActiveKey");
 
-    $(window).scroll(function(){
-        if($(window).scrollTop()>100) $('.top').fadeIn('slow'); // 100 픽셀을 초과하여 스크롤 된 다음 표시
-        else $('.top').fadeOut('slow'); // 100 픽셀 이하인 경우 숨김
-      });
-      $('.top a').click(function () {
-        $('html, body').animate({ scrollTop:0 }, 'slow');
-        return false;
+	$(document).ready(function(){
+		$(".button-collapse").sideNav();
+		$('select').material_select();
+		$('.modal-trigger').leanModal();
+    $('.datepicker').pickadate({
+      selectMonths: true, // Creates a dropdown to control month
+      selectYears: 15, // Creates a dropdown of 15 years to control year
+			format: 'yyyy-mm-dd',
+			monthsFull: [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+			monthsShort: [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월' ],
+			weekdaysFull: [ '일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일' ],
+			weekdaysShort: [ '일', '월', '화', '수', '목', '금', '토' ]
+			// 날짜 선택시 종료
+			// onSet: function( arg ){
+			// 	if ( 'select' in arg ){
+			// 		this.close();
+			// 	}
+			// }
     });
 
-    $('#myJstree').jstree({
-    	"state" : { "key" : "myJstree" },
-    	"plugins" : [ "themes", "state", "wholerow" ] });
-});
+		// date picker format
+		// var $input = $('.datepicker').pickadate();
+		// var picker = $input.pickadate('picker');
+		// picker.set('select', '2016-04-20', { format: 'yyyy-mm-dd' });
+
+    // Materialize.updateTextFields();
+		// $('ul.tabs').tabs();
+
+		treeActive();
+		navTreeActive();
+		treeActiveValidation();
+
+	});
 </script>
 </body>
 </html>

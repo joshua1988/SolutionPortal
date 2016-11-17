@@ -11,24 +11,24 @@
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
 <fmt:formatDate var="startDate" value="${userInfo.USER_START_DATE }" pattern="yyyy-MM-dd"/>
 <script type="text/javascript">
-function addProduct(){
-	var no = $(".contract1").length;
-	$("#plus").append(
-			'<div class="well well-sm contract1">'+
-			'<div class="form-group"><label class="control-label">제품구분</label>'+
-			'<c:if test="${not empty file }"><select class="form-control input-sm" name="PRODUCT_FILE_ID['+no+']"><c:forEach var="file" items="${file }"><c:if test="${file.FILE_CATEGORY != \'etc\' }"><option value="${file.OBJECT_ID }">${file.FILE_CATEGORY } ${file.PACKAGE_VERSION }</option></c:if></c:forEach></select></c:if>'+
-			'</div><div class="form-group"><label class="control-label">제품키</label>'+
-			'<input class="form-control input-sm license'+no+'" type="text" name="LICENSE_KEY['+no+']"></div>'+
-			'<div class="form-group"><label class="control-label">수량</label>'+
-			'<select class="form-control input-sm" name="LICENSE_QUANTITY" id="LICENSE_QUANTITY['+no+']"><c:forEach begin="1" end="100" step="1" varStatus="status">'+
-			'<option value="${status.index }">${status.index }</option></c:forEach></select></div>'+
-			'<div class="form-group"><label class="control-label">라이센스파일 :: <input type="checkbox" onclick="javascript:fileCheck('+no+');" class="fileCheck'+no+'">'+
-			'<small style="color: gray;">라이센스 파일이 필요 없을 시 체크</small></label>'+
-			'<input type="hidden" name="CHECKBOX['+no+']" value="false" class="fileCheckVal'+no+'">'+
-			'<input type="file" class="form-control input-sm file'+no+'" name="file['+no+']"></div>'+
-			'</div>'
-			);
-}
+// function addProduct(){
+// 	var no = $(".contract1").length;
+// 	$("#plus").append(
+// 			'<div class="well well-sm contract1">'+
+// 			'<div class="form-group"><label class="control-label">제품구분</label>'+
+// 			'<c:if test="${not empty file }"><select class="form-control input-sm" name="PRODUCT_FILE_ID['+no+']"><c:forEach var="file" items="${file }"><c:if test="${file.FILE_CATEGORY != \'etc\' }"><option value="${file.OBJECT_ID }">${file.FILE_CATEGORY } ${file.PACKAGE_VERSION }</option></c:if></c:forEach></select></c:if>'+
+// 			'</div><div class="form-group"><label class="control-label">제품키</label>'+
+// 			'<input class="form-control input-sm license'+no+'" type="text" name="LICENSE_KEY['+no+']"></div>'+
+// 			'<div class="form-group"><label class="control-label">수량</label>'+
+// 			'<select class="form-control input-sm" name="LICENSE_QUANTITY" id="LICENSE_QUANTITY['+no+']"><c:forEach begin="1" end="100" step="1" varStatus="status">'+
+// 			'<option value="${status.index }">${status.index }</option></c:forEach></select></div>'+
+// 			'<div class="form-group"><label class="control-label">라이센스파일 :: <input type="checkbox" onclick="javascript:fileCheck('+no+');" class="fileCheck'+no+'">'+
+// 			'<small style="color: gray;">라이센스 파일이 필요 없을 시 체크</small></label>'+
+// 			'<input type="hidden" name="CHECKBOX['+no+']" value="false" class="fileCheckVal'+no+'">'+
+// 			'<input type="file" class="form-control input-sm file'+no+'" name="file['+no+']"></div>'+
+// 			'</div>'
+// 			);
+// }
 
 function fileCheck(no){
 	var ischecked = $(".fileCheck"+no).is(":checked");
@@ -44,7 +44,7 @@ function fileCheck(no){
 <style type="text/css">
 body{ padding-bottom: 90px;}
 #addContract .form-group, .contract1 .form-group {
-	margin-bottom: 0.5px; 
+	margin-bottom: 0.5px;
 	padding-left: 15px;
 	padding-right: 15px;
 }
@@ -72,7 +72,7 @@ body{ padding-bottom: 90px;}
 		  <div class="form-group">
 		    <label for="USER_ADDRESS" class="control-label">회사주소</label>
 		    <input type="text" class="form-control input-sm" id="USER_ADDRESS" name="USER_ADDRESS" value="${userInfo.USER_ADDRESS }">
-		  </div>		  
+		  </div>
 		  <div class="form-group">
 		    <label for="PROJECT_NAME" class="control-label">프로젝트명</label>
 		    <input type="text" class="form-control input-sm" id="PROJECT_NAME" name="PROJECT_NAME" value="${userInfo.PROJECT_NAME }">
@@ -120,7 +120,7 @@ body{ padding-bottom: 90px;}
 		  </div>
 	  </div>
 	</div>
-	  
+
 	  <div class="panel panel-default">
 		  <div class="panel-heading"><strong>기타파일 선택</strong></div>
 	      <div class="panel-body">
@@ -135,13 +135,13 @@ body{ padding-bottom: 90px;}
 				 	</div>
 		 		</c:if>
 			</c:forEach>
-			</c:if>	
+			</c:if>
 	 	  </div>
  	  </div>
- 	  
+
  	  <div class="panel panel-default">
 	  	  <div class="panel-heading"><strong>제품등록</strong>
-	  	  	<c:if test="${not empty userInfo.PRODUCT_FILE_NAME && userInfo.PRODUCT_FILE_NAME != 'N' }"> 
+	  	  	<c:if test="${not empty userInfo.PRODUCT_FILE_NAME && userInfo.PRODUCT_FILE_NAME != 'N' }">
 	  	  	<small>계약예정제품: ${userInfo.PRODUCT_FILE_NAME }</small>
 	  	  	</c:if>
 	  	  </div>
@@ -157,25 +157,25 @@ body{ padding-bottom: 90px;}
       </div>
 
 	  <hr>
-	  
+
 	  <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">취소</button>
 	  <button type="button" class="btn btn-primary btn-sm" onclick="javascript:convertUser111();">
 	  	<span class="glyphicon glyphicon-open"></span> &nbsp;등록
 	  </button>
-</form>	        
+</form>
 <!-- </div> -->
 <script type="text/javascript">
-$(function() {
-	$( "#startDatepicker" ).datepicker();
-	$( "#startDatepicker" ).change(function() {
-		$( "#startDatepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	});
-    
-	$( "#setUpDatepicker" ).datepicker();
-	$( "#setUpDatepicker" ).change(function() {
-		$( "#setUpDatepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-	});
-});
+// $(function() {
+// 	$( "#startDatepicker" ).datepicker();
+// 	$( "#startDatepicker" ).change(function() {
+// 		$( "#startDatepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+// 	});
+//
+// 	$( "#setUpDatepicker" ).datepicker();
+// 	$( "#setUpDatepicker" ).change(function() {
+// 		$( "#setUpDatepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
+// 	});
+// });
 </script>
 </body>
 </html>

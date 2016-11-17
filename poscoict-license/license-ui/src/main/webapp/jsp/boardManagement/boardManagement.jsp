@@ -1,84 +1,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
 <style type="text/css">
-ul {
-	list-style: none;
-  	margin-left: -15px;
-}
-ul li {
-	line-height: 30px;
-}
+
 </style>
-<title>자료실</title>
-</head>
 <body>
-	<div class="well" style="margin: 0 auto 10px; background-color: white;">
-		<strong>게시판 관리 - <small>생성/수정/삭제</small></strong>
-		<button type="button" onclick="javascript:createProjectFun('F','root')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#projectFolderModal">루트폴더 생성</button>
-		<button type="button" onclick="javascript:createProjectFun('B','root')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#projectFolderModal">게시판 생성</button>
+	<div class="card-panel">
+		<div style="display:flex; align-items:center;">
+			<h5>게시판 관리</h5>
+			<a class="waves-effect waves-light btn modal-trigger" style="margin: 0 0.5em; padding: 0 5px;" href="#board_admin"
+				onclick="javascript:createProjectFun('F','root')"><i class="material-icons left">create_new_folder</i>폴더 생성</a>
+			<a class="waves-effect waves-light btn modal-trigger" style="padding: 0 5px;" href="#board_admin"
+				onclick="javascript:createProjectFun('B','root')"><i class="material-icons left">developer_board</i>게시판 생성</a>
+		</div>
+		<span class="card-title">
+			<%-- <h5>게시판 관리</h5>
+			<a class="waves-effect waves-light btn"
+				onclick="javascript:createProjectFun('F','root')"><i class="material-icons left">cloud</i>루트폴더 생성</a>
+			<a class="waves-effect waves-light btn"
+				onclick="javascript:createProjectFun('B','root')"><i class="material-icons left">cloud</i>게시판 생성</a> --%>
+			<%-- <button type="button" onclick="javascript:createProjectFun('F','root')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#projectFolderModal">루트폴더 생성</button>
+			<button type="button" onclick="javascript:createProjectFun('B','root')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#projectFolderModal">게시판 생성</button> --%>
+		</span>
+		<div class="card-content" style="margin: 1em 1em;">
+			<c:if test="${empty projectFolders || projectFolders==null }">목록이 없습니다.</c:if>
+			<c:if test="${not empty projectFolders && projectFolders!=null }">
+
+				<%-- dropdown demo --%>
+				<%-- <i class="material-icons" style="vertical-align:middle;">view_list</i> Glue PD
+				<a class='dropdown-button btn' href='#' data-activates='dropdown1'>관리</a>
+				<ul id='dropdown1' class='dropdown-content'>
+					<li><a href="#!">one</a></li>
+					<li><a href="#!">two</a></li>
+				</ul> --%>
+
+				${projectFolders}
+			</c:if>
+		</div>
+		<input type="hidden" id="solution" value="${solution }">
 	</div>
 
-	<div class="well" style="background-color: white;">
-	      <div id="myTabContent" class="tab-content">
-	        <div class="tab-pane fade in active" id="fileList">
-	            <c:if test="${empty projectFolders || projectFolders==null }">목록이 없습니다.</c:if>
-		    	<c:if test="${not empty projectFolders && projectFolders!=null }">
-		    	   <div id="asdf">
-		    	       ${projectFolders }
-		    	   </div>
-		    	</c:if>
-	        </div>
-	      </div>			
-	</div>
-	
-	<input type="hidden" id="solution" value="${solution }">
-	
-	<div class="row" style="font-size: 12px;">
-			<div class="col-xs-12"><p class="text-muted">&nbsp;&nbsp;<span class="glyphicon glyphicon-paperclip"></span> 사용 예</p></div>
-			<div class="col-xs-3">
-				<div class="well">
-				<ul>
-					<li><span class="glyphicon glyphicon-asterisk"></span>&nbsp;&nbsp;관리</li>
-					<li><span class="glyphicon glyphicon-folder-open"></span>&nbsp;&nbsp;폴더1
-						<ul>
-							<li><span class="glyphicon glyphicon-folder-open" style="color: gray;"></span>&nbsp;&nbsp;폴더2
-								<ul>
-									<li><span class="glyphicon glyphicon-folder-open" style="color: silver;"></span>&nbsp;&nbsp;폴더3
-										<ul>
-											<li><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;게시판1</li>
-										</ul>
-									</li>
-								</ul>
-							</li>
-						</ul>
-						<ul>
-							<li><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;게시판2</li>
-						</ul>
-					</li>
-					<li><span class="glyphicon glyphicon-list"></span>&nbsp;&nbsp;게시판3</li>
-				</ul>
-				</div>
-			</div>
-			<div class="col-xs-9 alert alert-success">
-				폴더는 총 3depth까지 생성 가능하며<br><br>
-				각 폴더에 게시판을 생성 할 수 있습니다.<br><br>
-				이 페이지에서 만들어진 폴더 및 게시판은<br><br>
-				현재 각 솔루션 관리자만 볼 수 있습니다.
-			</div>
-	</div>
-	
-	<div class="modal fade" id="projectFolderModal" tabindex="-1" role="dialog" aria-labelledby="projectFolderModalLabel" aria-hidden="true" data-backdrop="static">
-		<div class="modal-dialog">
-			<div class="modal-content" id="projectFolderContent">
+	<h6 class="header">폴더 사용 예시</h6>
+	<div class="card horizontal">
+		<div class="card-image">
+			<img src="${contextPath }/dist/images/folder_structure.png" alt="폴더구조 설명">
+		</div>
+		<div class="card-stacked">
+			<div class="card-content">
+				<p>폴더는 총 3depth까지 생성 가능하며 각 폴더에 게시판을 생성 할 수 있습니다.<br>
+				이 페이지에서 만들어진 폴더 및 게시판은 현재 각 솔루션 관리자만 볼 수 있습니다.</p>
 			</div>
 		</div>
 	</div>
+
+	<!-- Modal Trigger -->
+	<%-- <a class="waves-effect waves-light btn modal-trigger" href="#board_admin">Modal</a> --%>
+
+	<!-- Modal Structure -->
+	<div id="board_admin" class="modal">
+		<div id="projectFolderContent">
+			<%-- <div class="modal-content" id="projectFolderContent">
+				<h4>Modal Header</h4>
+				<p>A bunch of text</p>
+			</div>
+			<div class="modal-footer">
+				<a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+			</div> --%>
+		</div>
+	</div>
+
 </body>
-</html>

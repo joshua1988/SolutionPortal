@@ -1,332 +1,461 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
 <style type="text/css">
-body{ padding-bottom: 90px; }
-#addContract .form-group, .contract1 .form-group {
-	margin-bottom: 0.5px; 
-	padding-left: 15px;
-	padding-right: 15px;
-}
-.form-group label{
-	font-size: 12px;
-}
-.checkbox label {
- 	font-size: 12px; 
-}
 </style>
-<title>Insert title here</title>
-</head>
 <body>
-<form class="form-horizontal" role="form" action="${contextPath }/addCustomUser" method="post" name="addCustomUser">
-	<div class="panel panel-default">
-   	  <div class="panel-heading"><strong>Ä¿½ºÅÒ À¯Àú »ý¼º</strong></div>
-   	  <div class="panel-body" id="addContract">
-   	  	  <div class="form-group has-error">
-			  <label class="control-label" for="USER_NO">* ¾ÆÀÌµð</label>
-			  <input type="text" class="form-control input-sm" id="USER_NO" name="USER_NO">
-		  </div>
-		  <div class="form-group has-error">
-			  <label class="control-label" for="USER_NAME">* ´Ð³×ÀÓ</label>
-			  <input type="text" class="form-control input-sm" id="USER_NAME" name="USER_NAME">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="MANAGER_NAME">´ã´çÀÚ</label>
-			  <input type="text" class="form-control input-sm" id="MANAGER_NAME" name="MANAGER_NAME">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="USER_ADDRESS">È¸»çÁÖ¼Ò</label>
-			  <input type="text" class="form-control input-sm" id="USER_ADDRESS" name="USER_ADDRESS">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="MANAGER_OFFICE_PHON">ÀüÈ­¹øÈ£</label>
-			  <input type="text" class="form-control input-sm" id="MANAGER_OFFICE_PHON" name="MANAGER_OFFICE_PHON">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="MANAGER_CEL_PHON">ÈÞ´ë¹øÈ£</label>
-			  <input type="text" class="form-control input-sm" id="MANAGER_CEL_PHON" name="MANAGER_CEL_PHON">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="MANAGER_EMAIL">ÀÌ¸ÞÀÏ</label>
-			  <input type="text" class="form-control input-sm" id="MANAGER_EMAIL" name="MANAGER_EMAIL">
-		  </div>
-		  
-		  <hr>
-		  <strong>- ±ÇÇÑ ¼³Á¤</strong>
-		  <div class="row">
-		  <div class="col-xs-12">
-		  	<div class="col-xs-6">
-		  	  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_NOTICE" id="MENU_NOTICE" checked="checked" onclick="javascript:noticeCheckbox(); return false;">¸Þ´º»ý¼º/±Û º¸±â - <strong>°øÁö</strong></label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_NOTICE_WRITE">±Û µî·Ï/»èÁ¦</label></div>
+
+	<form class="form-horizontal" role="form" action="${contextPath }/addCustomUser" method="post" name="addCustomUser">
+		<div class="card-panel">
+   	  <div class="card-heading"><h5>ì»¤ìŠ¤í…€ ìœ ì € ìƒì„±</h5></div>
+   	  <div class="card-content" id="addContract">
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="USER_NO" type="text" class="validate" name="USER_NO">
+						<label for="USER_NO">* ì•„ì´ë””</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="USER_NAME" type="text" class="validate" name="USER_NAME">
+						<label for="USER_NAME">* ìˆ˜ì£¼ì‚¬ëª…</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="MANAGER_NAME" type="text" class="validate" name="MANAGER_NAME">
+						<label for="MANAGER_NAME">ë‹´ë‹¹ìž</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="USER_ADDRESS" type="text" class="validate" name="USER_ADDRESS">
+						<label for="USER_ADDRESS">íšŒì‚¬ì£¼ì†Œ</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="MANAGER_OFFICE_PHON" type="text" class="validate" name="MANAGER_OFFICE_PHON">
+						<label for="MANAGER_OFFICE_PHON">ì „í™”ë²ˆí˜¸</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="MANAGER_CEL_PHON" type="text" class="validate" name="MANAGER_CEL_PHON">
+						<label for="MANAGER_CEL_PHON">íœ´ëŒ€ë²ˆí˜¸</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="MANAGER_EMAIL" type="email" class="validate" name="MANAGER_EMAIL">
+						<label for="MANAGER_EMAIL">ì´ë©”ì¼</label>
+					</div>
+				</div>
+
+			  <h5>ê¶Œí•œ ì„¤ì •</h5>
+			  <div class="row">
+				  <div class="col s12">
+				  	<div class="col s6">
+							<div class="card-panel">
+								<div class="card-header">
+									<input type="checkbox" id="MENU_NOTICE" name="MENU_NOTICE" checked="checked" onclick="javascript:noticeCheckbox(); return false;"/>
+      						<label for="MENU_NOTICE">ë©”ë‰´ìƒì„±/ê¸€ ë³´ê¸° - <strong>ê³µì§€</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="card-content">
+									<input type="checkbox" id="FUNCTION_NOTICE_WRITE" name="FUNCTION_NOTICE_WRITE"/>
+      						<label for="FUNCTION_NOTICE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+								</div>
+								</div>
+							</div>
+							<div class="card-panel">
+								<div class="card-header">
+									<input type="checkbox" id="MENU_PRESENTATION" name="MENU_PRESENTATION" checked="checked"/>
+      						<label for="MENU_PRESENTATION">ë©”ë‰´ìƒì„± - <strong>ì œí’ˆì†Œê°œ</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="card-content">
+									<label style="font-size: 12px; color: gray;">ì œí’ˆì†Œê°œ ë©”ë‰´ìž…ë‹ˆë‹¤.</label>
+								</div>
+								</div>
+							</div>
+							<div class="card-panel">
+								<div class="card-header">
+									<input type="checkbox" id="MENU_GUEST_PACKAGE_DOWNLOAD" name="MENU_GUEST_PACKAGE_DOWNLOAD" checked="checked"/>
+      						<label for="MENU_GUEST_PACKAGE_DOWNLOAD">ë©”ë‰´ìƒì„±/ë‹¤ìš´ë¡œë“œ(Guest) - <strong>êµìœ¡ìš© ì†”ë£¨ì…˜ íŒ¨í‚¤ì§€</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="card-content">
+									<label style="font-size: 12px; color: gray;">êµìœ¡ìš© ì†”ë£¨ì…˜ì„ ë‹¤ìš´ ë°›ì„ ìˆ˜ ìžˆìŠµë‹ˆë‹¤.</label>
+								</div>
+								</div>
+							</div>
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_CUSTOMBOARD" name="MENU_CUSTOMBOARD" checked="checked"/>
+									<label for="MENU_CUSTOMBOARD">ë©”ë‰´ìƒì„± / ê²Œì‹œíŒ ìƒì„± - <strong>ìžë£Œì‹¤</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<label style="font-size: 12px; color: gray;">ê²Œì‹œíŒ ìƒì„± ë° ìžë£Œë¥¼ ë“±ë¡ í•  ìˆ˜ ìžˆëŠ” ë©”ë‰´ìž…ë‹ˆë‹¤.</label>
+									</div>
+								</div>
+							</div>
+					  </div>
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-header">
+									<input type="checkbox" id="MENU_GLUE" name="MENU_GLUE" checked="checked"/>
+      						<label for="MENU_GLUE">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸°<strong>Glue</strong></label>
+
+									<input type="checkbox" id="FUNCTION_GLUE_ADMIN" name="FUNCTION_GLUE_ADMIN"/>
+      						<label for="FUNCTION_GLUE_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+							       <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE" name="FUNCTION_GLUE_WRITE" checked="checked"/>
+											 <label for="FUNCTION_GLUE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+										 </li>
+							       <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_NOTICE" name="FUNCTION_GLUE_WRITE_NOTICE" />
+											 <label for="FUNCTION_GLUE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+										 </li>
+							       <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_QNA" name="FUNCTION_GLUE_WRITE_QNA" checked="checked"/>
+											 <label for="FUNCTION_GLUE_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+										 </li>
+							       <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_FAQ" name="FUNCTION_GLUE_WRITE_FAQ" />
+											 <label for="FUNCTION_GLUE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_TECH" name="FUNCTION_GLUE_WRITE_TECH" />
+											 <label for="FUNCTION_GLUE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_OLDTECH" name="FUNCTION_GLUE_WRITE_OLDTECH" />
+											 <label for="FUNCTION_GLUE_WRITE_OLDTECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ì˜ˆì „ ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_REPLY" name="FUNCTION_GLUE_REPLY" checked="checked"/>
+											 <label for="FUNCTION_GLUE_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_REPLY_BOARD_QNA" name="FUNCTION_GLUE_REPLY_BOARD_QNA" checked="checked"/>
+											 <label for="FUNCTION_GLUE_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ìž‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+										 </li>
+							     </ul>
+										<ul>
+										<%--  ì´ì „ ë²„ì „
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label></div></li>
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_QNA" checked="checked">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label></div></li>
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label></div></li>
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label></div></li>
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_OLDTECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ì˜ˆì „ ê¸°ìˆ ë¬¸ì„œ)</label></div></li>
+										</ul>
+										--%>
+									</div>
+								</div>
+							</div>
 					  </div>
 				  </div>
 			  </div>
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_PRESENTATION" checked="checked">¸Þ´º»ý¼º - <strong>Á¦Ç°¼Ò°³</strong></label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					      <label style="font-size: 12px; color: gray;">Á¦Ç°¼Ò°³ ¸Þ´ºÀÔ´Ï´Ù.</label>
-					  </div>
+
+			  <div class="row">
+				  <div class="col s12">
+					  <div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_GLUEMASTER" name="MENU_GLUEMASTER" checked="checked"/>
+      						<label for="MENU_GLUEMASTER">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸° - <strong>GlueMaster</strong></label>
+
+									<input type="checkbox" id="FUNCTION_GLUEMASTER_ADMIN" name="FUNCTION_GLUEMASTER_ADMIN"/>
+      						<label for="FUNCTION_GLUEMASTER_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div class="card-content">
+									<ul class="collection">
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE" name="FUNCTION_GLUEMASTER_WRITE" checked="checked"/>
+										 <label for="FUNCTION_GLUEMASTER_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE_NOTICE" name="FUNCTION_GLUEMASTER_WRITE_NOTICE"/>
+										 <label for="FUNCTION_GLUEMASTER_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE_QNA" name="FUNCTION_GLUEMASTER_WRITE_QNA" checked="checked"/>
+										 <label for="FUNCTION_GLUEMASTER_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE_FAQ" name="FUNCTION_GLUEMASTER_WRITE_FAQ" />
+										 <label for="FUNCTION_GLUEMASTER_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE_TECH" name="FUNCTION_GLUEMASTER_WRITE_TECH" />
+										 <label for="FUNCTION_GLUEMASTER_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_REPLY" name="FUNCTION_GLUEMASTER_REPLY" checked="checked"/>
+										 <label for="FUNCTION_GLUEMASTER_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_REPLY_BOARD_QNA" name="FUNCTION_GLUEMASTER_REPLY_BOARD_QNA" checked="checked"/>
+										 <label for="FUNCTION_GLUEMASTER_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ìž‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+									 </li>
+								 </ul>
+								</div>
+							</div>
+						</div>
+					  <div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_GLUEMOBILE" name="MENU_GLUEMOBILE" checked="checked"/>
+									<label for="MENU_GLUEMOBILE">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸° - <strong>GlueMobile</strong></label>
+
+									<input type="checkbox" id="FUNCTION_GLUEMOBILE_ADMIN" name="FUNCTION_GLUEMOBILE_ADMIN"/>
+									<label for="FUNCTION_GLUEMOBILE_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE" name="FUNCTION_GLUEMOBILE_WRITE" checked="checked"/>
+											 <label for="FUNCTION_GLUEMOBILE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE_NOTICE" name="FUNCTION_GLUEMOBILE_WRITE_NOTICE" />
+											 <label for="FUNCTION_GLUEMOBILE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE_QNA" name="FUNCTION_GLUEMOBILE_WRITE_QNA" checked="checked"/>
+											 <label for="FUNCTION_GLUEMOBILE_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE_FAQ" name="FUNCTION_GLUEMOBILE_WRITE_FAQ" />
+											 <label for="FUNCTION_GLUEMOBILE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE_TECH" name="FUNCTION_GLUEMOBILE_WRITE_TECH" />
+											 <label for="FUNCTION_GLUEMOBILE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_REPLY" name="FUNCTION_GLUEMOBILE_REPLY" checked="checked"/>
+											 <label for="FUNCTION_GLUEMOBILE_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_REPLY_BOARD_QNA" name="FUNCTION_GLUEMOBILE_REPLY_BOARD_QNA" checked="checked"/>
+											 <label for="FUNCTION_GLUEMOBILE_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ìž‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+										 </li>
+									 </ul>
+									</div>
+								</div>
+							</div>
+						</div>
+				  </div> <%-- col --%>
+			  </div>
+
+			  <div class="row">
+				  <div class="col s12">
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_UCUBE" name="MENU_UCUBE" checked="checked"/>
+									<label for="MENU_UCUBE">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸° - <strong>uCUBE</strong></label>
+
+									<input type="checkbox" id="FUNCTION_UCUBE_ADMIN" name="FUNCTION_UCUBE_ADMIN"/>
+									<label for="FUNCTION_UCUBE_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE" name="FUNCTION_UCUBE_WRITE" checked="checked"/>
+											 <label for="FUNCTION_UCUBE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE_NOTICE" name="FUNCTION_UCUBE_WRITE_NOTICE" />
+											 <label for="FUNCTION_UCUBE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE_QNA" name="FUNCTION_UCUBE_WRITE_QNA" checked="checked"/>
+											 <label for="FUNCTION_UCUBE_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE_FAQ" name="FUNCTION_UCUBE_WRITE_FAQ" />
+											 <label for="FUNCTION_UCUBE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE_TECH" name="FUNCTION_UCUBE_WRITE_TECH" />
+											 <label for="FUNCTION_UCUBE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_REPLY" name="FUNCTION_UCUBE_REPLY" checked="checked"/>
+											 <label for="FUNCTION_UCUBE_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_REPLY_BOARD_QNA" name="FUNCTION_UCUBE_REPLY_BOARD_QNA" checked="checked"/>
+											 <label for="FUNCTION_UCUBE_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ìž‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+										 </li>
+									 </ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_POSBEE" name="MENU_POSBEE" checked="checked"/>
+									<label for="MENU_POSBEE">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸° - <strong>PosBee</strong></label>
+
+									<input type="checkbox" id="FUNCTION_POSBEE_ADMIN" name="FUNCTION_POSBEE_ADMIN"/>
+									<label for="FUNCTION_POSBEE_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE" name="FUNCTION_POSBEE_WRITE" checked="checked"/>
+											 <label for="FUNCTION_POSBEE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE_NOTICE" name="FUNCTION_POSBEE_WRITE_NOTICE" />
+											 <label for="FUNCTION_POSBEE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE_QNA" name="FUNCTION_POSBEE_WRITE_QNA" checked="checked"/>
+											 <label for="FUNCTION_POSBEE_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE_FAQ" name="FUNCTION_POSBEE_WRITE_FAQ" />
+											 <label for="FUNCTION_POSBEE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE_TECH" name="FUNCTION_POSBEE_WRITE_TECH" />
+											 <label for="FUNCTION_POSBEE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_REPLY" name="FUNCTION_POSBEE_REPLY" checked="checked"/>
+											 <label for="FUNCTION_POSBEE_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_REPLY_BOARD_QNA" name="FUNCTION_POSBEE_REPLY_BOARD_QNA" checked="checked"/>
+											 <label for="FUNCTION_POSBEE_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ìž‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+										 </li>
+									 </ul>
+									</div>
+								</div>
+							</div>
+						</div>
 				  </div>
 			  </div>
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_GUEST_PACKAGE_DOWNLOAD" checked="checked">¸Þ´º»ý¼º/´Ù¿î·Îµå(Guest) - <strong>±³À°¿ë ¼Ö·ç¼Ç ÆÐÅ°Áö</strong></label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					      <label style="font-size: 12px; color: gray;">±³À°¿ë ¼Ö·ç¼ÇÀ» ´Ù¿î ¹ÞÀ» ¼ö ÀÖ½À´Ï´Ù.</label>
-					  </div>
-				  </div>
-			  </div>
-		  	</div>
-			<div class="col-xs-6">
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_GLUE" checked="checked">¸Þ´º»ý¼º/±Û º¸±â - <strong>Glue</strong></label></div>
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUE_ADMIN">¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ð±Û º¸±â/ÇÁ·ÎÁ§Æ® Æú´õ*°Ô½ÃÆÇ »ý¼º)</label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					  	  <ul class="list-unstyled">
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUE_WRITE" checked="checked">±Û µî·Ï/»èÁ¦</label></div></li>
-					  	  	<li>
-							  <ul>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_NOTICE">±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_QNA" checked="checked">±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_FAQ">±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_TECH">±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_OLDTECH">±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­(¿¹Àü))</label></div></li>
-							  </ul>
-					  	  	</li>
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUE_REPLY" checked="checked">º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUE_REPLY_BOARD_QNA" checked="checked">º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-					  	  </ul>
-					  </div>
-				  </div>
-			  </div>
-			 </div>
-		  </div>
-		  </div>
-		  
-		  <div class="row">
-		  <div class="col-xs-12">
-			  <div class="col-xs-6">
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_GLUEMASTER" checked="checked">¸Þ´º»ý¼º/±Û º¸±â - <strong>GlueMaster</strong></label></div>
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUEMASTER_ADMIN">¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ð±Û º¸±â/ÇÁ·ÎÁ§Æ® Æú´õ*°Ô½ÃÆÇ »ý¼º)</label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					  	  <ul class="list-unstyled">
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUEMASTER_WRITE" checked="checked">±Û µî·Ï/»èÁ¦</label></div></li>
-					  	  	<li>
-					  	  		<ul>
-					  	  		  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUEMASTER_CHECK" name="FUNCTION_GLUEMASTER_WRITE_NOTICE">±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUEMASTER_CHECK" name="FUNCTION_GLUEMASTER_WRITE_QNA" checked="checked">±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUEMASTER_CHECK" name="FUNCTION_GLUEMASTER_WRITE_FAQ">±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUEMASTER_CHECK" name="FUNCTION_GLUEMASTER_WRITE_TECH">±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-					  	  		</ul>
-					  	  	</li>
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUEMASTER_REPLY" checked="checked">º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUEMASTER_REPLY_BOARD_QNA" checked="checked">º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-					  	  </ul>
-					  </div>
-				  </div>
-			  </div>
-			  </div>
-			  <div class="col-xs-6">
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_GLUEMOBILE" checked="checked">¸Þ´º»ý¼º/±Û º¸±â - <strong>GlueMobile</strong></label></div>
-					      <div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUEMOBILE_ADMIN">¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ð±Û º¸±â/ÇÁ·ÎÁ§Æ® Æú´õ*°Ô½ÃÆÇ »ý¼º)</label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					  	  <ul class="list-unstyled">
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUEMOBILE_WRITE" checked="checked">±Û µî·Ï/»èÁ¦</label></div></li>
-					  	  	<li>
-					  	  		<ul>
-					  	  		  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUEMOBILE_CHECK" name="FUNCTION_GLUEMOBILE_WRITE_NOTICE">±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUEMOBILE_CHECK" name="FUNCTION_GLUEMOBILE_WRITE_QNA" checked="checked">±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUEMOBILE_CHECK" name="FUNCTION_GLUEMOBILE_WRITE_FAQ">±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-								  <li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUEMOBILE_CHECK" name="FUNCTION_GLUEMOBILE_WRITE_TECH">±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-					  	  		</ul>
-					  	  	</li>
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUEMOBILE_REPLY" checked="checked">º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-					  	  	<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_GLUEMOBILE_REPLY_BOARD_QNA" checked="checked">º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-					  	  </ul>
-					  </div>
+
+			  <div class="row">
+				  <div class="col s12">
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_SOLUTION_UPLOAD" name="MENU_SOLUTION_UPLOAD"/>
+									<label for="MENU_SOLUTION_UPLOAD">ë©”ë‰´ìƒì„± - <strong>ì†”ë£¨ì…˜ íŒ¨í‚¤ì§€ ê´€ë¦¬</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_GLUE" name="FUNCTION_SOLUTION_UPLOAD_GLUE"/>
+											 <label for="FUNCTION_SOLUTION_UPLOAD_GLUE">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (Glue)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_GLUEMASTER" name="FUNCTION_SOLUTION_UPLOAD_GLUEMASTER" />
+											 <label for="FUNCTION_SOLUTION_UPLOAD_GLUEMASTER">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (GlueMaster)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_GLUEMOBILE" name="FUNCTION_SOLUTION_UPLOAD_GLUEMOBILE"/>
+											 <label for="FUNCTION_SOLUTION_UPLOAD_GLUEMOBILE">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (GlueMobile)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_UCUBE" name="FUNCTION_SOLUTION_UPLOAD_UCUBE" />
+											 <label for="FUNCTION_SOLUTION_UPLOAD_UCUBE">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (uCUBE)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_POSBEE" name="FUNCTION_SOLUTION_UPLOAD_POSBEE" />
+											 <label for="FUNCTION_SOLUTION_UPLOAD_POSBEE">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (PosBee)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_ETC" name="FUNCTION_SOLUTION_UPLOAD_ETC" />
+											 <label for="FUNCTION_SOLUTION_UPLOAD_ETC">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (etc)</label>
+										 </li>
+									 </ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_MANAGEMENT" name="MENU_MANAGEMENT"/>
+									<label for="MENU_MANAGEMENT">ë©”ë‰´ìƒì„± - <strong>ê³ ê°ê´€ë¦¬</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="SUB_MENU_MANAGEMENT_COMPLETE" name="SUB_MENU_MANAGEMENT_COMPLETE"/>
+											 <label for="SUB_MENU_MANAGEMENT_COMPLETE">ì„œë¸Œë©”ë‰´ / ê³ ê° ì •ë³´ ë³´ê¸° - <strong>ì™„ë£Œ ê³„ì•½ê±´</strong></label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_MANAGEMENT_INPUT_USER" name="FUNCTION_MANAGEMENT_INPUT_USER" />
+											 <label for="FUNCTION_MANAGEMENT_INPUT_USER">ê³ ê° ë“±ë¡ / ìˆ˜ì • / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="SUB_MENU_MANAGEMENT_PROGRESS" name="SUB_MENU_MANAGEMENT_PROGRESS"/>
+											 <label for="SUB_MENU_MANAGEMENT_PROGRESS">ì„œë¸Œë©”ë‰´ / ê³ ê° ì •ë³´ ë³´ê¸° - <strong>ì§„í–‰ì¤‘ ê³„ì•½ê±´</strong></label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_PROGRESS_INPUT_USER" name="FUNCTION_PROGRESS_INPUT_USER" />
+											 <label for="FUNCTION_PROGRESS_INPUT_USER">ê°€ê³„ì•½ ë“±ë¡ / ìˆ˜ì • / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_PROGRESS_COMMENT" name="FUNCTION_PROGRESS_COMMENT" />
+											 <label for="FUNCTION_PROGRESS_COMMENT">Comment ë“±ë¡</label>
+										 </li>
+									 </ul>
+
+									 	<%-- ì´ì „ ë²„ì „ --%>
+										<%-- <ul class="list-unstyled">
+												<li><div class="checkbox"><label><input type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_COMPLETE">ì„œë¸Œë©”ë‰´ / ê³ ê° ì •ë³´ ë³´ê¸° - <strong>ì™„ë£Œ ê³„ì•½ê±´</strong></label></div></li>
+												<li>
+														<ul>
+																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_MANAGEMENT_INPUT_USER">ê³ ê° ë“±ë¡ / ìˆ˜ì • / ì‚­ì œ</label></div></li>
+														</ul>
+												</li>
+												<li><div class="checkbox"><label><input type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_PROGRESS">ì„œë¸Œë©”ë‰´ / ê³ ê° ì •ë³´ ë³´ê¸° - <strong>ì§„í–‰ì¤‘ ê³„ì•½ê±´</strong></label></div></li>
+												<li>
+														<ul>
+																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_PROGRESS_INPUT_USER">ê°€ê³„ì•½ ë“±ë¡ / ìˆ˜ì • / ì‚­ì œ</label></div></li>
+																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_PROGRESS_COMMENT">Comment ë“±ë¡</label></div></li>
+														</ul>
+												</li>
+										</ul> --%>
+									</div>
+								</div>
+							</div>
+						</div>
 				  </div>
 			  </div>
-			  </div>
-		  </div>
-		  </div>
-		  
-		  <div class="row">
-		  <div class="col-xs-12">
-		  	<div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_UCUBE" checked="checked">¸Þ´º»ý¼º/±Û º¸±â - <strong>uCUBE</strong></label></div>
-						      <div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_UCUBE_ADMIN">¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ð±Û º¸±â/ÇÁ·ÎÁ§Æ® Æú´õ*°Ô½ÃÆÇ »ý¼º)</label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-						  	  <ul class="list-unstyled">
-						  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_UCUBE_WRITE" checked="checked">±Û µî·Ï/»èÁ¦</label></div></li>
-						  	  	  <li>
-						  	  	  	  <ul>
-							  	  		  <li><div class="checkbox"><label><input type="checkbox" value="true" id="UCUBE_CHECK" name="FUNCTION_UCUBE_WRITE_NOTICE">±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-										  <li><div class="checkbox"><label><input type="checkbox" value="true" id="UCUBE_CHECK" name="FUNCTION_UCUBE_WRITE_QNA" checked="checked">±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-										  <li><div class="checkbox"><label><input type="checkbox" value="true" id="UCUBE_CHECK" name="FUNCTION_UCUBE_WRITE_FAQ">±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-										  <li><div class="checkbox"><label><input type="checkbox" value="true" id="UCUBE_CHECK" name="FUNCTION_UCUBE_WRITE_TECH">±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-						  	  	  	  </ul>
-						  	  	  </li>
-						  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_UCUBE_REPLY" checked="checked">º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-						  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_UCUBE_REPLY_BOARD_QNA" checked="checked">º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-						  	  </ul>
-						  </div>
-					  </div>
-				  </div>
-			  </div>
-		  	  <div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_POSBEE" checked="checked">¸Þ´º»ý¼º/±Û º¸±â - <strong>PosBee</strong></label></div>
-						      <div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_POSBEE_ADMIN">¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ð±Û º¸±â/ÇÁ·ÎÁ§Æ® Æú´õ*°Ô½ÃÆÇ »ý¼º)</label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-						  	  <ul class="list-unstyled">
-						  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_POSBEE_WRITE" checked="checked">±Û µî·Ï/»èÁ¦</label></div></li>
-						  	  	  <li>
-						  	  	  	  <ul>
-							  	  		  <li><div class="checkbox"><label><input type="checkbox" value="true" id="POSBEE_CHECK" name="FUNCTION_POSBEE_WRITE_NOTICE">±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-										  <li><div class="checkbox"><label><input type="checkbox" value="true" id="POSBEE_CHECK" name="FUNCTION_POSBEE_WRITE_QNA" checked="checked">±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-										  <li><div class="checkbox"><label><input type="checkbox" value="true" id="POSBEE_CHECK" name="FUNCTION_POSBEE_WRITE_FAQ">±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-										  <li><div class="checkbox"><label><input type="checkbox" value="true" id="POSBEE_CHECK" name="FUNCTION_POSBEE_WRITE_TECH">±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-						  	  	  	  </ul>
-						  	  	  </li>
-						  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_POSBEE_REPLY" checked="checked">º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-						  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_POSBEE_REPLY_BOARD_QNA" checked="checked">º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-						  	  </ul>
-						  </div>
-					  </div>
-				  </div>
-			  </div>
-		  </div>
-		  </div>
-		  
-		  <div class="row">
-		  <div class="col-xs-12">
-		  		<div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_MANAGEMENT">¸Þ´º»ý¼º - <strong>°í°´°ü¸®</strong></label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-					  		  <ul class="list-unstyled">
-						  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_COMPLETE">¼­ºê¸Þ´º/°í°´ Á¤º¸ º¸±â - <strong>¿Ï·á °è¾à°Ç</strong></label></div></li>
-						  	  	  <li>
-						  	  	  	  <ul>
-						  	  	  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_MANAGEMENT_INPUT_USER">°í°´ µî·Ï/¼öÁ¤/»èÁ¦</label></div></li>
-						  	  	  	  </ul>
-						  	  	  </li>
-						  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_PROGRESS">¼­ºê¸Þ´º/°í°´ Á¤º¸ º¸±â - <strong>ÁøÇàÁß °è¾à°Ç</strong></label></div></li>
-						  	  	  <li>
-						  	  	  	  <ul>
-						  	  	  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_PROGRESS_INPUT_USER">°¡°è¾à µî·Ï/¼öÁ¤/»èÁ¦</label></div></li>
-						  	  	  	  	  <li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_PROGRESS_COMMENT">Comment µî·Ï</label></div></li>
-						  	  	  	  </ul>
-						  	  	  </li>
-						  	  </ul>
-						  </div>
-					  </div>
-				  </div>
+
+			  <div class="row">
+			  	<div class="col s12">
+						<div class="col s6">
+							<%-- ìžë£Œì‹¤ --%>
+						</div>
 			  	</div>
-		  	 <div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input type="checkbox" value="true" id="MENU_SOLUTION_UPLOAD" name="MENU_SOLUTION_UPLOAD">¸Þ´º»ý¼º - <strong>¼Ö·ç¼Ç ÆÐÅ°Áö °ü¸®</strong></label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-						      <div class="checkbox"><label><input type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_GLUE">ÆÐÅ°Áö µî·Ï/»èÁ¦ (Glue)</label></div>
-						      <div class="checkbox"><label><input type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_GLUEMASTER">ÆÐÅ°Áö µî·Ï/»èÁ¦ (GlueMaster)</label></div>
-						      <div class="checkbox"><label><input type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_GLUEMOBILE">ÆÐÅ°Áö µî·Ï/»èÁ¦ (GlueMobile)</label></div>
-						      <div class="checkbox"><label><input type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_UCUBE">ÆÐÅ°Áö µî·Ï/»èÁ¦ (uCUBE)</label></div>
-						      <div class="checkbox"><label><input type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_POSBEE">ÆÐÅ°Áö µî·Ï/»èÁ¦ (PosBee)</label></div>
-						      <div class="checkbox"><label><input type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_ETC">ÆÐÅ°Áö µî·Ï/»èÁ¦ (±âÅ¸ÆÄÀÏ)</label></div>
-						  </div>
-					  </div>
-				  </div>
 			  </div>
-		  </div>
-		  </div>
-		  
-		  <div class="row">
-		  	<div class="col-xs-12">
-		  	  <div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input type="checkbox" value="true" name="MENU_CUSTOMBOARD">¸Þ´º»ý¼º/°Ô½ÃÆÇ »ý¼º - <strong>ÀÚ·á½Ç</strong></label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-						      <label style="font-size: 12px; color: gray;">°Ô½ÃÆÇ »ý¼º ¹× ÀÚ·á¸¦ µî·Ï ÇÒ ¼ö ÀÖ´Â ¸Þ´º ÀÔ´Ï´Ù.</label>
-						  </div>
-				 	  </div>
-				  </div>
-			  </div>
-		  	</div>
-		  </div>
-		
-		<br>  
-		<div class="col-xs-12 btn-group">
-			<button type="button" class="btn btn-default btn-sm" onclick="javascript:history.back();">Ãë¼Ò</button>
-	    	<button type="button" class="btn btn-primary btn-sm" onclick="javascript:confirmCustomUserForm();">À¯Àú »ý¼º</button>
-		</div>
-		</div>
+			</div>
+			<div class="card-action">
+				<button type="button" class="btn btn-primary btn-sm" onclick="javascript:confirmCustomUserForm();">ìœ ì € ìƒì„±</button>
+				<button type="button" class="btn btn-default btn-sm" onclick="javascript:history.back();">ì·¨ì†Œ</button>
+			</div>
 	  </div>
-</form>
+	</form>
+
 </body>
-</html>

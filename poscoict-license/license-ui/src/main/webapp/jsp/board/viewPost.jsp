@@ -1,122 +1,152 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<!-- <meta name="viewport" content="width=device-width, initial-scale=0.5"> -->
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="security"
-	uri="http://www.springframework.org/security/tags"%>
-<c:set var="contextPath" value="<%=request.getContextPath()%>" />
-<link rel="stylesheet" type="text/css"
-	href="${contextPath }/dist/se2/css/smart_editor2_out.css">
-<title>Insert title here</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<%@ taglib prefix="security"
+		uri="http://www.springframework.org/security/tags"%>
+	<c:set var="contextPath" value="<%=request.getContextPath()%>" />
+	<link rel="stylesheet" type="text/css" href="${contextPath }/dist/se2/css/smart_editor2_out.css">
+	<title>일반 게시판</title>
 </head>
 <body>
-	<div class="row">
-		<blockquote style="margin: 0;">
-			<p style="line-height: 1;">${board.TITLE }</p>
-			<small> 분류: ${folder } &gt;
-				${board.SUBCATEGORY==null?'공지':board.SUBCATEGORY } <label
-				style="color: #C0CFCB;">|</label> ${board.CONTENT_NO } 번 <label
-				style="color: #C0CFCB;">|</label> 작성자:${board.USER_NAME } <label
-				style="color: #C0CFCB;">|</label> ${board.r_CREATION_DATE } <label
-				style="color: #C0CFCB;">|</label> 조회:${board.CLICKS } <br> <c:if
-					test="${not empty attachInfo && attachInfo.size()>0 }">
-					<br>
+	<div class="card">
+		<div class="card-content">
+			<div class="section btnSection" style="padding: 0;">
+				<span class="right btnGroup">
+					<a class="waves-effect waves-light btn" onclick="javascript:movePage('${chartNum}','${folder }','${search==null?null:search }','${select==null?null:select }', '${subCategory }')">
+						<i class="material-icons">view_list</i>
+					</a>
+					<c:if
+						test="${ folder eq 'qna' && board.CONTENT_SEQ == 1 && board.ORI_FOLDER_ID != 'notice' }">
+						<%-- <a id="getReplyBoardBtn" class="waves-effect waves-light btn" onclick="javascript:getReplyBoard('${folder }','${board.CONTENT_NO }','${search==null?null:search }','${select==null?null:select }','${chartNum}')"> --%>
+						<a id="getReplyBoardBtn" class="waves-effect waves-light btn" onclick="javascript:replyBoardOnNewPage('${folder }','${board.CONTENT_NO }','${search==null?null:search }','${select==null?null:select }','${chartNum}')">
+							<i class="material-icons">subdirectory_arrow_right</i>
+						</a>
+					</c:if>
+					<security:authorize ifAnyGranted="ROLE_D, ROLE_C">
+						<a class="waves-effect waves-light btn" onclick="javascript:modifyForm('${folder }','${board.CONTENT_NO }','${chartNum}','${search==null?null:search }','${select==null?null:select }', '${subCategory }'); return false;">
+							<i class="material-icons">border_color</i>
+						</a>
+					</security:authorize>
+					<security:authorize ifAnyGranted="ROLE_D">
+						<a class="waves-effect waves-light btn" onclick="javascript:adminDeleteBoard('${folder }','${board.CONTENT_NO }','${search==null?null:search }','${select==null?null:select }','${chartNum}','${subCategory }'); return false;">
+							<i class="material-icons">delete</i>
+						</a>
+					</security:authorize>
+					<security:authorize ifAnyGranted="ROLE_G, ROLE_S, ROLE_U">
+						<a class="waves-effect waves-light btn" onclick="javascript:guestAuthConfirmPopup('${folder }','${board.CONTENT_NO }','${chartNum}','${search==null?null:search }','${select==null?null:select }','${subCategory }'); return false;">
+							<i class="material-icons">edit</i>
+						</a>
+						<a class="waves-effect waves-light btn" onclick="javascript:guestDeleteBoard('${folder }','${board.CONTENT_NO }','${search==null?null:search }','${select==null?null:select }','${chartNum}','${subCategory }'); return false;">
+							<i class="material-icons">delete</i>
+						</a>
+					</security:authorize>
+				</span>
+				<span class="card-title" style="display:block;">${board.TITLE }</span>
+			</div>
+			<div class="section viewInfo">
+				<span class="badge hide-on-med-and-down" style="font-size:0.8em;">
+				<%-- <span style="font-size:0.8em;"> --%>
+					<%-- <b>분류 : ${folder} -> ${board.SUBCATEGORY==null?'공지':board.SUBCATEGORY } | </b>
+					<b>번호 : ${board.CONTENT_NO } | </b>
+					<b>작성자: ${board.USER_NAME } | </b>
+					<b>날짜 : ${board.r_CREATION_DATE } | </b>
+					<b>조회 : ${board.CLICKS } </b> --%>
+
+					<%-- @@@@ 아래는 Materialize breadcrumbs 이용하여 개편 --%>
+					<%-- 분류 : ${folder} -> ${board.SUBCATEGORY==null?'공지':board.SUBCATEGORY } | --%>
+					번호 : ${board.CONTENT_NO } |
+					${board.USER_NAME } |
+					${board.r_CREATION_DATE.substring(2,16)} |
+					조회 : ${board.CLICKS }
+				</span>
+				<span class="hide-on-med-and-up" style="font-size:0.8em;">
+					${board.r_CREATION_DATE.substring(2,10)} | ${board.USER_NAME} | 번호 : ${board.CONTENT_NO}
+				</span>
+			</div>
+			<div class="divider"></div>
+			<div class="section" style="padding:1rem 0.5rem;">
+				<div class="se2_outputarea" style="word-break: break-all; position: static;">
+					${board.MAIN_CONTENT }
+				</div>
+				<c:if test="${not empty attachInfo && attachInfo.size()>0 }">
 					<c:forEach items="${attachInfo }" var="attach" varStatus="status">
-						첨부파일 ${status.index+1 }: 
-						<abbr><a href="#" style="color: black;"
-							onclick="javascript:attachFileDown('${attach.OBJECT_ID }')">${attach.ATTACH_FILE_NAME
-								}(${attach.ATTACH_FILE_SIZE }byte)</a></abbr>
+						<span style="font-size:12px;">
+							<i class="tiny material-icons" style="vertical-align:middle;">attach_file</i>첨부파일 ${status.index+1 } :
+							<a href="#" onclick="javascript:attachFileDown('${attach.OBJECT_ID }')">
+								${attach.ATTACH_FILE_NAME}
+							</a><span class="black-text"> (${attach.ATTACH_FILE_SIZE} byte)</span>
+						</span>
 						<br>
 					</c:forEach>
 				</c:if>
-			</small>
-		</blockquote>
-	</div>
-
-	<hr>
-	<div class="row" style="margin-left: 5px; margin-right: 5px;">
-		<div class="se2_outputarea"
-			style="word-break: break-all; position: static;">
-			${board.MAIN_CONTENT }</div>
-	</div>
-
-	<hr>
-	<div class="row" style="padding: 0 30px 0 0;">
-		<div class="btn-group col-xs-6">
-			<button type="button" class="btn btn-success"
-				onclick="javascript:movePage('${chartNum}','${folder }','${search==null?null:search }','${select==null?null:select }', '${subCategory }')">목록</button>
-			<c:if
-				test="${ folder eq 'qna' && board.CONTENT_SEQ == 1 && board.ORI_FOLDER_ID != 'notice' }">
-				<button type="button" class="btn btn-default replyBoardButton"
-					onclick="javascript:getReplyBoard('${folder }','${board.CONTENT_NO }','${search==null?null:search }','${select==null?null:select }','${chartNum}')">답글</button>
-			</c:if>
-
-			<security:authorize ifAnyGranted="ROLE_D, ROLE_C">
-					<button type="button" class="btn btn-default"
-						onclick="javascript:modifyForm('${folder }','${board.CONTENT_NO }','${chartNum}','${search==null?null:search }','${select==null?null:select }', '${subCategory }'); return false;">수정</button>					
-			</security:authorize>	
-			<security:authorize ifAnyGranted="ROLE_D">
-					<button type="button" class="btn btn-default"
-						onclick="javascript:adminDeleteBoard('${folder }','${board.CONTENT_NO }','${search==null?null:search }','${select==null?null:select }','${chartNum}','${subCategory }'); return false;">삭제</button>						
-			</security:authorize>			
-			<security:authorize ifAnyGranted="ROLE_G,ROLE_S, ROLE_U">
-				<c:if test="${sessionScope.USER_NO eq board.USER_NO}">
-					<button type="button" class="btn btn-default"
-						onclick="javascript:guestModifyForm('${folder }','${board.CONTENT_NO }','${chartNum}','${search==null?null:search }','${select==null?null:select }','${subCategory }'); return false;">수정</button>
-					<button type="button" class="btn btn-default"
-						onclick="javascript:guestDeleteBoard('${folder }','${board.CONTENT_NO }','${search==null?null:search }','${select==null?null:select }','${chartNum}','${subCategory }'); return false;">삭제</button>
+			</div>
+			<div class="divider"></div>
+			<div class="section replyInfo" style="font-size: 12px;">
+				<%-- Reply Registeration Section --%>
+				<c:if test="${board.ORI_FOLDER_ID != 'notice' }">
+					<div class="row valign-wrapper">
+						<security:authorize ifAnyGranted="ROLE_U,ROLE_S,ROLE_D,ROLE_C,ROLE_G">
+							<c:if test="${folder != 'notice'}">
+								<div class="input-field valign col s12" style="display:flex;">
+				          <i class="material-icons prefix">textsms</i>
+									<%-- <textarea id="replyText" class="materialize-textarea" length="120"></textarea> --%>
+									<input type="text" id="replyText" class="form-control" style="height:36px;" placeholder="댓글을 입력하세요.">
+									<%-- <label for="replyText" style="">댓글을 입력하세요.</label> --%>
+									<a class="waves-effect waves-light btn valign"
+										onclick="javascript:insertReply('${folder}','${board.CONTENT_NO }'); return false;"><i class="material-icons">edit</i>
+									</a>
+				        </div>
+								<%-- 게스트 이름 변경하여 댓글 등록
+								<div>
+									<div class="input-field">
+										 <input placeholder="댓글에 표시될 이름 입력" id="guest" type="text" class="validate">
+										 <label for="guest">댓글 주인</label>
+									 </div>
+								</div> --%>
+							</c:if>
+						</security:authorize>
+						<%-- <security:authorize ifAnyGranted="ROLE_G">
+							<c:if test="${folder != 'notice'}">
+								<div class="input-field valign col s12" style="display:flex;">
+				          <i class="material-icons prefix">textsms</i>
+									<input type="text" id="replyText" class="form-control" style="height:36px;" placeholder="댓글을 입력하세요.">
+									<a class="waves-effect waves-light btn valign" style="width:12%;"
+										onclick="javascript:insertReply('${folder}','${board.CONTENT_NO }'); return false;">
+										등록
+									</a>
+				        </div>
+							</c:if>
+						</security:authorize> --%>
+					</div>
+				<div id="reply"></div>
 				</c:if>
-			</security:authorize>
-		</div>
 
-		<security:authorize ifAnyGranted="ROLE_G">
-			<c:if test="${sessionScope.USER_NO eq board.USER_NO}">
-				<div class="input-group input-group-sm has-warning col-xs-6">
-					<span class="input-group-addon">임시ID</span> <input type="text"
-						class="form-control" id="guestID" name="guestID"
-						placeholder="guest ID"> <span class="input-group-addon">임시PW</span>
-					<input type="password" class="form-control" id="guestPW"
-						name="guestPW" placeholder="guest PW">
-				</div>
-			</c:if>
-		</security:authorize>
-	</div>
-
-	<div id="replyBoardForm"></div>
-
-	<c:if test="${board.ORI_FOLDER_ID != 'notice' }">
-		<hr>
-		<div style="font-size: 12px;">
-			<div class="well">
-				<security:authorize ifAnyGranted="ROLE_U,ROLE_S,ROLE_D,ROLE_C">
-					<c:if test="${folder != 'notice'}">
-						<div>
-							<label>1000byte 이하 작성</label>
-							<div class="input-group">
-								<input type="text" id="replyText" class="form-control">
-								<span class="input-group-btn">
-									<button class="btn btn-default" type="button"
-										onclick="javascript:insertReply('${folder}','${board.CONTENT_NO }'); return false;">덧글등록</button>
-								</span>
+				<security:authorize ifAnyGranted="ROLE_G">
+					<c:if test="${sessionScope.USER_NO eq board.USER_NO}">
+						<%-- <div class="row">
+							<div class="input-field col s6">
+								<i class="material-icons prefix">account_circle</i>
+								<input id="guestID" name="guestID" type="text" class="validate">
+								<label for="guestID" style="font-size:inherit;">guestID 필수</label>
 							</div>
-						</div>
+							<div class="input-field col s6">
+								<i class="material-icons prefix">vpn_key</i>
+								<input id="guestPW" name="guestPW" type="password" class="validate">
+								<label for="guestPW" style="font-size:inherit;">guestPW 필수</label>
+							</div>
+						</div> --%>
 					</c:if>
 				</security:authorize>
-				<div id="reply"></div>
 			</div>
+			<%-- <div id="replyBoardForm"></div> --%>
+
 		</div>
-	</c:if>
+	</div>
 
-
-	<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
-	<script
-		src="${contextPath }/dist/jquery-ui/jquery-1.10.2-jquery.min.js"></script>
-	<script type="text/javascript" charset="utf-8"
-		src="${contextPath }/dist/se2/js/HuskyEZCreator.js"></script>
+	<script	src="${contextPath }/dist/jquery-ui/jquery-1.10.2-jquery.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="${contextPath }/dist/se2/js/HuskyEZCreator.js"></script>
 	<script type="text/javascript">
 		$(function() {
 			cmtList("${board.CONTENT_NO}", "${board.ORI_FOLDER_ID}");
@@ -127,4 +157,3 @@
 		});
 	</script>
 </body>
-</html>

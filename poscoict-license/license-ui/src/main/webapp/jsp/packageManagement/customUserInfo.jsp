@@ -1,343 +1,532 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-<style type="text/css">
-/* body{ padding-bottom: 90px; } */
-#addContract .form-group {
-	margin-bottom: 0.5px; 
-	padding-left: 15px;
-	padding-right: 15px;
-}
-.form-group label{
-	font-size: 12px;
-}
-.checkbox label {
- 	font-size: 12px; 
-}
-</style>
-<title>Insert title here</title>
-</head>
 <body>
-<!-- <div class="row"> -->
-<form class="form-horizontal" role="form" method="post" name="modifyCustomUser">
-	<div class="panel panel-default">
-   	  <div class="panel-heading"><strong>Ä¿½ºÅÒ À¯Àú »ı¼º</strong></div>
-   	  <div class="panel-body" id="addContract">
-   	  	  <div class="form-group has-error">
-			  <label class="control-label" for="USER_NO">* ¾ÆÀÌµğ</label>
-			  <input disabled="disabled" type="text" class="form-control input-sm" id="USER_NO_D" name="USER_NO_D" value="${userInfo.getUSER_NO() }">
-			  <input type="hidden" id="USER_NO" name="USER_NO" value="${userInfo.getUSER_NO() }">
-		  </div>
-		  <div class="form-group has-error">
-			  <label class="control-label" for="USER_NAME">* ´Ğ³×ÀÓ</label>
-			  <input disabled="disabled" type="text" class="form-control input-sm" id="USER_NAME" name="USER_NAME" value="${userInfo.getUSER_NAME() }">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="MANAGER_NAME">´ã´çÀÚ</label>
-			  <input disabled="disabled" type="text" class="form-control input-sm" id="MANAGER_NAME" name="MANAGER_NAME" value="${userInfo.getMANAGER_NAME() }">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="USER_ADDRESS">È¸»çÁÖ¼Ò</label>
-			  <input disabled="disabled" type="text" class="form-control input-sm" id="USER_ADDRESS" name="USER_ADDRESS" value="${userInfo.getUSER_ADDRESS() }">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="MANAGER_OFFICE_PHON">ÀüÈ­¹øÈ£</label>
-			  <input disabled="disabled" type="text" class="form-control input-sm" id="MANAGER_OFFICE_PHON" name="MANAGER_OFFICE_PHON" value="${userInfo.getMANAGER_OFFICE_PHON() }">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="MANAGER_CEL_PHON">ÈŞ´ë¹øÈ£</label>
-			  <input disabled="disabled" type="text" class="form-control input-sm" id="MANAGER_CEL_PHON" name="MANAGER_CEL_PHON" value="${userInfo.getMANAGER_CEL_PHON() }">
-		  </div>
-		  <div class="form-group has-success">
-			  <label class="control-label" for="MANAGER_EMAIL">ÀÌ¸ŞÀÏ</label>
-			  <input disabled="disabled" type="text" class="form-control input-sm" id="MANAGER_EMAIL" name="MANAGER_EMAIL" value="${userInfo.getMANAGER_EMAIL() }">
-		  </div>
-		  <br>  
-		  <div class="col-xs-12">
-		  	  <button type="button" class="btn btn-info btn-sm modify_button" onclick="javascript:changeButton(); return false;">Á¤º¸¼öÁ¤ÇÏ±â</button>
-	    	  <button type="button" class="btn btn-success btn-sm modify_submit_button" onclick="javascript:modifyCustomUserInfo('${userInfo.getUSER_NO() }');" style="display: none;">Á¤º¸¼öÁ¤¿Ï·á</button>
-		  </div>
-		  
-		  <hr>
-		  <strong>- ±ÇÇÑ ¼³Á¤</strong>
-		  <div class="row">
-		  <div class="col-xs-12">
-		  	<div class="col-xs-6">
-		  	  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox">
-					      	<label>
-					      		<input disabled="disabled" type="checkbox" value="true" name="MENU_NOTICE" id="MENU_NOTICE" <c:if test="${userPermission.isMENU_NOTICE() }">checked="checked"</c:if> onclick="javascript:noticeCheckbox(); return false;">¸Ş´º»ı¼º/±Û º¸±â - <strong>°øÁö</strong>
-					      	</label>
-					      </div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_NOTICE_WRITE" <c:if test="${userPermission.isFUNCTION_NOTICE_WRITE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦</label></div>
+
+	<form class="form-horizontal" role="form" method="post" name="modifyCustomUser">
+		<div class="card-panel">
+   	  <div class="card-heading"><h5>ì»¤ìŠ¤í…€ ìœ ì € ìƒì„±</h5></div>
+   	  <div class="card-content" id="addContract">
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="USER_NO_D" type="text" class="validate" name="USER_NO_D" value="${userInfo.getUSER_NO() }" disabled>
+						<input type="hidden" id="USER_NO" name="USER_NO" value="${userInfo.getUSER_NO() }">
+						<label for="USER_NO_D">* ì•„ì´ë””</label>
+
+						<%-- <input disabled="disabled" type="text" class="form-control input-sm" id="USER_NO_D" name="USER_NO_D" value="${userInfo.getUSER_NO() }">
+						<input type="hidden" id="USER_NO" name="USER_NO" value="${userInfo.getUSER_NO() }"> --%>
+					</div>
+					<div class="input-field col s6">
+						<input id="USER_NAME" type="text" class="validate" name="USER_NAME" value="${userInfo.getUSER_NAME() }" disabled>
+						<label for="USER_NAME">* ìˆ˜ì£¼ì‚¬ëª…</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="MANAGER_NAME" type="text" class="validate" name="MANAGER_NAME" value="${userInfo.getMANAGER_NAME() }" disabled>
+						<label for="MANAGER_NAME">ë‹´ë‹¹ì</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="USER_ADDRESS" type="text" class="validate" name="USER_ADDRESS" value="${userInfo.getUSER_ADDRESS() }" disabled>
+						<label for="USER_ADDRESS">íšŒì‚¬ì£¼ì†Œ</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s6">
+						<input id="MANAGER_OFFICE_PHON" type="text" class="validate" name="MANAGER_OFFICE_PHON" value="${userInfo.getMANAGER_OFFICE_PHON() }" disabled>
+						<label for="MANAGER_OFFICE_PHON">ì „í™”ë²ˆí˜¸</label>
+					</div>
+					<div class="input-field col s6">
+						<input id="MANAGER_CEL_PHON" type="text" class="validate" name="MANAGER_CEL_PHON" value="${userInfo.getMANAGER_CEL_PHON() }" disabled>
+						<label for="MANAGER_CEL_PHON">íœ´ëŒ€ë²ˆí˜¸</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="input-field col s12">
+						<input id="MANAGER_EMAIL" type="email" class="validate" name="MANAGER_EMAIL" value="${userInfo.getMANAGER_EMAIL() }" disabled>
+						<label for="MANAGER_EMAIL">ì´ë©”ì¼</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col s12">
+						<button type="button" class="btn modify_button" onclick="javascript:changeButton(); return false;">ì •ë³´ìˆ˜ì •í•˜ê¸°</button>
+						<button type="button" class="btn modify_submit_button" onclick="javascript:modifyCustomUserInfo('${userInfo.getUSER_NO() }');" style="display: none;">ì •ë³´ìˆ˜ì •ì™„ë£Œ</button>
+					</div>
+				</div>
+
+			  <h5>ê¶Œí•œ ì„¤ì •</h5>
+			  <div class="row">
+				  <div class="col s12">
+				  	<div class="col s6">
+							<div class="card-panel">
+								<div class="card-header">
+									<input type="checkbox" id="MENU_NOTICE" name="MENU_NOTICE"
+										<c:if test="${userPermission.isMENU_NOTICE() }">checked="checked"</c:if> onclick="javascript:noticeCheckbox(); return false;"/>
+      						<label for="MENU_NOTICE">ë©”ë‰´ìƒì„±/ê¸€ ë³´ê¸° - <strong>ê³µì§€</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="card-content">
+									<input type="checkbox" id="FUNCTION_NOTICE_WRITE" name="FUNCTION_NOTICE_WRITE"
+										<c:if test="${userPermission.isFUNCTION_NOTICE_WRITE() }">checked="checked"</c:if>/>
+      						<label for="FUNCTION_NOTICE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+								</div>
+								</div>
+							</div>
+							<div class="card-panel">
+								<div class="card-header">
+									<input type="checkbox" id="MENU_PRESENTATION" name="MENU_PRESENTATION"
+										<c:if test="${userPermission.isMENU_PRESENTATION() }">checked="checked"</c:if>/>
+      						<label for="MENU_PRESENTATION">ë©”ë‰´ìƒì„± - <strong>ì œí’ˆì†Œê°œ</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="card-content">
+									<label style="font-size: 12px; color: gray;">ì œí’ˆì†Œê°œ ë©”ë‰´ì…ë‹ˆë‹¤.</label>
+								</div>
+								</div>
+							</div>
+							<div class="card-panel">
+								<div class="card-header">
+									<input type="checkbox" id="MENU_GUEST_PACKAGE_DOWNLOAD" name="MENU_GUEST_PACKAGE_DOWNLOAD"
+										<c:if test="${userPermission.isMENU_GUEST_PACKAGE_DOWNLOAD() }">checked="checked"</c:if>/>
+      						<label for="MENU_GUEST_PACKAGE_DOWNLOAD">ë©”ë‰´ìƒì„±/ë‹¤ìš´ë¡œë“œ(Guest) - <strong>êµìœ¡ìš© ì†”ë£¨ì…˜ íŒ¨í‚¤ì§€</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+								<div class="card-content">
+									<label style="font-size: 12px; color: gray;">êµìœ¡ìš© ì†”ë£¨ì…˜ì„ ë‹¤ìš´ ë°›ì„ ìˆ˜ ìˆìŠµë‹ˆë‹¤.</label>
+								</div>
+								</div>
+							</div>
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_CUSTOMBOARD" name="MENU_CUSTOMBOARD" />
+									<label for="MENU_CUSTOMBOARD">ë©”ë‰´ìƒì„± / ê²Œì‹œíŒ ìƒì„± - <strong>ìë£Œì‹¤</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<label style="font-size: 12px; color: gray;">ê²Œì‹œíŒ ìƒì„± ë° ìë£Œë¥¼ ë“±ë¡ í•  ìˆ˜ ìˆëŠ” ë©”ë‰´ì…ë‹ˆë‹¤.</label>
+									</div>
+								</div>
+							</div>
+					  </div>
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-header">
+									<input type="checkbox" id="MENU_GLUE" name="MENU_GLUE"
+										<c:if test="${userPermission.isMENU_GLUE() }">checked="checked"</c:if>/>
+      						<label for="MENU_GLUE">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸°<strong>Glue</strong></label>
+
+									<input type="checkbox" id="FUNCTION_GLUE_ADMIN" name="FUNCTION_GLUE_ADMIN"
+										<c:if test="${userPermission.isFUNCTION_GLUE_ADMIN() }">checked="checked"</c:if>/>
+      						<label for="FUNCTION_GLUE_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+							       <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE" name="FUNCTION_GLUE_WRITE"
+												 <c:if test="${userPermission.isFUNCTION_GLUE_WRITE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+										 </li>
+							       <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_NOTICE" name="FUNCTION_GLUE_WRITE_NOTICE"
+												 <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_NOTICE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+										 </li>
+							       <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_QNA" name="FUNCTION_GLUE_WRITE_QNA"
+												 <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_QNA() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUE_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+										 </li>
+							       <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_FAQ" name="FUNCTION_GLUE_WRITE_FAQ"
+												 <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_FAQ() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_TECH" name="FUNCTION_GLUE_WRITE_TECH"
+												 <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_TECH() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_WRITE_OLDTECH" name="FUNCTION_GLUE_WRITE_OLDTECH"
+												 <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_OLDTECH() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUE_WRITE_OLDTECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ì˜ˆì „ ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_REPLY" name="FUNCTION_GLUE_REPLY"
+												 <c:if test="${userPermission.isFUNCTION_GLUE_REPLY() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUE_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUE_REPLY_BOARD_QNA" name="FUNCTION_GLUE_REPLY_BOARD_QNA"
+												 <c:if test="${userPermission.isFUNCTION_GLUE_REPLY_BOARD_QNA() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUE_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ì‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+										 </li>
+							     </ul>
+										<ul>
+										<%--  ì´ì „ ë²„ì „
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label></div></li>
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_QNA" checked="checked">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label></div></li>
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label></div></li>
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label></div></li>
+											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_OLDTECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ì˜ˆì „ ê¸°ìˆ ë¬¸ì„œ)</label></div></li>
+										</ul>
+										--%>
+									</div>
+								</div>
+							</div>
 					  </div>
 				  </div>
 			  </div>
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_PRESENTATION" <c:if test="${userPermission.isMENU_PRESENTATION() }">checked="checked"</c:if>>¸Ş´º»ı¼º - <strong>Á¦Ç°¼Ò°³</strong></label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					      <label style="font-size: 12px; color: gray;">Á¦Ç°¼Ò°³ ¸Ş´ºÀÔ´Ï´Ù.</label>
-					  </div>
+
+			  <div class="row">
+				  <div class="col s12">
+					  <div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_GLUEMASTER" name="MENU_GLUEMASTER"
+										<c:if test="${userPermission.isMENU_GLUEMASTER() }">checked="checked"</c:if>/>
+      						<label for="MENU_GLUEMASTER">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸° - <strong>GlueMaster</strong></label>
+
+									<input type="checkbox" id="FUNCTION_GLUEMASTER_ADMIN" name="FUNCTION_GLUEMASTER_ADMIN"
+										<c:if test="${userPermission.isFUNCTION_GLUEMASTER_ADMIN() }">checked="checked"</c:if>/>
+      						<label for="FUNCTION_GLUEMASTER_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div class="card-content">
+									<ul class="collection">
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE" name="FUNCTION_GLUEMASTER_WRITE"
+											 <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE() }">checked="checked"</c:if>/>
+										 <label for="FUNCTION_GLUEMASTER_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE_NOTICE" name="FUNCTION_GLUEMASTER_WRITE_NOTICE"
+											 <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE_NOTICE() }">checked="checked"</c:if>/>
+										 <label for="FUNCTION_GLUEMASTER_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE_QNA" name="FUNCTION_GLUEMASTER_WRITE_QNA"
+											 <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE_QNA() }">checked="checked"</c:if>/>
+										 <label for="FUNCTION_GLUEMASTER_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE_FAQ" name="FUNCTION_GLUEMASTER_WRITE_FAQ"
+											 <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE_FAQ() }">checked="checked"</c:if>/>
+										 <label for="FUNCTION_GLUEMASTER_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_WRITE_TECH" name="FUNCTION_GLUEMASTER_WRITE_TECH"
+											 <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE_TECH() }">checked="checked"</c:if>/>
+										 <label for="FUNCTION_GLUEMASTER_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_REPLY" name="FUNCTION_GLUEMASTER_REPLY"
+											 <c:if test="${userPermission.isFUNCTION_GLUEMASTER_REPLY() }">checked="checked"</c:if>/>
+										 <label for="FUNCTION_GLUEMASTER_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+									 </li>
+									 <li class="collection-item">
+										 <input type="checkbox" id="FUNCTION_GLUEMASTER_REPLY_BOARD_QNA" name="FUNCTION_GLUEMASTER_REPLY_BOARD_QNA"
+											 <c:if test="${userPermission.isFUNCTION_GLUEMASTER_REPLY_BOARD_QNA() }">checked="checked"</c:if>/>
+										 <label for="FUNCTION_GLUEMASTER_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ì‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+									 </li>
+								 </ul>
+								</div>
+							</div>
+						</div>
+					  <div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_GLUEMOBILE" name="MENU_GLUEMOBILE"
+										<c:if test="${userPermission.isMENU_GLUEMOBILE() }">checked="checked"</c:if>/>
+									<label for="MENU_GLUEMOBILE">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸° - <strong>GlueMobile</strong></label>
+
+									<input type="checkbox" id="FUNCTION_GLUEMOBILE_ADMIN" name="FUNCTION_GLUEMOBILE_ADMIN"
+										<c:if test="${userPermission.isFUNCTION_GLUEMOBILE_ADMIN() }">checked="checked"</c:if>/>
+									<label for="FUNCTION_GLUEMOBILE_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE" name="FUNCTION_GLUEMOBILE_WRITE"
+												 <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUEMOBILE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE_NOTICE" name="FUNCTION_GLUEMOBILE_WRITE_NOTICE"
+												 <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE_NOTICE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUEMOBILE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE_QNA" name="FUNCTION_GLUEMOBILE_WRITE_QNA"
+												 <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE_QNA() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUEMOBILE_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE_FAQ" name="FUNCTION_GLUEMOBILE_WRITE_FAQ"
+												 <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE_FAQ() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUEMOBILE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_WRITE_TECH" name="FUNCTION_GLUEMOBILE_WRITE_TECH"
+												 <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE_TECH() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUEMOBILE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_REPLY" name="FUNCTION_GLUEMOBILE_REPLY"
+												 <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_REPLY() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUEMOBILE_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_GLUEMOBILE_REPLY_BOARD_QNA" name="FUNCTION_GLUEMOBILE_REPLY_BOARD_QNA"
+												 <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_REPLY_BOARD_QNA() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_GLUEMOBILE_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ì‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+										 </li>
+									 </ul>
+									</div>
+								</div>
+							</div>
+						</div>
+				  </div> <%-- col --%>
+			  </div>
+
+			  <div class="row">
+				  <div class="col s12">
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_UCUBE" name="MENU_UCUBE"
+										<c:if test="${userPermission.isMENU_UCUBE() }">checked="checked"</c:if>/>
+									<label for="MENU_UCUBE">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸° - <strong>uCUBE</strong></label>
+
+									<input type="checkbox" id="FUNCTION_UCUBE_ADMIN" name="FUNCTION_UCUBE_ADMIN"
+										<c:if test="${userPermission.isFUNCTION_UCUBE_ADMIN() }">checked="checked"</c:if>/>
+									<label for="FUNCTION_UCUBE_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE" name="FUNCTION_UCUBE_WRITE"
+												 <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_UCUBE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE_NOTICE" name="FUNCTION_UCUBE_WRITE_NOTICE"
+												 <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE_NOTICE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_UCUBE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE_QNA" name="FUNCTION_UCUBE_WRITE_QNA"
+												 <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE_QNA() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_UCUBE_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE_FAQ" name="FUNCTION_UCUBE_WRITE_FAQ"
+												 <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE_FAQ() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_UCUBE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_WRITE_TECH" name="FUNCTION_UCUBE_WRITE_TECH"
+												 <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE_TECH() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_UCUBE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_REPLY" name="FUNCTION_UCUBE_REPLY"
+												 <c:if test="${userPermission.isFUNCTION_UCUBE_REPLY() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_UCUBE_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_UCUBE_REPLY_BOARD_QNA" name="FUNCTION_UCUBE_REPLY_BOARD_QNA"
+												 <c:if test="${userPermission.isFUNCTION_UCUBE_REPLY_BOARD_QNA() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_UCUBE_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ì‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+										 </li>
+									 </ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_POSBEE" name="MENU_POSBEE"
+										<c:if test="${userPermission.isMENU_POSBEE() }">checked="checked"</c:if>/>
+									<label for="MENU_POSBEE">ë©”ë‰´ìƒì„± / ê¸€ ë³´ê¸° - <strong>PosBee</strong></label>
+
+									<input type="checkbox" id="FUNCTION_POSBEE_ADMIN" name="FUNCTION_POSBEE_ADMIN"
+										<c:if test="${userPermission.isFUNCTION_POSBEE_ADMIN() }">checked="checked"</c:if>/>
+									<label for="FUNCTION_POSBEE_ADMIN">ì–´ë“œë¯¼ ê¶Œí•œ (ìœ ì € ë¹„ë°€ê¸€ ë³´ê¸° / í”„ë¡œì íŠ¸ í´ë” ê²Œì‹œíŒ ìƒì„±)</label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE" name="FUNCTION_POSBEE_WRITE"
+												 <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_POSBEE_WRITE">ê¸€ ë“±ë¡ / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE_NOTICE" name="FUNCTION_POSBEE_WRITE_NOTICE"
+												 <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE_NOTICE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_POSBEE_WRITE_NOTICE">ê¸€ ë“±ë¡ / ì‚­ì œ (ê³µì§€ì‚¬í•­)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE_QNA" name="FUNCTION_POSBEE_WRITE_QNA"
+												 <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE_QNA() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_POSBEE_WRITE_QNA">ê¸€ ë“±ë¡ / ì‚­ì œ (Q&amp;A)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE_FAQ" name="FUNCTION_POSBEE_WRITE_FAQ"
+												 <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE_FAQ() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_POSBEE_WRITE_FAQ">ê¸€ ë“±ë¡ / ì‚­ì œ (FAQ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_WRITE_TECH" name="FUNCTION_POSBEE_WRITE_TECH"
+												 <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE_TECH() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_POSBEE_WRITE_TECH">ê¸€ ë“±ë¡ / ì‚­ì œ (ê¸°ìˆ ë¬¸ì„œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_REPLY" name="FUNCTION_POSBEE_REPLY"
+												 <c:if test="${userPermission.isFUNCTION_POSBEE_REPLY() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_POSBEE_REPLY">ë³¸ë¬¸ ë§ê¸€ ë“±ë¡ (ë¦¬í”Œ)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_POSBEE_REPLY_BOARD_QNA" name="FUNCTION_POSBEE_REPLY_BOARD_QNA"
+												 <c:if test="${userPermission.isFUNCTION_POSBEE_REPLY_BOARD_QNA() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_POSBEE_REPLY_BOARD_QNA">ë³¸ë¬¸ì— ë‹µê¸€ ì‘ì„± (ìƒˆê¸€-Q&amp;A)</label>
+										 </li>
+									 </ul>
+									</div>
+								</div>
+							</div>
+						</div>
 				  </div>
 			  </div>
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_GUEST_PACKAGE_DOWNLOAD" <c:if test="${userPermission.isMENU_GUEST_PACKAGE_DOWNLOAD() }">checked="checked"</c:if>>¸Ş´º»ı¼º/´Ù¿î·Îµå(Guest) - <strong>±³À°¿ë ¼Ö·ç¼Ç ÆĞÅ°Áö</strong></label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					      <label style="font-size: 12px; color: gray;">±³À°¿ë ¼Ö·ç¼ÇÀ» ´Ù¿î ¹ŞÀ» ¼ö ÀÖ½À´Ï´Ù.</label>
-					  </div>
-				  </div>
-			  </div>
-		  	</div>
-			<div class="col-xs-6">
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_GLUE" <c:if test="${userPermission.isMENU_GLUE() }">checked="checked"</c:if>>¸Ş´º»ı¼º/±Û º¸±â - <strong>Glue</strong></label></div>
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUE_ADMIN" <c:if test="${userPermission.isFUNCTION_GLUE_ADMIN() }">checked="checked"</c:if>>¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ğ±Û º¸±â)</label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					  	  <ul class="list-unstyled">
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUE_WRITE" <c:if test="${userPermission.isFUNCTION_GLUE_WRITE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦</label></div></li>
-					  	  	<li>
-							  <ul>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_NOTICE" <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_NOTICE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_QNA" <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_QNA() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_FAQ" <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_FAQ() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_TECH" <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_TECH() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_OLDTECH" <c:if test="${userPermission.isFUNCTION_GLUE_WRITE_OLDTECH() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­(¿¹Àü))</label></div></li>
-							  </ul>
-					  	  	</li>
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUE_REPLY" <c:if test="${userPermission.isFUNCTION_GLUE_REPLY() }">checked="checked"</c:if>>º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUE_REPLY_BOARD_QNA" <c:if test="${userPermission.isFUNCTION_GLUE_REPLY_BOARD_QNA() }">checked="checked"</c:if>>º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-					  	  </ul>
-					  </div>
-				  </div>
-			  </div>
-			 </div>
-		  </div>
-		  </div>
-		  
-		  <div class="row">
-		  <div class="col-xs-12">
-			  <div class="col-xs-6">
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_GLUEMASTER" <c:if test="${userPermission.isMENU_GLUEMASTER() }">checked="checked"</c:if>>¸Ş´º»ı¼º/±Û º¸±â - <strong>GlueMaster</strong></label></div>
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUEMASTER_ADMIN" <c:if test="${userPermission.isFUNCTION_GLUEMASTER_ADMIN() }">checked="checked"</c:if>>¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ğ±Û º¸±â)</label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					  	  <ul class="list-unstyled">
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUEMASTER_WRITE" <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦</label></div></li>
-					  	  	<li>
-					  	  		<ul>
-					  	  		  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUEMASTER_CHECK" name="FUNCTION_GLUEMASTER_WRITE_NOTICE" <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE_NOTICE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUEMASTER_CHECK" name="FUNCTION_GLUEMASTER_WRITE_QNA" <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE_QNA() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUEMASTER_CHECK" name="FUNCTION_GLUEMASTER_WRITE_FAQ" <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE_FAQ() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUEMASTER_CHECK" name="FUNCTION_GLUEMASTER_WRITE_TECH" <c:if test="${userPermission.isFUNCTION_GLUEMASTER_WRITE_TECH() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-					  	  		</ul>
-					  	  	</li>
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUEMASTER_REPLY" <c:if test="${userPermission.isFUNCTION_GLUEMASTER_REPLY() }">checked="checked"</c:if>>º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUEMASTER_REPLY_BOARD_QNA" <c:if test="${userPermission.isFUNCTION_GLUEMASTER_REPLY_BOARD_QNA() }">checked="checked"</c:if>>º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-					  	  </ul>
-					  </div>
-				  </div>
-			  </div>
-			  </div>
-			  <div class="col-xs-6">
-			  <div class="panel panel-default">
-				  <div class="panel-heading">
-				      <h5 class="panel-title">
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_GLUEMOBILE" <c:if test="${userPermission.isMENU_GLUEMOBILE() }">checked="checked"</c:if>>¸Ş´º»ı¼º/±Û º¸±â - <strong>GlueMobile</strong></label></div>
-					      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUEMOBILE_ADMIN" <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_ADMIN() }">checked="checked"</c:if>>¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ğ±Û º¸±â)</label></div>
-				      </h5>
-				  </div>
-				  <div id="collapseOne" class="panel-collapse collapse in">
-					  <div class="panel-body">
-					  	  <ul class="list-unstyled">
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUEMOBILE_WRITE" <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦</label></div></li>
-					  	  	<li>
-					  	  		<ul>
-					  	  		  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUEMOBILE_CHECK" name="FUNCTION_GLUEMOBILE_WRITE_NOTICE" <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE_NOTICE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUEMOBILE_CHECK" name="FUNCTION_GLUEMOBILE_WRITE_QNA" <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE_QNA() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUEMOBILE_CHECK" name="FUNCTION_GLUEMOBILE_WRITE_FAQ" <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE_FAQ() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-								  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="GLUEMOBILE_CHECK" name="FUNCTION_GLUEMOBILE_WRITE_TECH" <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_WRITE_TECH() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-					  	  		</ul>
-					  	  	</li>
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUEMOBILE_REPLY" <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_REPLY() }">checked="checked"</c:if>>º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-					  	  	<li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_GLUEMOBILE_REPLY_BOARD_QNA" <c:if test="${userPermission.isFUNCTION_GLUEMOBILE_REPLY_BOARD_QNA() }">checked="checked"</c:if>>º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-					  	  </ul>
-					  </div>
-				  </div>
-			  </div>
-			  </div>
-		  </div>
-		  </div>
-		  
-		  <div class="row">
-		  <div class="col-xs-12">
-		  	<div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_UCUBE" <c:if test="${userPermission.isMENU_UCUBE() }">checked="checked"</c:if>>¸Ş´º»ı¼º/±Û º¸±â - <strong>uCUBE</strong></label></div>
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_UCUBE_ADMIN" <c:if test="${userPermission.isFUNCTION_UCUBE_ADMIN() }">checked="checked"</c:if>>¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ğ±Û º¸±â)</label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-						  	  <ul class="list-unstyled">
-						  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_UCUBE_WRITE" <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦</label></div></li>
-						  	  	  <li>
-						  	  	  	  <ul>
-							  	  		  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="UCUBE_CHECK" name="FUNCTION_UCUBE_WRITE_NOTICE" <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE_NOTICE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-										  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="UCUBE_CHECK" name="FUNCTION_UCUBE_WRITE_QNA" <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE_QNA() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-										  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="UCUBE_CHECK" name="FUNCTION_UCUBE_WRITE_FAQ" <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE_FAQ() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-										  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="UCUBE_CHECK" name="FUNCTION_UCUBE_WRITE_TECH" <c:if test="${userPermission.isFUNCTION_UCUBE_WRITE_TECH() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-						  	  	  	  </ul>
-						  	  	  </li>
-						  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_UCUBE_REPLY" <c:if test="${userPermission.isFUNCTION_UCUBE_REPLY() }">checked="checked"</c:if>>º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-						  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_UCUBE_REPLY_BOARD_QNA" <c:if test="${userPermission.isFUNCTION_UCUBE_REPLY_BOARD_QNA() }">checked="checked"</c:if>>º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-						  	  </ul>
-						  </div>
-					  </div>
+
+			  <div class="row">
+				  <div class="col s12">
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_SOLUTION_UPLOAD" name="MENU_SOLUTION_UPLOAD"
+										<c:if test="${userPermission.isMENU_SOLUTION_UPLOAD() }">checked="checked"</c:if>/>
+									<label for="MENU_SOLUTION_UPLOAD">ë©”ë‰´ìƒì„± - <strong>ì†”ë£¨ì…˜ íŒ¨í‚¤ì§€ ê´€ë¦¬</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_GLUE" name="FUNCTION_SOLUTION_UPLOAD_GLUE"
+												 <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_GLUE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_SOLUTION_UPLOAD_GLUE">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (Glue)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_GLUEMASTER" name="FUNCTION_SOLUTION_UPLOAD_GLUEMASTER"
+												 <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_GLUEMASTER() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_SOLUTION_UPLOAD_GLUEMASTER">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (GlueMaster)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_GLUEMOBILE" name="FUNCTION_SOLUTION_UPLOAD_GLUEMOBILE"
+												 <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_GLUEMOBILE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_SOLUTION_UPLOAD_GLUEMOBILE">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (GlueMobile)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_UCUBE" name="FUNCTION_SOLUTION_UPLOAD_UCUBE"
+												 <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_UCUBE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_SOLUTION_UPLOAD_UCUBE">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (uCUBE)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_POSBEE" name="FUNCTION_SOLUTION_UPLOAD_POSBEE"
+												 <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_POSBEE() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_SOLUTION_UPLOAD_POSBEE">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (PosBee)</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_SOLUTION_UPLOAD_ETC" name="FUNCTION_SOLUTION_UPLOAD_ETC"
+												 <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_ETC() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_SOLUTION_UPLOAD_ETC">íŒ¨í‚¤ì§€ ë“±ë¡ / ì‚­ì œ (etc)</label>
+										 </li>
+									 </ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col s6">
+							<div class="card-panel">
+								<div class="card-heading">
+									<input type="checkbox" id="MENU_MANAGEMENT" name="MENU_MANAGEMENT"
+										<c:if test="${userPermission.isMENU_MANAGEMENT() }">checked="checked"</c:if>/>
+									<label for="MENU_MANAGEMENT">ë©”ë‰´ìƒì„± - <strong>ê³ ê°ê´€ë¦¬</strong></label>
+								</div>
+								<div id="collapseOne" class="panel-collapse collapse in">
+									<div class="card-content">
+										<ul class="collection">
+										 <li class="collection-item">
+											 <input type="checkbox" id="SUB_MENU_MANAGEMENT_COMPLETE" name="SUB_MENU_MANAGEMENT_COMPLETE"
+												 <c:if test="${userPermission.isSUB_MENU_MANAGEMENT_COMPLETE() }">checked="checked"</c:if>/>
+											 <label for="SUB_MENU_MANAGEMENT_COMPLETE">ì„œë¸Œë©”ë‰´ / ê³ ê° ì •ë³´ ë³´ê¸° - <strong>ì™„ë£Œ ê³„ì•½ê±´</strong></label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_MANAGEMENT_INPUT_USER" name="FUNCTION_MANAGEMENT_INPUT_USER"
+												 <c:if test="${userPermission.isFUNCTION_MANAGEMENT_INPUT_USER() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_MANAGEMENT_INPUT_USER">ê³ ê° ë“±ë¡ / ìˆ˜ì • / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="SUB_MENU_MANAGEMENT_PROGRESS" name="SUB_MENU_MANAGEMENT_PROGRESS"
+												 <c:if test="${userPermission.isSUB_MENU_MANAGEMENT_PROGRESS() }">checked="checked"</c:if>/>
+											 <label for="SUB_MENU_MANAGEMENT_PROGRESS">ì„œë¸Œë©”ë‰´ / ê³ ê° ì •ë³´ ë³´ê¸° - <strong>ì§„í–‰ì¤‘ ê³„ì•½ê±´</strong></label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_PROGRESS_INPUT_USER" name="FUNCTION_PROGRESS_INPUT_USER"
+												 <c:if test="${userPermission.isFUNCTION_PROGRESS_INPUT_USER() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_PROGRESS_INPUT_USER">ê°€ê³„ì•½ ë“±ë¡ / ìˆ˜ì • / ì‚­ì œ</label>
+										 </li>
+										 <li class="collection-item">
+											 <input type="checkbox" id="FUNCTION_PROGRESS_COMMENT" name="FUNCTION_PROGRESS_COMMENT"
+												 <c:if test="${userPermission.isFUNCTION_PROGRESS_COMMENT() }">checked="checked"</c:if>/>
+											 <label for="FUNCTION_PROGRESS_COMMENT">Comment ë“±ë¡</label>
+										 </li>
+									 </ul>
+
+									 	<%-- ì´ì „ ë²„ì „ --%>
+										<%-- <ul class="list-unstyled">
+												<li><div class="checkbox"><label><input type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_COMPLETE">ì„œë¸Œë©”ë‰´ / ê³ ê° ì •ë³´ ë³´ê¸° - <strong>ì™„ë£Œ ê³„ì•½ê±´</strong></label></div></li>
+												<li>
+														<ul>
+																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_MANAGEMENT_INPUT_USER">ê³ ê° ë“±ë¡ / ìˆ˜ì • / ì‚­ì œ</label></div></li>
+														</ul>
+												</li>
+												<li><div class="checkbox"><label><input type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_PROGRESS">ì„œë¸Œë©”ë‰´ / ê³ ê° ì •ë³´ ë³´ê¸° - <strong>ì§„í–‰ì¤‘ ê³„ì•½ê±´</strong></label></div></li>
+												<li>
+														<ul>
+																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_PROGRESS_INPUT_USER">ê°€ê³„ì•½ ë“±ë¡ / ìˆ˜ì • / ì‚­ì œ</label></div></li>
+																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_PROGRESS_COMMENT">Comment ë“±ë¡</label></div></li>
+														</ul>
+												</li>
+										</ul> --%>
+									</div>
+								</div>
+							</div>
+						</div>
 				  </div>
 			  </div>
-		  	  <div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_POSBEE" <c:if test="${userPermission.isMENU_POSBEE() }">checked="checked"</c:if>>¸Ş´º»ı¼º/±Û º¸±â - <strong>PosBee</strong></label></div>
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_POSBEE_ADMIN" <c:if test="${userPermission.isFUNCTION_POSBEE_ADMIN() }">checked="checked"</c:if>>¾îµå¹Î ±ÇÇÑ (À¯Àú ºñ¹Ğ±Û º¸±â)</label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-						  	  <ul class="list-unstyled">
-						  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_POSBEE_WRITE" <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦</label></div></li>
-						  	  	  <li>
-						  	  	  	  <ul>
-							  	  		  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="POSBEE_CHECK" name="FUNCTION_POSBEE_WRITE_NOTICE" <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE_NOTICE() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (°øÁö»çÇ×)</label></div></li>
-										  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="POSBEE_CHECK" name="FUNCTION_POSBEE_WRITE_QNA" <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE_QNA() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (Q&amp;A)</label></div></li>
-										  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="POSBEE_CHECK" name="FUNCTION_POSBEE_WRITE_FAQ" <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE_FAQ() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (FAQ)</label></div></li>
-										  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="POSBEE_CHECK" name="FUNCTION_POSBEE_WRITE_TECH" <c:if test="${userPermission.isFUNCTION_POSBEE_WRITE_TECH() }">checked="checked"</c:if>>±Û µî·Ï/»èÁ¦ (±â¼ú¹®¼­)</label></div></li>
-						  	  	  	  </ul>
-						  	  	  </li>
-						  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_POSBEE_REPLY" <c:if test="${userPermission.isFUNCTION_POSBEE_REPLY() }">checked="checked"</c:if>>º»¹® µ¡±Û µî·Ï (¸®ÇÃ)</label></div></li>
-						  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_POSBEE_REPLY_BOARD_QNA" <c:if test="${userPermission.isFUNCTION_POSBEE_REPLY_BOARD_QNA() }">checked="checked"</c:if>>º»¹®¿¡ ´ëÇÑ ´ä±Û ÀÛ¼º (»õ±Û-Q&amp;A)</label></div></li>
-						  	  </ul>
-						  </div>
-					  </div>
-				  </div>
-			  </div>
-		  </div>
-		  </div>
-		  
-		  <div class="row">
-		  <div class="col-xs-12">
-		  		<div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_MANAGEMENT" <c:if test="${userPermission.isMENU_MANAGEMENT() }">checked="checked"</c:if>>¸Ş´º»ı¼º - <strong>°í°´°ü¸®</strong></label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-					  		  <ul class="list-unstyled">
-						  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_COMPLETE" <c:if test="${userPermission.isSUB_MENU_MANAGEMENT_COMPLETE() }">checked="checked"</c:if>>¼­ºê¸Ş´º/°í°´ Á¤º¸ º¸±â - <strong>¿Ï·á °è¾à°Ç</strong></label></div></li>
-						  	  	  <li>
-						  	  	  	  <ul>
-						  	  	  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_MANAGEMENT_INPUT_USER" <c:if test="${userPermission.isFUNCTION_MANAGEMENT_INPUT_USER() }">checked="checked"</c:if>>°í°´ µî·Ï/¼öÁ¤/»èÁ¦</label></div></li>
-						  	  	  	  </ul>
-						  	  	  </li>
-						  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_PROGRESS" <c:if test="${userPermission.isSUB_MENU_MANAGEMENT_PROGRESS() }">checked="checked"</c:if>>¼­ºê¸Ş´º/°í°´ Á¤º¸ º¸±â - <strong>ÁøÇàÁß °è¾à°Ç</strong></label></div></li>
-						  	  	  <li>
-						  	  	  	  <ul>
-						  	  	  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_PROGRESS_INPUT_USER" <c:if test="${userPermission.isFUNCTION_PROGRESS_INPUT_USER() }">checked="checked"</c:if>>°¡°è¾à µî·Ï/¼öÁ¤/»èÁ¦</label></div></li>
-						  	  	  	  	  <li><div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="FUNCTION_PROGRESS_COMMENT" <c:if test="${userPermission.isFUNCTION_PROGRESS_COMMENT() }">checked="checked"</c:if>>Comment µî·Ï</label></div></li>
-						  	  	  	  </ul>
-						  	  	  </li>
-						  	  </ul>
-						  </div>
-					  </div>
-				  </div>
+
+			  <div class="row">
+			  	<div class="col s12">
+						<div class="col s6">
+							<%-- ìë£Œì‹¤ --%>
+						</div>
 			  	</div>
-		  	 <div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="MENU_SOLUTION_UPLOAD" name="MENU_SOLUTION_UPLOAD" <c:if test="${userPermission.isMENU_SOLUTION_UPLOAD() }">checked="checked"</c:if>>¸Ş´º»ı¼º - <strong>¼Ö·ç¼Ç ÆĞÅ°Áö °ü¸®</strong></label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_GLUE" <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_GLUE() }">checked="checked"</c:if>>ÆĞÅ°Áö µî·Ï/»èÁ¦ (Glue)</label></div>
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_GLUEMASTER" <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_GLUEMASTER() }">checked="checked"</c:if>>ÆĞÅ°Áö µî·Ï/»èÁ¦ (GlueMaster)</label></div>
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_GLUEMOBILE" <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_GLUEMOBILE() }">checked="checked"</c:if>>ÆĞÅ°Áö µî·Ï/»èÁ¦ (GlueMobile)</label></div>
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_UCUBE" <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_UCUBE() }">checked="checked"</c:if>>ÆĞÅ°Áö µî·Ï/»èÁ¦ (uCUBE)</label></div>
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_POSBEE" <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_POSBEE() }">checked="checked"</c:if>>ÆĞÅ°Áö µî·Ï/»èÁ¦ (PosBee)</label></div>
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" id="SOLUTION_CHECK" name="FUNCTION_SOLUTION_UPLOAD_ETC" <c:if test="${userPermission.isFUNCTION_SOLUTION_UPLOAD_ETC() }">checked="checked"</c:if>>ÆĞÅ°Áö µî·Ï/»èÁ¦ (±âÅ¸ÆÄÀÏ)</label></div>
-						  </div>
-					  </div>
-				  </div>
 			  </div>
-		  </div>
-		  </div>
-		  
-		  <div class="row">
-		  	<div class="col-xs-12">
-		  	  <div class="col-xs-6">
-				  <div class="panel panel-default">
-					  <div class="panel-heading">
-					      <h5 class="panel-title">
-						      <div class="checkbox"><label><input disabled="disabled" type="checkbox" value="true" name="MENU_CUSTOMBOARD" <c:if test="${userPermission.isMENU_CUSTOMBOARD() }">checked="checked"</c:if>>¸Ş´º»ı¼º/°Ô½ÃÆÇ »ı¼º - <strong>ÀÚ·á½Ç</strong></label></div>
-					      </h5>
-					  </div>
-					  <div id="collapseOne" class="panel-collapse collapse in">
-						  <div class="panel-body">
-						      <label style="font-size: 12px; color: gray;">°Ô½ÃÆÇ »ı¼º ¹× ÀÚ·á¸¦ µî·Ï ÇÒ ¼ö ÀÖ´Â ¸Ş´º ÀÔ´Ï´Ù.</label>
-						  </div>
-				 	  </div>
-				  </div>
-			  </div>
-		  	</div>
-		  </div>
-		
-		<br>  
-		<div class="col-xs-12">
-			<button type="button" class="btn btn-info btn-sm modify_button_per" onclick="javascript:changeButtonPerm(); return false;">±ÇÇÑ¼öÁ¤ÇÏ±â</button>
-	    	<button type="button" class="btn btn-success btn-sm modify_submit_button_per" onclick="javascript:modifyCustomUserPermission('${userInfo.getUSER_NO() }');" style="display: none;">±ÇÇÑ¼öÁ¤¿Ï·á</button>
-		</div>
-		</div>
+			</div>
+			<div class="card-action">
+				<button type="button" class="btn btn-info btn-sm modify_button_per" onclick="javascript:changeButtonPerm(); return false;">ê¶Œí•œìˆ˜ì •í•˜ê¸°</button>
+	    	<button type="button" class="btn btn-success btn-sm modify_submit_button_per" onclick="javascript:modifyCustomUserPermission('${userInfo.getUSER_NO() }');" style="display: none;">ê¶Œí•œìˆ˜ì •ì™„ë£Œ</button>
+			</div>
 	  </div>
-</form>
+	</form>
+
 </body>
-</html>

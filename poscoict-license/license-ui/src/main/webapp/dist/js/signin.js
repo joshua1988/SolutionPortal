@@ -9,11 +9,14 @@ function loginOK(){
 		$("#password").focus();
 		return false;
 	}
+
 	var form = document.frm;
+	// console.log(form);
 	form.submit();
 }
 
 function guestLogin(){
-	var form = document.frm2;	
+	var form = document.frm2;
+	// console.log(form);
 	form.submit();
 }

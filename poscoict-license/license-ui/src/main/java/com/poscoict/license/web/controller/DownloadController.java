@@ -6,10 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,21 +15,16 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.poscoict.license.consts.Consts;
 import com.poscoict.license.dao.ManagementDao;
-import com.poscoict.license.dao.ManagementDaoJdbc;
 
 @Controller
 public class DownloadController extends ExceptionControllerAdvice{
     private ManagementDao dao = null;
-	private Logger logger = LoggerFactory.getLogger(getClass());
-
-    private ManagementDao getManagementDao() {
-        ApplicationContext context = new GenericXmlApplicationContext( "applicationContext.xml" );
-        return this.dao = context.getBean( "managementDao", ManagementDaoJdbc.class );
-    }
+	
+    @Autowired ManagementDao managementDao;
     
     @RequestMapping( value={"attachFileDown"}, method=RequestMethod.POST )
     public ModelAndView attachFileDown(@RequestParam( "objectId" ) String objectId){
-    	dao = getManagementDao();
+    	dao = managementDao;
     	System.out.println("________objectId: "+objectId);
     	Map<String, Object> fileInfo = dao.getDownloadAttachInfo(objectId);
     	File file = new File( (String)fileInfo.get("ATTACH_FILE_PATH") );
@@ -47,7 +39,7 @@ public class DownloadController extends ExceptionControllerAdvice{
     @RequestMapping( value={"sdkFileDown","licenseFileDown"} )
     public ModelAndView download( @RequestParam( "category" ) String category, @RequestParam( "objectId" ) String objectId,
     		 HttpServletRequest request ) {
-        dao = getManagementDao();
+        dao = managementDao;
         String userNo = (String)request.getSession().getAttribute("USER_NO");
         String filePath = "";
         

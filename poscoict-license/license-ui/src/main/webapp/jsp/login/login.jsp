@@ -3,63 +3,164 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=0.7">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
-<link rel="stylesheet" href="${contextPath }/dist/bootstrap/css/bootstrap.css">
-<style type="text/css">
-.row{
-	margin-top: 10%;
- 	background-image: url('${contextPath }/dist/img/bg.gif'); 
- 	background-repeat: repeat-x; 
-}
-.container{
-	padding-top: 60px;
-	padding-bottom: 60px;
-}
-</style>
-<title>라이선스 관리 포탈</title>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	<c:set var="contextPath" value="<%=request.getContextPath()%>"/>
+
+	<!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize.css-->
+  <link type="text/css" rel="stylesheet" href="${contextPath}/dist/materialize/css/materialize.min.css"  media="screen,projection"/>
+  <!--Let browser know website is optimized for mobile-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+
+	<%-- Android Chrome --%>
+	<meta name="mobile-web-app-capable" content="yes">
+	<link rel="icon" sizes="192x192" href="${contextPath}/dist/images/icons/chrome-touch-icon.png">
+
+	<%-- PWA meta --%>
+	<link rel="manifest" href="${contextPath}/manifest.json">
+
+	<%-- Safari --%>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="apple-mobile-web-app-title" content="SolPot(Dev)">
+	<link rel="apple-touch-icon" href="${contextPath}/dist/images/icons/apple-touch-icon.png">
+	<link rel="apple-touch-startup-image" href="${contextPath}/dist/images/icons/apple-touch-icon.png">
+	<link rel="apple-touch-icon-precomposed" href="${contextPath}/dist/images/icons/apple-touch-icon.png">
+
+	<%-- <link rel="shortcut icon" sizes="192x192" href="${contextPath}/dist/images/icons/chrome-touch-icon.png">
+	<link rel="shortcut icon" sizes="128x128" href="icon-128x128.png">
+	<link rel="apple-touch-icon" sizes="128x128" href="${contextPath}/dist/images/icons/apple-touch-icon.png">
+	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="icon-128x128.png"> --%>
+	<style>
+    body {
+      display: flex;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    main {
+      flex: 1 0 auto;
+			align-items: center;
+    }
+
+    body {
+      background: #fff;
+    }
+
+    .input-field input[type=date]:focus + label,
+    .input-field input[type=text]:focus + label,
+    .input-field input[type=email]:focus + label,
+    .input-field input[type=password]:focus + label {
+      color: #e91e63;
+    }
+
+    .input-field input[type=date]:focus,
+    .input-field input[type=text]:focus,
+    .input-field input[type=email]:focus,
+    .input-field input[type=password]:focus {
+      border-bottom: 2px solid #e91e63;
+      box-shadow: none;
+    }
+  </style>
+	<title>라이선스 관리 포탈</title>
 </head>
 <body>
-<div class="row">
-	<div class="container">
-		<div class="media">
-		  <a class="pull-left" href="#">
-		    <img class="media-object" src="${contextPath }/dist/img/glueimg01.png" alt="..." style="padding-top: 20px;">
-		  </a>
-		  <div class="media-body input-group-sm col-lg-3">
-		    <h4 class="media-heading"><label style="font-size: 13px; color: white;">라이선스 관리 포탈</label></h4>
-		    <form class="form-signin" name="frm" method="post" action="securityLogin">
-	   		<input type="text" class="form-control" id="text" name="text" placeholder="ID" autofocus>
-			<input type="password" class="form-control" id="password" name="password" placeholder="PASSWORD">
-			<button class="btn btn-sm btn-info btn-block" onclick="javascript:loginOK();" type="button">로그인</button>
-			</form>
-			<form class="form-signin" name="frm2" method="post" action="securityLogin">
-			<input type="hidden" name="text" value="guest">
-			<input type="hidden" name="password" value="guest">
-			<button class="btn btn-sm btn-warning btn-block" onclick="javascript:guestLogin();" type="button">게스트 로그인</button>
-			</form>
-		  </div>
-		</div>
-	</div>		
-</div>
+	<div class="section"></div>
+	  <main>
+	    <center>
+				<div class="section hide-on-small-only"></div>
+				<img class="responsive-img" style="width: 250px;" src="${contextPath}/dist/img/mainLogo.gif" />
+	      <div class="section hide-on-small-only"></div>
 
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>     -->
-<script src="${contextPath }/dist/jquery-ui/jquery-1.10.2-jquery.min.js"></script>
-<script src="${contextPath }/dist/bootstrap/js/bootstrap.min.js"></script>
-<script src="${contextPath }/dist/js/signin.js"></script>
-<script type="text/javascript">
-$(function(){
-	$(".text").focus();
-	$("input").keydown(function(e){
-		if(e.keyCode == 13) {
-			loginOK();
-		}
+	      <h5 class="blue-text text-darken-1">Welcome to Solution Portal</h5>
+	      <div class="section hide-on-small-only"></div>
+
+	      <div class="container">
+	        <div class="z-depth-1 grey lighten-4 row hoverable" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
+
+	          <form class="col s12 form-signin" name="frm" method="post" action="securityLogin">
+	            <div class='row'>
+	              <div class='col s12'>
+	              </div>
+	            </div>
+
+	            <div class='row'>
+	              <div class='input-field col s12' style="text-align: left;">
+	                <input class='validate' type='text' name='text' id='text' autofocus/>
+	                <label for='text'>ID를 입력하세요</label>
+	              </div>
+	            </div>
+
+	            <div class='row text-center'>
+	              <div class='input-field col s12 text-left' style="text-align: left;">
+	                <input class='validate' type='password' name='password' id='password'/>
+	                <label for='password'>비밀번호를 입력하세요</label>
+	              </div>
+	              <label style='float: right;'>
+									<a class='pink-text text-darken-1' href='#!'><b>비밀번호 잊으셨나요?</b></a>
+								</label>
+	            </div>
+
+	            <br />
+	            <center>
+	              <div class='row'>
+	                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue darken-1' name="action" onclick="javascript:loginOK();">
+										Login</button><br><br><br>
+									<%-- <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo' name="action" onclick="javascript:guestLogin();">
+										Guest</button> --%>
+	              </div>
+	            </center>
+	          </form>
+						<div class='row'>
+							<div class="col s12">
+								<button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue darken-1' name="action" onclick="javascript:guestLogin();">
+									Guest</button>
+							</div>
+						</div>
+						<form class="form-signin" name="frm2" method="post" action="securityLogin" hidden>
+							<input type="hidden" name="text" value="guest">
+							<input type="hidden" name="password" value="guest">
+						</form>
+	        </div>
+	      </div>
+				<a id="pushBtn" class="waves-effect waves-light btn"><i id="pushIcon" class="material-icons left">notifications_active</i>알림 설정</a>
+				<!-- notifications_off -->
+				<%-- <label for="pushAlert">게시판 & 답글 알림 설정</label> --%>
+				<div class="switch" id="pushAlert">
+			    <label>
+			      Off
+			      <input id="pushSwitch" type="checkbox">
+			      <span class="lever"></span>
+			      On
+			    </label>
+			  </div>
+				<br/>
+	      <%-- <a href="#!">Help Desk</a> --%>
+	    </center>
+	  </main>
+	<script type="text/javascript">
+	    sessionStorage.clear();
+			sessionStorage.setItem("treeActiveKey", "notice");
+			sessionStorage.setItem("navActiveKey", "Navnotice");
+	</script>
+  <script async src="${contextPath }/serviceworker.js"></script>
+	<script src="${contextPath }/dist/jquery/jquery.min.js"></script>
+	<script src="${contextPath }/dist/materialize/js/materialize.min.js"></script>
+	<script async src="${contextPath }/dist/js/signin.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		/* $('body').bind('touchmove', function(ev) { ev.preventDefault(); }); */
+		$(".text").focus();
+		$("input").keydown(function(e){
+			if(e.keyCode == 13) {
+				loginOK();
+			}
+		});
 	});
-});
-</script>    
+	</script>
 </body>
 </html>

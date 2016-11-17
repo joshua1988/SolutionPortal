@@ -52,7 +52,10 @@
 	
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/security-context.xml</param-value>
+		<param-value>
+			/WEB-INF/security-context.xml
+			classpath:applicationContext.xml
+		</param-value>
 	</context-param>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -98,6 +101,7 @@
 		<url-pattern>/deleteReply</url-pattern>
 		<url-pattern>/deleteBoard</url-pattern>
 		<url-pattern>/replyBoard</url-pattern>
+		<url-pattern>/replyBoardOnNewPage</url-pattern>
 		<url-pattern>/passwordPop</url-pattern>
 		<url-pattern>/changePassword</url-pattern>		
 		<url-pattern>/certificateDownload</url-pattern>
@@ -112,7 +116,7 @@
 		<url-pattern>/licenseManager</url-pattern>
 		<url-pattern>/newContract</url-pattern>
 		<url-pattern>/addContract</url-pattern>
-		<url-pattern>/userInfom</url-pattern>
+		<url-pattern>/userInform</url-pattern>
 		<url-pattern>/techSupportCertificationInfo</url-pattern>
 		<url-pattern>/productModifyForm</url-pattern>
 		<url-pattern>/modifyProduct</url-pattern>

@@ -5,8 +5,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,11 +15,9 @@ import com.poscoict.license.service.CertificateService;
 
 @Controller
 public class CertificateController extends ExceptionControllerAdvice {
-    private CertificateService getCertificateService() {
-        ApplicationContext context = new GenericXmlApplicationContext( "applicationContext.xml" );
-        return context.getBean( "certificateService", CertificateService.class );
-    }
     
+	@Autowired CertificateService certificateService;
+	
     // 라이센스 인증서 다운로드 정보
     @RequestMapping( value = { "certificateDownloadInfo" }, method = { RequestMethod.POST } )
     public ModelAndView getLicenseCertification(HttpSession session, String licenseFileName, HttpServletRequest req) throws Exception {
@@ -28,7 +25,7 @@ public class CertificateController extends ExceptionControllerAdvice {
         ModelAndView mv = new ModelAndView();
         mv.setViewName( "certificateDownload/certificateView" );
         
-        Map<String, Object> map = (Map<String, Object>) getCertificateService().getLicenseCertification((String)session.getAttribute("USER_NO"), licenseFileName, req);
+        Map<String, Object> map = (Map<String, Object>) certificateService.getLicenseCertification((String)session.getAttribute("USER_NO"), licenseFileName, req);
         mv.addObject("ImgFileName", map.get("ImgFileName"));
         mv.addObject("PDFFileName", map.get("PDFFileName"));
         
@@ -42,7 +39,7 @@ public class CertificateController extends ExceptionControllerAdvice {
         ModelAndView mv = new ModelAndView();
         mv.setViewName( "certificateDownload/certificateView" );
         
-        Map<String, Object> map = (Map<String, Object>) getCertificateService().getTechSupportCertificationInfo((String)session.getAttribute("USER_NO"), productFileId, req);
+        Map<String, Object> map = (Map<String, Object>) certificateService.getTechSupportCertificationInfo((String)session.getAttribute("USER_NO"), productFileId, req);
         mv.addObject("ImgFileName", map.get("ImgFileName"));
         mv.addObject("PDFFileName", map.get("PDFFileName"));
         return mv;

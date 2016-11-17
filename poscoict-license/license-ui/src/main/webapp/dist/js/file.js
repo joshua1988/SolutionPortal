@@ -1,21 +1,21 @@
 function packageManager(mode, localId){
-	saveLocalStoragy(localId);
-	
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+	// saveLocalStoragy(localId);
+
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","licenseManager");
-	
+
 	document.body.appendChild(form);
-	
+
 	var objectId = createEl("mode", mode);
 	form.appendChild(objectId);
 	form.submit();
 }
 function fileDownload(cate, id){
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","sdkFileDown");
-	
+
 	document.body.appendChild(form);
 
 	var category = createEl("category", cate);
@@ -26,25 +26,25 @@ function fileDownload(cate, id){
 }
 
 function fileDownload2(cate, id){
-	var form = document.createElement("form");     
-	form.setAttribute("method","post");                    
+	var form = document.createElement("form");
+	form.setAttribute("method","post");
 	form.setAttribute("action","licenseFileDown");
-	
+
 	document.body.appendChild(form);
 
 	var category = createEl("category", cate);
 	var objectId = createEl("objectId", id);
 	form.appendChild(category);
 	form.appendChild(objectId);
-	form.submit(); 
+	form.submit();
 }
 
 function createEl(name, value){
-	var input_id = document.createElement("input");  
-	input_id.setAttribute("type", "hidden");                  
-	input_id.setAttribute("name", name);                        
+	var input_id = document.createElement("input");
+	input_id.setAttribute("type", "hidden");
+	input_id.setAttribute("name", name);
 	input_id.setAttribute("value", value);
-	
+
 	return input_id;
 }
 
@@ -94,31 +94,55 @@ function orderCompanyInfo(company) {
 		success: function(data){
 			$("#companyInfoPop").empty();
 			$("#companyInfoPop").append(""
-					+"<div class='modal-dialog'>"
-					+"<div class='modal-content'>"
-					+"<div class='modal-header'>"
-					+"<button type='button' class='close' data-dismiss='modal' aria-hidden='true'>×</button>"
-					+"<h4 class='modal-title'><p class='text-muted'><strong>"+data.map.COMPANY_NAME+"</strong></p></h4>"
-					+"</div>"
-					+"<div class='modal-body'>"
-					+"<form name='modifyCompanyFrm'>"
-					+"<dl>"
-					+"<dt>아이디</dt><dd><input type='text' class='form-control' name='USER_NO' value='"+data.map.USER_NO+"'></dd>"
-					+"<dt>회사명</dt><dd><input type='text' class='form-control' name='USER_NAME' value='"+data.map.COMPANY_NAME+"'></dd>"
-					+"<dt>주소</dt><dd><input type='text' class='form-control' name='USER_ADDRESS' value='"+data.map.USER_ADDRESS+"'></dd>"
-					+"<dt>담당자</dt><dd><input type='text' class='form-control' name='MANAGER_NAME' value='"+data.map.MANAGER_NAME+"'></dd>"
-					+"<dt>전화번호</dt><dd><input type='text' class='form-control' name='MANAGER_OFFICE_PHON' value='"+data.map.MANAGER_OFFICE_PHON+"'></dd>"
-					+"<dt>휴대번호</dt><dd><input type='text' class='form-control' name='MANAGER_CEL_PHON' value='"+data.map.MANAGER_CEL_PHON+"'></dd>"
-					+"<dt>이메일</dt><dd><input type='text' class='form-control' name='MANAGER_EMAIL' value='"+data.map.MANAGER_EMAIL+"'></dd>"
-					+"</dl>"
-					+"<input type='hidden' name='oriCompanyId' value='"+data.map.USER_NO+"'>"
-					+"<div class='btn-group'>"
-					+"<button type='button' class='btn btn-info' data-dismiss='modal'>닫기</button>"
-					+"<button id='hideButton' class='btn btn-default' data-dismiss='modal' onclick='javascript:modifyCompanyInfo(); return false;'>수정</button>"
-					+"<button id='hideButton' class='btn btn-default' data-dismiss='modal' onclick='javascript:expireOrderCompany("+"\""+data.map.USER_NO+"\""+");return false;'>제거</button>"
-					+"</div>"
-					+"</form></div></div></div>"
-					);
+				+"<div class='modal-content'>"
+				+"<form name='modifyCompanyFrm'>"
+				+"<div class='row'>"
+				+"<div class='input-field col s6'>"
+				+"<input placeholder='아이디 입력' id='USER_NO' type='text' name='USER_NO' value='"+data.map.USER_NO+"'>"
+				+"<label for='USER_NO'>* 아이디</label>"
+				+"</div>"
+				+"<div class='input-field col s6'>"
+				+"<input placeholder='수주사명 입력' id='USER_NAME' type='text' class='validate' name='USER_NAME' value='"+data.map.COMPANY_NAME+"'>"
+				+"<label for='USER_NAME'>* 수주사명</label>"
+				+"</div>"
+				+"</div>"
+				+"<div class='row'>"
+				+"<div class='input-field col s6'>"
+				+"<input placeholder='담당자 입력' id='MANAGER_NAME' type='text' class='validate' name='MANAGER_NAME' value='"+data.map.MANAGER_NAME+"'>"
+				+"<label for='MANAGER_NAME'>담당자</label>"
+				+"</div>"
+				+"<div class='input-field col s6'>"
+				+"<input placeholder='회사주소 입력' id='USER_ADDRESS' type='text' class='validate' name='USER_ADDRESS' value='"+data.map.USER_ADDRESS+"'>"
+				+"<label for='USER_ADDRESS'>회사주소</label>"
+				+"</div>"
+				+"</div>"
+				+"<div class='row'>"
+				+"<div class='input-field col s6'>"
+				+"<input placeholder='전화번호 입력' id='MANAGER_OFFICE_PHON' type='text' class='validate' name='MANAGER_OFFICE_PHON' value='"+data.map.MANAGER_OFFICE_PHON+"'>"
+				+"<label for='MANAGER_OFFICE_PHON'>전화번호</label>"
+				+"</div>"
+				+"<div class='input-field col s6'>"
+				+"<input placeholder='휴대번호 입력' id='MANAGER_CEL_PHON' type='text' class='validate' name='MANAGER_CEL_PHON' value='"+data.map.MANAGER_CEL_PHON+"'>"
+				+"<label for='MANAGER_CEL_PHON'>휴대번호</label>"
+				+"</div>"
+				+"</div>"
+				+"<div class='row'>"
+				+"<div class='input-field col s12'>"
+				+"<input placeholder='이메일 입력' id='MANAGER_EMAIL' type='email' class='validate' name='MANAGER_EMAIL' value='"+data.map.MANAGER_EMAIL+"'>"
+				+"<label for='MANAGER_EMAIL'>이메일</label>"
+				+"</div>"
+				+"</div>"
+				+"<input type='hidden' name='oriCompanyId' value='"+data.map.USER_NO+"'>"
+				+"</form>"
+				+"</div>"
+				+"<div class='modal-footer'>"
+				+"<a href='#' class='modal-action waves-effect waves-green btn-flat' onclick='javascript:expireOrderCompany("+"\""+data.map.USER_NO+"\""+"); return false;'><i class='material-icons left'>delete</i>제거</a>"
+				+"<a href='#' class='modal-action modal-close waves-effect waves-green btn-flat' onclick='javascript:modifyCompanyInfo(); return false;'><i class='material-icons left'>create</i>수정</a>"
+				+"</div>"
+			);
+
+			// 16.11.07 - 동적으로 텍스트 값 넣었을 때, validate 처리 하는 방법
+			$("label").addClass("active");
 		}
 	});
 }
@@ -133,12 +157,12 @@ function modifyCompanyInfo(){
 		alertPopup("수주사명을 입력해 주세요.");
 		return false;
 	}
-	
-	var form = document.modifyCompanyFrm;     
-	form.setAttribute("method","post");                    
+
+	var form = document.modifyCompanyFrm;
+	form.setAttribute("method","post");
 	form.setAttribute("action","modifyCompanyInfo");
 	form.submit();
-	
+
 //	var url = "modifyCompanyInfo";
 //	var formData = $("form[name=modifyCompanyFrm]").serialize();
 //	jQuery.ajax({
@@ -149,28 +173,28 @@ function modifyCompanyInfo(){
 //			getOrderCompanyList();
 //			alertPopup("수정 되었습니다.");
 //		}
-//	});	
+//	});
 }
 
 function expireOrderCompany(companyId){
 	var inst = confirmPopup("목록에서 제거 하시겠습니까?");
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
-		form.setAttribute("method","post");                    
+		var form = document.createElement("form");
+		form.setAttribute("method","post");
 		form.setAttribute("action","expireOrderCompany");
 		document.body.appendChild(form);
-		
+
 		var param1 = createEl("companyId", companyId);
 		form.appendChild(param1);
 		form.submit();
 	});
-	
+
 //	var inst = confirmPopup("목록에서 제거 하시겠습니까?");
 //	inst.open();
 //	var url = "expireOrderCompany";
 //	$('.remodal-confirm').on('click', function () {
-//		$.post(url, 
+//		$.post(url,
 //				{companyId:companyId},
 //				function(data){
 //					alertPopup("제거 완료");
@@ -208,12 +232,12 @@ function getVersionInfo(f){
 }
 
 function deletePackage(category, id, mode){
-	
+
 	var inst = confirmPopup("삭제 하시겠습니까?");
 	inst.open();
 	var url = "deletePackage";
-	$('.remodal-confirm').on('click', function () {		
-		$.post(url, 
+	$('.remodal-confirm').on('click', function () {
+		$.post(url,
 				{category:category, objectId:id},
 				function(data){
 					if(data=='Y'){
@@ -228,12 +252,12 @@ function deletePackage(category, id, mode){
 //		$.remodal.lookup[$('[data-remodal-id=modal]').data('remodal')].close();
 	});
 }
-function deletePatch(category, id, mode){	
+function deletePatch(category, id, mode){
 	var inst = confirmPopup("삭제 하시겠습니까?");
 	inst.open();
 	var url = "deletePackage";
 	$('.remodal-confirm').on('click', function () {
-		$.post(url, 
+		$.post(url,
 				{category:category, objectId:id},
 				function(data){
 					patchList(mode);
@@ -249,7 +273,7 @@ function deletePatch(category, id, mode){
 //	if(dd=="GlueFrameowrk") temp="2";
 //	if(dd=="PosBee") temp="3";
 //	if(dd=="etc") temp="4";
-//	
+//
 //	return temp;
 //}
 
@@ -275,15 +299,23 @@ function addOrderCompanyFormCheck(){
 		alertPopup("수주사명을 입력해 주세요.");
 		return;
 	}
-	
+
 	f.submit();
 }
 
 function formCheck(f){
+	// console.log("formCheck's form : ", f);
+
 	var folder = f.folderCategory.value.replace(/\s/g, "");
 	var file = f.file.value.replace(/\s/g, "");
 	var comment = f.comment.value.replace(/\s/g, "");
 	var version = f.packageVersion.value.replace(/\s/g, "");
+
+	// console.log("folder : ", folder);
+	// console.log("file : ", file);
+	// console.log("comment : ", comment);
+	// console.log("version : ", version);
+
 	if(folder == "0"){
 		alertPopup("패키지를 선택하세요.");
 		return;
@@ -304,16 +336,26 @@ function formCheck(f){
 }
 
 function openPackage(id, flag, mode){
-	var text = flag=='Y'?"비":"";
+
+	console.log("openPackage clicked");
+
+	// var flag = 'Y'?"비":"";
+	if (flag == "Y") {
+		flag = "비";
+	}	else {
+		flag = "";
+	}
+
+	var text = flag;
 	text += "공개로 전환 하시겠습니까?";
 	var inst = confirmPopup(text);
 	inst.open();
 	$('.remodal-confirm').on('click', function () {
-		var form = document.createElement("form");     
-		form.setAttribute("method","post");                    
+		var form = document.createElement("form");
+		form.setAttribute("method","post");
 		form.setAttribute("action","openPackage");
 		document.body.appendChild(form);
-		
+
 		var param1 = createEl("objectId", id);
 		var param2 = createEl("flag", flag);
 		var param3 = createEl("mode", mode);
