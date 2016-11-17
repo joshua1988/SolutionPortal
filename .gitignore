@@ -1,11 +1,11 @@
 # Solution Portal
-ict-license/license-api/*
-ict-license/license-manager/*
-ict-license/license-uichina/*
-ict-license/license-ui/.settings/*
-ict-license/.settings/*
-ict-license/license-ui/src/test/*
-ict-license/license-ui/target/*
+poscoict-license/license-api/*
+poscoict-license/license-manager/*
+poscoict-license/license-uichina/*
+poscoict-license/license-ui/.settings/*
+poscoict-license/.settings/*
+poscoict-license/license-ui/src/test/*
+poscoict-license/license-ui/target/*
 
 
 # Windows image file caches
