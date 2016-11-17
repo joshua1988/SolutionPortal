@@ -13,7 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLSyntaxErrorException;
-import com.poscoict.license.service.UserException;
+import com.poscoict.license.exception.UserException;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice {
@@ -22,6 +22,7 @@ public class ExceptionControllerAdvice {
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	public ModelAndView errView(Exception ex){
+		ex.printStackTrace();
 		logger.error(ex.toString());
 		ModelAndView mv = new ModelAndView(DEFAULT_ERROR_VIEW);
 		mv.addObject("name", ex.getClass().getSimpleName());

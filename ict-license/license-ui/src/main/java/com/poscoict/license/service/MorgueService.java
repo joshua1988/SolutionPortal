@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.poscoict.license.consts.Consts;
 import com.poscoict.license.dao.MorgueDao;
+import com.poscoict.license.exception.UserException;
 import com.poscoict.license.security.CustomUserDetails;
 import com.poscoict.license.util.LmsUtil;
 import com.poscoict.license.vo.Reply;

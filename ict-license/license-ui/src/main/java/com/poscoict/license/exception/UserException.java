@@ -1,4 +1,4 @@
-package com.poscoict.license.service;
+package com.poscoict.license.exception;
 
 public class UserException extends Exception {
 

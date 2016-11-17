@@ -8,8 +8,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,63 +17,61 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.poscoict.license.exception.UserException;
 import com.poscoict.license.security.CustomUserDetails;
 import com.poscoict.license.service.MorgueService;
-import com.poscoict.license.service.UserException;
 import com.poscoict.license.vo.UserPermission;
 
 @Controller
 public class MorgueController {
-    private MorgueService getMorgueService() {
-        ApplicationContext context = new GenericXmlApplicationContext( "applicationContext.xml" );
-        return context.getBean( "morgueService", MorgueService.class );
-    }
+	
+	@Autowired MorgueService getMorgueService;
 	
     @RequestMapping( value = {"morgue"}, method = { RequestMethod.GET,RequestMethod.POST })
     public ModelAndView morgue( HttpSession session ) throws Exception{
     	ModelAndView mv = new ModelAndView();
     	mv.setViewName("mainPage");
     	mv.addObject( "page", "morgue/morgue" );
-    	mv.addObject("customBoardList", getMorgueService().getUerCustomBoardList( (String) session.getAttribute("USER_NO") ));
+    	mv.addObject("customBoardList", getMorgueService.getUerCustomBoardList( (String) session.getAttribute("USER_NO") ));
     	return mv;
     }
     
     @RequestMapping( value = {"createCustomBoard"}, method = { RequestMethod.POST })
     public ModelAndView createBoard(HttpSession session, String boardName) throws Exception{
-    	getMorgueService().createCustomBoard(session, boardName.trim());
+    	getMorgueService.createCustomBoard(session, boardName.trim());
     	CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	session.setAttribute("userMenu", getMorgueService().getUserMenu( (UserPermission)session.getAttribute("userPermission"), userDetails ));
+    	session.setAttribute("userMenu", getMorgueService.getUserMenu( (UserPermission)session.getAttribute("userPermission"), userDetails ));
     	
     	ModelAndView mv = new ModelAndView();
     	mv.setViewName("mainPage");
     	mv.addObject( "page", "morgue/morgue" );
-    	mv.addObject("customBoardList", getMorgueService().getUerCustomBoardList( (String) session.getAttribute("USER_NO") ));
+    	mv.addObject("customBoardList", getMorgueService.getUerCustomBoardList( (String) session.getAttribute("USER_NO") ));
     	return mv;
     }
     
     @RequestMapping( value = {"deleteCustomBoard"}, method = { RequestMethod.POST })
     public ModelAndView deleteCustomBoard(HttpSession session, String boardId) throws Exception{
-    	getMorgueService().deleteCustomBoard( boardId, (String)session.getAttribute("USER_NO") );
+    	getMorgueService.deleteCustomBoard( boardId, (String)session.getAttribute("USER_NO") );
     	CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	session.setAttribute("userMenu", getMorgueService().getUserMenu( (UserPermission)session.getAttribute("userPermission"), userDetails ));
+    	session.setAttribute("userMenu", getMorgueService.getUserMenu( (UserPermission)session.getAttribute("userPermission"), userDetails ));
     	
     	ModelAndView mv = new ModelAndView();
     	mv.setViewName("mainPage");
     	mv.addObject( "page", "morgue/morgue" );
-    	mv.addObject("customBoardList", getMorgueService().getUerCustomBoardList( (String) session.getAttribute("USER_NO") ));
+    	mv.addObject("customBoardList", getMorgueService.getUerCustomBoardList( (String) session.getAttribute("USER_NO") ));
     	return mv;
     }
     
     @RequestMapping( value = {"renameCustomBoard"}, method = { RequestMethod.POST })
     public ModelAndView renameCustomBoard(HttpSession session, String boardId, String boardName) throws Exception{
-    	getMorgueService().renameCustomBoard( boardId, boardName, (String)session.getAttribute("USER_NO") );
+    	getMorgueService.renameCustomBoard( boardId, boardName, (String)session.getAttribute("USER_NO") );
     	CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-    	session.setAttribute("userMenu", getMorgueService().getUserMenu( (UserPermission)session.getAttribute("userPermission"), userDetails ));
+    	session.setAttribute("userMenu", getMorgueService.getUserMenu( (UserPermission)session.getAttribute("userPermission"), userDetails ));
     	
     	ModelAndView mv = new ModelAndView();
     	mv.setViewName("mainPage");
     	mv.addObject( "page", "morgue/morgue" );
-    	mv.addObject("customBoardList", getMorgueService().getUerCustomBoardList( (String) session.getAttribute("USER_NO") ));
+    	mv.addObject("customBoardList", getMorgueService.getUerCustomBoardList( (String) session.getAttribute("USER_NO") ));
     	return mv;
     }
     
@@ -89,7 +86,7 @@ public class MorgueController {
     	mv.setViewName("mainPage");
     	mv.addObject( "page", "morgue/customBoardList" );
     	
-    	Map<String, Object> map = getMorgueService().getBoardList(boardId, chartNum, search, select);
+    	Map<String, Object> map = getMorgueService.getBoardList(boardId, chartNum, search, select);
         if ( ( search != null ) || ( search != "" ) ) {
         	mv.addObject( "search", search );
         	mv.addObject( "select", select );
@@ -112,7 +109,7 @@ public class MorgueController {
     	mv.setViewName("mainPage");
     	mv.addObject( "page", "morgue/write" );
     	mv.addObject("boardId", boardId);
-    	mv.addObject("boardName", getMorgueService().getCustomBoardName(boardId));
+    	mv.addObject("boardName", getMorgueService.getCustomBoardName(boardId));
     	
     	return mv;
     }
@@ -124,7 +121,7 @@ public class MorgueController {
             @RequestParam( "boardId" ) String boardId,
             @RequestParam(value="boardAttach", required=false) MultipartFile[] boardAttach,
             HttpSession session ) throws Exception {
-        getMorgueService().insertBoard(title, boardId, mainContent, boardAttach, session);
+        getMorgueService.insertBoard(title, boardId, mainContent, boardAttach, session);
 
         return "redirect:/customBoard?boardId="+boardId;
     }
@@ -137,7 +134,7 @@ public class MorgueController {
             @RequestParam( value = "search", required = false ) String search,
             @RequestParam( value = "select", required = false ) String select,
             HttpSession session) throws UserException {
-    	Map<String, Object> map = getMorgueService().viewPost(boardId, chartNum, contentNo, search, select, session);
+    	Map<String, Object> map = getMorgueService.viewPost(boardId, chartNum, contentNo, search, select, session);
         ModelAndView mv = new ModelAndView();
         mv.setViewName( "mainPage" );
         mv.addObject( "search", search );
@@ -157,7 +154,7 @@ public class MorgueController {
     public ModelAndView replyList( String boardId, String contentNo, HttpSession session ) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName( "morgue/replyList" );
-        ArrayList<Map<String, Object>> list = getMorgueService().replyList(boardId, contentNo, session);
+        ArrayList<Map<String, Object>> list = getMorgueService.replyList(boardId, contentNo, session);
         mv.addObject( "list", list );
         mv.addObject( "size", list.size() );
         mv.addObject( "replyBoardId", boardId );
@@ -168,13 +165,13 @@ public class MorgueController {
     // 리플 등록
     @RequestMapping( value = "cInsertReply", method = RequestMethod.POST )
     public void insertReply( String boardId, String contentNo, String mainContent, HttpSession session, Writer writer ) throws IOException, UserException {
-        writer.write( getMorgueService().insertReply(boardId, contentNo, URLDecoder.decode(mainContent, "UTF-8"), session) );
+        writer.write( getMorgueService.insertReply(boardId, contentNo, URLDecoder.decode(mainContent, "UTF-8"), session) );
     }
     
     // 리플 삭제
     @RequestMapping( value = { "cDeleteReply" }, method = RequestMethod.POST )
     public void deleteReply( String boardId, String reContentNo, String contentNo, HttpSession session, Writer writer ) throws IOException {
-        writer.write( getMorgueService().deleteReply(boardId, reContentNo, contentNo, session) );
+        writer.write( getMorgueService.deleteReply(boardId, reContentNo, contentNo, session) );
     }
     
     // 답글 폼    
@@ -182,7 +179,7 @@ public class MorgueController {
     public ModelAndView replyBoardForm( String boardId, String contentNo, String search, String select, String chartNum ) {
         ModelAndView mv = new ModelAndView();
         mv.setViewName( "morgue/replyBoard" );
-        mv.addObject( "replyBoardForm", getMorgueService().replyBoardForm(boardId, contentNo) );
+        mv.addObject( "replyBoardForm", getMorgueService.replyBoardForm(boardId, contentNo) );
         mv.addObject("boardId", boardId);
         mv.addObject("search", search);
         mv.addObject("select", select);
@@ -204,7 +201,7 @@ public class MorgueController {
             @RequestParam( value="boardAttach", required = false ) MultipartFile[] boardAttach) throws UserException {
     	ModelAndView mv = new ModelAndView();
     	
-    	int no = getMorgueService().replyBoard(session, boardId, title, content, contentNo, boardAttach);
+    	int no = getMorgueService.replyBoard(session, boardId, title, content, contentNo, boardAttach);
     	
     	mv.setViewName( "board/replyBoard" );      
         mv.addObject("success", "success");
@@ -227,7 +224,7 @@ public class MorgueController {
             @RequestParam( value = "subCategory", required = false ) String subCategory,
             HttpSession session) throws UserException{
     	ModelAndView mv = new ModelAndView();
-    	Map<String, Object> map = getMorgueService().modifyBoardForm(session, boardId, contentNo);
+    	Map<String, Object> map = getMorgueService.modifyBoardForm(session, boardId, contentNo);
     	
     	mv.setViewName( "mainPage" );
     	mv.addObject( "page", "morgue/modify" );
@@ -257,7 +254,7 @@ public class MorgueController {
     	
     	ModelAndView mv = new ModelAndView();
     	mv.setViewName("board/modify");
-    	getMorgueService().modifyBoard(session, boardId, title, content, contentNo, boardAttach, deleteFile);
+    	getMorgueService.modifyBoard(session, boardId, title, content, contentNo, boardAttach, deleteFile);
         mv.addObject("success", "success");
 
 //        return viewPost(category, chartNum, contentNo, search, select, oldSubCategory, session);
@@ -273,7 +270,7 @@ public class MorgueController {
             @RequestParam( value = "search", required = false ) String search,
             @RequestParam( value = "select", required = false ) String select) throws UserException {
     	
-    	getMorgueService().deleteBoard(session, boardId, contentNo);
+    	getMorgueService.deleteBoard(session, boardId, contentNo);
         return "redirect:/customBoard?boardId="+boardId;
     }
     
@@ -283,7 +280,7 @@ public class MorgueController {
     	ModelAndView mv = new ModelAndView();
     	mv.setViewName( "mainPage" );
     	mv.addObject( "page", "boardManagement/boardManagement" );
-        mv.addObject( "projectFolders", getMorgueService().defaultprojectFolderTree(solution, userDetails) );
+        mv.addObject( "projectFolders", getMorgueService.defaultprojectFolderTree(solution, userDetails) );
         mv.addObject("solution", solution);
         
     	return mv;
@@ -295,16 +292,16 @@ public class MorgueController {
     		@RequestParam( "mode" ) String mode, 
     		@RequestParam( value = "upperId" ) String upperId,
     		@RequestParam( value = "projectName", required = false ) String projectName ) throws UserException{
-    	getMorgueService().projectFolders(session, solution, mode, upperId, projectName);
+    	getMorgueService.projectFolders(session, solution, mode, upperId, projectName);
     	
     	CustomUserDetails userDetails = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
     	UserPermission userPermission = (UserPermission)session.getAttribute("userPermission");
     	
-    	session.setAttribute("userMenu", getMorgueService().getUserMenu(userPermission, userDetails));
+    	session.setAttribute("userMenu", getMorgueService.getUserMenu(userPermission, userDetails));
     	ModelAndView mv = new ModelAndView();
     	mv.setViewName( "mainPage" );
     	mv.addObject( "page", "boardManagement/boardManagement" );
-        mv.addObject( "projectFolders", getMorgueService().defaultprojectFolderTree(solution, userDetails) );
+        mv.addObject( "projectFolders", getMorgueService.defaultprojectFolderTree(solution, userDetails) );
         mv.addObject("solution", solution);
         
     	return mv;
