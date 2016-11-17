@@ -3,11 +3,9 @@ ict-license/license-api/*
 ict-license/license-manager/*
 ict-license/license-uichina/*
 ict-license/.settings/*
-
 ict-license/license-ui/.settings/*
-ict-license/license-ui/target/*
-ict-license/license-ui/.classpath
 ict-license/license-ui/src/test/*
+
 
 # Windows image file caches
 Thumbs.db
