@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+	   http://www.springframework.org/schema/beans
+	   http://www.springframework.org/schema/beans/spring-beans-3.2.xsd&#10;
+	   http://www.springframework.org/schema/context 
+	   http://www.springframework.org/schema/context/spring-context-3.2.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context" default-autowire="byName">
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  		<property name="locations" value="classpath:jdbc.properties"/>  
+	</bean>
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClass}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxActive" value="20"/>
+        <property name="minIdle" value="5"/>
+        <property name="maxWait" value="3000"/>
+		<property name="validationQuery" value="select 1"/>
+		<property name="testWhileIdle" value="true"/>
+		<property name="timeBetweenEvictionRunsMillis" value="7200000"/>
+	</bean>
+
+	<bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<bean id="userDao" class="com.poscoict.license.dao.UserDaoJdbc">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	
+	<bean id="managementDao" class="com.poscoict.license.dao.ManagementDaoJdbc">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	
+	<bean id="morgueDao" class="com.poscoict.license.dao.MorgueDaoJdbc">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	
+	<bean name="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basenames">
+		   <list>
+		    <value>boardQuery</value>
+		    <value>managementQuery</value>
+		    <value>morgueQuery</value>
+		   </list>
+		</property>
+	</bean>
+		 
+	<bean name="messageSourceAccessor" class="org.springframework.context.support.MessageSourceAccessor">
+		<constructor-arg>
+		   <ref bean="messageSource"/>
+		</constructor-arg>
+	</bean>
+	
+	<context:annotation-config/>
+	<bean id="boardService" class="com.poscoict.license.service.BoardService"/>
+	
+	<bean id="managementService" class="com.poscoict.license.service.ManagementService"/>
+	
+	<bean id="certificateService" class="com.poscoict.license.service.CertificateService"/>
+	
+	<bean id="generateExcelService" class="com.poscoict.license.service.GenerateExcelService"/>
+	
+	<bean id="morgueService" class="com.poscoict.license.service.MorgueService"/>
+	
+	<bean id="lmsUtil" class="com.poscoict.license.util.LmsUtil"/>
+	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerExceptionResolver" />
+
+</beans>       
