@@ -3,7 +3,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
     
-    <servlet>
+<!--     <servlet>
 		<servlet-name>rest</servlet-name>
 		<servlet-class>
 			org.springframework.web.servlet.DispatcherServlet
@@ -14,7 +14,7 @@
 	<servlet-mapping>
 		<servlet-name>rest</servlet-name>
 		<url-pattern>/push/*</url-pattern>
-	</servlet-mapping>
+	</servlet-mapping> -->
     
     <security-constraint>
     	<web-resource-collection>
@@ -188,5 +188,8 @@
 		
 		<url-pattern>/boardManagement</url-pattern>
 		<url-pattern>/projectFolders</url-pattern>
+		
+		<!-- Web Push -->
+		<url-pattern>/greeting</url-pattern>
 	</servlet-mapping>
 </web-app>
