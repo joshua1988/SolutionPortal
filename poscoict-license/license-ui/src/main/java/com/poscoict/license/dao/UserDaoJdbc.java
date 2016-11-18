@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.poscoict.license.vo.Board;
+import com.poscoict.license.vo.PushMessage;
 import com.poscoict.license.vo.Reply;
 import com.poscoict.license.vo.UserInfo;
 
@@ -23,16 +24,16 @@ public class UserDaoJdbc implements UserDao {
     private JdbcTemplate jdbcTemplate;
     private MessageSourceAccessor msAccessor = null;
     private Logger logger = LoggerFactory.getLogger(getClass());
-    
+
     public void setMessageSourceAccessor(MessageSourceAccessor msAccessor) {
-     this.msAccessor = msAccessor;
+    	this.msAccessor = msAccessor;
     }
-    
+
 
     public void setJdbcTemplate( JdbcTemplate jdbcTemplate ) {
         this.jdbcTemplate = jdbcTemplate;
     }
-    
+
 /*    public void setDataSource(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
     }*/
@@ -101,15 +102,15 @@ public class UserDaoJdbc implements UserDao {
                 return "";
         }
     }
-    
+
 //    private String subCategory( String category ) {
 //    	String temp="";
-//    	
+//
 //    	for(SubCategory sub: SubCategory.values()){
 //    		if(sub.getCategory().equals(category))
-//    			temp=" and SUBCATEGORY = '" + category + "'";    		
+//    			temp=" and SUBCATEGORY = '" + category + "'";
 //    	}
-//    	
+//
 //    	return temp;
 //    }
 
@@ -117,7 +118,7 @@ public class UserDaoJdbc implements UserDao {
         return this.jdbcTemplate.queryForObject( getQuery("board.loginCheck"), new Object[] {
                 id, pw }, Integer.class );
     }
-    
+
     public List<Map<String, Object>> getUerCustomBoardList( String userNo ) {
         return this.jdbcTemplate.queryForList( getQuery("morgue.getUerCustomBoardList"), userNo );
     }
@@ -125,11 +126,11 @@ public class UserDaoJdbc implements UserDao {
     public UserInfo get( String id ) {
         return this.jdbcTemplate.queryForObject( getQuery("board.get"), new Object[] { id }, this.userMapper );
     }
-    
+
     public List<Map<String, Object>> getMenuList(String userNo) {
     	return this.jdbcTemplate.queryForList( getQuery("board.getMenuList"), userNo);
     }
-    
+
     // 중요 공지 등록/해지
     public void noticeMode(String folderId, String contentNo){
     	this.jdbcTemplate.update( getQuery("board.noticeMode"), folderId, contentNo );
@@ -140,25 +141,25 @@ public class UserDaoJdbc implements UserDao {
         return this.jdbcTemplate.queryForObject( getQuery("board.getBoardCount"), new Object[] { folderId },
                 Integer.class );
     }
-    
+
     // 폴더별 게시물 토탈
     public int getBoardCount2( String folderId, String category ) {
         return this.jdbcTemplate.queryForObject( getQuery("board.getBoardCount2")+" and SUBCATEGORY = '" + category + "'"
         		, new Object[] { folderId }, Integer.class );
     }
-    
+
     // 폴더별 검색 게시물 토탈
     public int getSearchCount2( String folderId, String category, String search, String select ) {
         return this.jdbcTemplate.queryForObject( "select count(*) from glms_qna qna, glms_user user where qna.USER_NO = user.USER_NO"
                 + " and FOLDER_ID=?"+" and SUBCATEGORY = '" + category + "'" + searchQuery( search, select ), new Object[] { folderId }, Integer.class );
     }
-    
+
     // 게시물 리스트
     public List<Map<String, Object>> getBoard2( String page, String category, int start, int end ) {
         return this.jdbcTemplate.queryForList( getQuery("board.getBoard")+" and SUBCATEGORY = '" + category + "'"+" order by CONTENT_GRP DESC, CONTENT_SEQ ASC LIMIT ?,?) order by OD ASC, CONTENT_GRP DESC, CONTENT_SEQ ASC"
         		, page, start, end );
     }
-    
+
     // 게시물 검색 리스트
     public List<Map<String, Object>> getBoardSearch2( String page, String search, String select, String category, int start, int end ) {
         return this.jdbcTemplate
@@ -178,28 +179,28 @@ public class UserDaoJdbc implements UserDao {
                         + " order by CONTENT_GRP DESC, CONTENT_SEQ ASC LIMIT ?,?) order by OD ASC, CONTENT_GRP DESC, CONTENT_SEQ ASC"
                         , page, start, end );
     }
-    
-    
+
+
 
     // 글쓰기
     public void insertBoard( Board board ) {
-        this.jdbcTemplate.update( getQuery("board.insertBoard"), 
+        this.jdbcTemplate.update( getQuery("board.insertBoard"),
         		board.getCONTENT_NO(), board.getFOLDER_ID(), board.getFOLDER_ID(), board.getSUBCATEGORY(),
                 board.getTITLE(), board.getMAIN_CONTENT(), board.getUSER_NO(), board.getOPEN_FLAG(), board.getR_CREATION_DATE(),
-                board.getR_CREATION_USER(), board.getCONTENT_GRP(), board.getCONTENT_SEQ(), board.getATTACH_FILE_NAME(), 
+                board.getR_CREATION_USER(), board.getCONTENT_GRP(), board.getCONTENT_SEQ(), board.getATTACH_FILE_NAME(),
                 board.getATTACH_FILE_PATH(), board.getATTACH_FILE_SIZE() );
     }
-    
+
     // 게시판 guest 임시 ID,PW 입력
     public void insertExtraAccounts(String guestID, String guestPW, int contentNo, String folderID){
     	this.jdbcTemplate.update( getQuery("board.insertExtraAccounts"), guestID, guestPW, contentNo, folderID);
     }
-    
+
     // 게시판 guest 임시 ID,PW 확인
     public int getExtraAccounts( String guestID, String guestPW, int contentNo, String folderID ) {
         return this.jdbcTemplate.queryForObject( getQuery("board.getExtraAccounts"), new Object[]{guestID, guestPW, contentNo, folderID}, Integer.class );
     }
-    
+
     // folder 패스 가져오기
     public String getFolderPath( String folderId ) {
         return this.jdbcTemplate.queryForObject( getQuery("board.getFolderPath"), new Object[] { folderId }, String.class );
@@ -237,7 +238,7 @@ public class UserDaoJdbc implements UserDao {
     public Map<String, Object> getViewPost( String menu, int contentNo ) {
         return this.jdbcTemplate.queryForMap(getQuery("board.getViewPost"), new Object[] { menu, contentNo } );
     }
-    
+
     // 게시판 첨부파일 정보
     public List<Map<String, Object>> getBoardAttachInfo( String category, int contentNo ) {
         return this.jdbcTemplate.queryForList( getQuery("board.getBoardAttachInfo"), category, contentNo );
@@ -245,7 +246,7 @@ public class UserDaoJdbc implements UserDao {
 
     // 게시물 수정 업데이트
     public void modifyBoard( Board board ) {
-        this.jdbcTemplate.update( getQuery("board.modifyBoard"), 
+        this.jdbcTemplate.update( getQuery("board.modifyBoard"),
         		board.getSUBCATEGORY(), board.getOPEN_FLAG(), board.getTITLE(), board.getMAIN_CONTENT(),
                 board.getR_MODIFY_DATE(), board.getR_MODIFY_USER(), board.getORI_FOLDER_ID(), board.getCONTENT_NO() );
     }
@@ -274,7 +275,7 @@ public class UserDaoJdbc implements UserDao {
 
     // 리플 MAX(CONTENT_NO)
     public int getReplyCount( String ORI_FOLDER_ID, int CONTENT_NO ) {
-        return this.jdbcTemplate.queryForObject( getQuery("board.getReplyCount"), new Object[] { ORI_FOLDER_ID, CONTENT_NO }, 
+        return this.jdbcTemplate.queryForObject( getQuery("board.getReplyCount"), new Object[] { ORI_FOLDER_ID, CONTENT_NO },
         		Integer.class );
     }
 
@@ -282,43 +283,44 @@ public class UserDaoJdbc implements UserDao {
     public void deleteReply( String userNo, int contentNo, String folder, int reContentNo ) {
         this.jdbcTemplate.update( getQuery("board.deleteReply"), userNo, contentNo, folder, reContentNo, userNo);
     }
-    
+
     // 비밀번호 확인
     public int passwordConfirmation(String userNo, String oriPassword){
-    	return this.jdbcTemplate.queryForObject(getQuery("board.passwordConfirmation"), 	
+    	return this.jdbcTemplate.queryForObject(getQuery("board.passwordConfirmation"),
     			new Object[] {userNo, oriPassword}
     			, Integer.class);
     }
-    
+
+    // 비밀번호 수정
     public void modifyPassword(String userNo, String newPassword){
     	this.jdbcTemplate.update(getQuery("board.modifyPassword"), newPassword, userNo);
     }
-    
+
     // 첨부파일 패스
     public String getAttachFilePath(String objectId){
-    	return this.jdbcTemplate.queryForObject(getQuery("board.getAttachFilePath"), 	
+    	return this.jdbcTemplate.queryForObject(getQuery("board.getAttachFilePath"),
     			new Object[] {objectId}, String.class);
     }
-    
-    // 첨부파일 정보 삭제 
+
+    // 첨부파일 정보 삭제
     public void deleteAttachFile( String objectId ) {
         this.jdbcTemplate.update( getQuery("board.deleteAttachFile"), objectId );
     }
-    
-    // 첨부파일 정보 삭제 
+
+    // 첨부파일 정보 삭제
     public void updateAttachFileInfo( String folderId, String contentNo, String fileName, String filePath, int fileSize ) {
         this.jdbcTemplate.update( getQuery("board.updateAttachFileInfo"), fileName, filePath, fileSize, folderId, contentNo );
     }
-    
+
     // 게시판 읽기 권한 확인
     public Map<String, Object> getBoardPermissionCheck(String folderId, String contentNo) {
         return this.jdbcTemplate.queryForMap(getQuery("board.getBoardPermissionCheck"), folderId, folderId, folderId, folderId, folderId, contentNo);
     }
-    
+
     public void setAttachFileInfo(int contentNo, String folderId, String objectId, String fileName, String filePath, int fileSize, String userNo){
     	this.jdbcTemplate.update( getQuery("board.setAttachFileInfo"), objectId, contentNo, folderId, fileName, filePath, fileSize, userNo);
     }
-    
+
     public String getQuery(String queryKey){
     	String query = this.msAccessor.getMessage(queryKey);
     	logger.debug(queryKey);

@@ -157,7 +157,7 @@ public class BoardService extends LmsUtil {
 	public String getUserMenu(UserPermission userPermission, CustomUserDetails userDetails){
 		return initializeMenu(new StringBuffer(), userPermission, userDetails).toString();
 	}
-	
+
 	public String getUserNavMenu(UserPermission userPermission, CustomUserDetails userDetails){
 		return initializeNavMenu(new StringBuffer(), userPermission, userDetails).toString();
 	}
@@ -333,9 +333,9 @@ public class BoardService extends LmsUtil {
         board.setUSER_NO( userNo );
         board.setR_CREATION_USER( userNo );
         board.setR_CREATION_DATE( dateFormat() );
-        
+
         logger.info("@@@@ dateFormat() : " + dateFormat());
-        
+
         board.setCONTENT_GRP( no );
         board.setCONTENT_SEQ( 1 );
 
@@ -435,9 +435,9 @@ public class BoardService extends LmsUtil {
         Map<String, Object> temp = userDao.getViewPost( folder, Integer.parseInt( contentNo ) );
         List<Map<String, Object>> attachList= userDao.getBoardAttachInfo(folder, Integer.parseInt( contentNo ));
         temp.put("SUBCATEGORY", temp.get("FOLDER_ID").equals("notice")?null:Consts.SubCategory.valueOf((String)temp.get("SUBCATEGORY")).getCategoryToString());
- 
+
 //        logger.info("@@@@@@@@@@ 시간 데이터 :", temp.get("r_CREATION_DATE"));
-        
+
         Map<String, Object> map = new HashMap<String, Object>();
         map.put("boardInfo", temp);
         map.put("attachInfo", attachList);
@@ -590,7 +590,7 @@ public class BoardService extends LmsUtil {
         }
 
         Map<String, Object> map = userDao.getViewPost(category, Integer.parseInt( contentNo ));
-        
+
         if(!userDetails.getAuthorities().toString().contains(Consts.rolePrefix+Consts.USERLV_ADMIN)
         		&& !map.get("R_CREATION_USER").equals(userNo))
         	throw new UserException("이 게시물을 삭제할 권한이 없습니다.");
@@ -780,12 +780,12 @@ public class BoardService extends LmsUtil {
     	logger.info("guestPermissionCheck: guestID : "+guestID);
     	logger.info("guestPermissionCheck: guestPW : "+guestPW);
     	logger.info("guestPermissionCheck: no : "+contentNo);
-        
+
         Map<String, Object> permission = userDao.getBoardPermissionCheck(category, contentNo);
         if(userDao.getExtraAccounts(guestID, guestPW, Integer.parseInt(contentNo), category)<1) temp="N";
 
         logger.info("guestPermissionCheck: temp1 : "+temp);
-        
+
 //        if(userDao.getExtraAccounts(guestID, guestPW, Integer.parseInt(permission.get("UP_CONTENT_NO").toString()),
 //        		(String)permission.get("UP_ORI_FOLDER_ID"))<1) {
 //        	temp="N";
@@ -794,7 +794,7 @@ public class BoardService extends LmsUtil {
 //        	temp="Y";
 //        }
 //        logger.info("guestPermissionCheck: temp2 : "+temp);
-        
+
         return temp;
     }
 
