@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.crypto.Cipher;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,19 +28,25 @@ import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.poscoict.license.consts.Consts;
+import com.poscoict.license.dao.PushDao;
 import com.poscoict.license.dao.UserDao;
 import com.poscoict.license.exception.UserException;
 import com.poscoict.license.security.CustomUserDetails;
 import com.poscoict.license.util.LmsUtil;
 import com.poscoict.license.vo.Board;
+import com.poscoict.license.vo.PushMessage;
 import com.poscoict.license.vo.Reply;
 import com.poscoict.license.vo.UserInfo;
 import com.poscoict.license.vo.UserPermission;
 
 @Service
 public class BoardService extends LmsUtil {
+	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private PushDao pushDao;
 
 	@Autowired
 	private PlatformTransactionManager transactionManager;
@@ -299,7 +304,7 @@ public class BoardService extends LmsUtil {
         map.put("totalPage", totalPage);
         map.put("subCategoryList", getBoardTypes());
 
-    	return map;
+    	return map; 
     }
 
 	public void insertBoard( String title, String openFlag, String folder, String subCategory, String mainContent,
@@ -338,7 +343,7 @@ public class BoardService extends LmsUtil {
 
         board.setCONTENT_GRP( no );
         board.setCONTENT_SEQ( 1 );
-
+        
         ArrayList<Map<String, Object>> attachList = new ArrayList<Map<String,Object>>();
         if(boardAttach.length>0){
             for ( int i=0; i<boardAttach.length; i++ ) {
@@ -393,6 +398,7 @@ public class BoardService extends LmsUtil {
         		}
         	}
         	userDao.insertBoard( board );
+        	
         	if(extraAccount) userDao.insertExtraAccounts(guestID, guestPW, no, folder);
 
         	this.transactionManager.commit(status);
@@ -401,6 +407,19 @@ public class BoardService extends LmsUtil {
         	logger.error("userDao.insertBoard: ", e);
         	throw new UserException("게시물 등록 실패");
         }
+        
+//      Insert this new board data into push message table 
+//      DATE : 16.11.22
+        try {
+	      	int pushObjectId = pushDao.getMessageCount() + 1;
+	      	String postType = new String("board");
+	      	insertPush(pushObjectId, no, postType, folder, subCategory, title, mainContent.replaceAll("'", "&apos;"), userNo, dateFormat());
+		} catch (Exception e) {
+			// TODO: handle exception
+			this.transactionManager.rollback(status);
+	      	logger.error("pushDao.insertPushMessage : ", e);
+	      	throw new UserException("Push 메시지 등록 실패");
+		}
     }
 
     public Map<String, Object> viewPost( String folder, String subCategory, String chartNum, String contentNo, String search,  String select, HttpSession session ) throws UserException {
@@ -742,6 +761,20 @@ public class BoardService extends LmsUtil {
         	logger.error("userDao.insertReply", e);
         	throw new UserException("리플 등록 실패");
         }
+        
+//      Insert this new reply data into push message table 
+//      DATE : 16.11.22
+        try {
+	      	int pushObjectId = pushDao.getMessageCount() + 1;
+	      	String postType = new String("comment");
+	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), postType, folder, "solution type is not decided", 
+	      			"comment has no title", mainContent.replaceAll("\n", "<br>"), (String) session.getAttribute( "USER_NO" ), dateFormat());
+		} catch (Exception e) {
+			// TODO: handle exception
+//			this.transactionManager.rollback(status);
+	      	logger.error("pushDao.insertPushMessage : ", e);
+	      	throw new UserException("리플 등록 실패");
+		}
 
         return "end";
     }
@@ -838,5 +871,14 @@ public class BoardService extends LmsUtil {
     	}
 
     	return flag;
+    }
+    
+    
+    public void insertPush(int object_id, int content_no, String post_type, 
+			String board_type, String solution_type, String post_title, String content, String user, String created_date) {
+//      Insert this new board data into push message table 
+//      DATE : 16.11.22
+    	PushMessage pushMsg = new PushMessage(object_id, content_no, post_type, board_type, solution_type, post_title, content, user, created_date);
+      	pushDao.insertPushMessage(pushMsg);
     }
 }

@@ -33,12 +33,16 @@
 	<bean id="userDao" class="com.poscoict.license.dao.UserDaoJdbc">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
-
+	
 	<bean id="managementDao" class="com.poscoict.license.dao.ManagementDaoJdbc">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 
 	<bean id="morgueDao" class="com.poscoict.license.dao.MorgueDaoJdbc">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	
+	<bean id="pushDao" class="com.poscoict.license.dao.PushDaoJdbc">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 
@@ -48,6 +52,7 @@
 		    <value>boardQuery</value>
 		    <value>managementQuery</value>
 		    <value>morgueQuery</value>
+		    <value>pushQuery</value>
 		   </list>
 		</property>
 	</bean>

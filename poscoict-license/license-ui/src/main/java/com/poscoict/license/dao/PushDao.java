@@ -4,7 +4,7 @@ import com.poscoict.license.vo.PushMessage;
 
 public interface PushDao {
 
-	int getMessageCount( String FOLDER_ID );
+	int getMessageCount();
 	
 	void insertPushMessage( PushMessage push );
 }

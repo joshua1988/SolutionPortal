@@ -191,5 +191,7 @@
 		
 		<!-- Web Push -->
 		<url-pattern>/greeting</url-pattern>
+		<url-pattern>/push/message</url-pattern>
+		
 	</servlet-mapping>
 </web-app>

@@ -13,6 +13,23 @@ public class PushMessage {
 	private String USER; // 댓글 작성자
 	private String CREATED_DATE; // 작성시간
 	
+	public PushMessage(int object_id, int content_no, String post_type, 
+			String board_type, String solution_type, String post_title, String content, String user, String created_date) {
+		this.OBJECT_ID = object_id;
+		this.CONTENT_NO = content_no;
+		this.POST_TYPE = post_type;
+		this.BOARD_TYPE = board_type;
+		this.SOLUTION_TYPE = solution_type;
+		this.POST_TITLE = post_title;
+		this.CONTENT = content;
+		this.USER = user;
+		this.CREATED_DATE = created_date;
+	}
+	
+	public PushMessage() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public int getOBJECT_ID() {
 		return OBJECT_ID;
 	}
