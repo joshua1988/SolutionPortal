@@ -413,13 +413,14 @@ public class BoardService extends LmsUtil {
         try {
 	      	int pushObjectId = pushDao.getMessageCount() + 1;
 	      	String postType = new String("board");
-	      	insertPush(pushObjectId, no, postType, folder, subCategory, title, mainContent.replaceAll("'", "&apos;"), userNo, dateFormat());
+	      	insertPush(pushObjectId, no, false, postType, folder, subCategory, title, mainContent.replaceAll("'", "&apos;"), userNo, dateFormat());
 		} catch (Exception e) {
 			// TODO: handle exception
 			this.transactionManager.rollback(status);
 	      	logger.error("pushDao.insertPushMessage : ", e);
 	      	throw new UserException("Push 메시지 등록 실패");
 		}
+        
     }
 
     public Map<String, Object> viewPost( String folder, String subCategory, String chartNum, String contentNo, String search,  String select, HttpSession session ) throws UserException {
@@ -767,7 +768,7 @@ public class BoardService extends LmsUtil {
         try {
 	      	int pushObjectId = pushDao.getMessageCount() + 1;
 	      	String postType = new String("comment");
-	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), postType, folder, "solution type is not decided", 
+	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), false, postType, folder, "solution type is not decided", 
 	      			"comment has no title", mainContent.replaceAll("\n", "<br>"), (String) session.getAttribute( "USER_NO" ), dateFormat());
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -874,11 +875,11 @@ public class BoardService extends LmsUtil {
     }
     
     
-    public void insertPush(int object_id, int content_no, String post_type, 
+    public void insertPush(int object_id, int content_no, boolean sent_flag, String post_type, 
 			String board_type, String solution_type, String post_title, String content, String user, String created_date) {
 //      Insert this new board data into push message table 
 //      DATE : 16.11.22
-    	PushMessage pushMsg = new PushMessage(object_id, content_no, post_type, board_type, solution_type, post_title, content, user, created_date);
+    	PushMessage pushMsg = new PushMessage(object_id, content_no, false, post_type, board_type, solution_type, post_title, content, user, created_date);
       	pushDao.insertPushMessage(pushMsg);
     }
 }

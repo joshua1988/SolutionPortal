@@ -5,6 +5,7 @@ public class PushMessage {
 	
 	private int OBJECT_ID; // 푸쉬 인덱스
 	private int CONTENT_NO; // 글번호
+	private Boolean SENT_FLAG;
 	private String POST_TYPE; // 글 성격 (게시글 / 답글 / 댓글)
 	private String BOARD_TYPE; // 게시판 성격 (Q&A / FAQ)
 	private String SOLUTION_TYPE; // 솔루션 종류
@@ -13,10 +14,11 @@ public class PushMessage {
 	private String USER; // 댓글 작성자
 	private String CREATED_DATE; // 작성시간
 	
-	public PushMessage(int object_id, int content_no, String post_type, 
+	public PushMessage(int object_id, int content_no, Boolean sent_flag, String post_type, 
 			String board_type, String solution_type, String post_title, String content, String user, String created_date) {
 		this.OBJECT_ID = object_id;
 		this.CONTENT_NO = content_no;
+		this.SENT_FLAG= sent_flag;
 		this.POST_TYPE = post_type;
 		this.BOARD_TYPE = board_type;
 		this.SOLUTION_TYPE = solution_type;
@@ -35,6 +37,12 @@ public class PushMessage {
 	}
 	public void setOBJECT_ID(int oBJECT_ID) {
 		OBJECT_ID = oBJECT_ID;
+	}
+	public Boolean getSENT_FLAG() {
+		return SENT_FLAG;
+	}
+	public void setSENT_FLAG(Boolean sENT_FLAG) {
+		SENT_FLAG = sENT_FLAG;
 	}
 	public int getCONTENT_NO() {
 		return CONTENT_NO;

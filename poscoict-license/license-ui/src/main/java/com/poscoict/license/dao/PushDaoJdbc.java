@@ -52,7 +52,7 @@ public class PushDaoJdbc implements PushDao{
     // 푸쉬 메시지 생성
 	public void insertPushMessage(PushMessage push) {
 		// TODO Auto-generated method stub
-		this.jdbcTemplate.update(getQuery("push.insertMessage"), push.getOBJECT_ID(), push.getCONTENT_NO(), 
+		this.jdbcTemplate.update(getQuery("push.insertMessage"), push.getOBJECT_ID(), push.getCONTENT_NO(), push.getSENT_FLAG(), 
 				push.getPOST_TYPE(), push.getBOARD_TYPE(), push.getSOLUTION_TYPE(), push.getPOST_TITLE(), 
 				push.getCONTENT(), push.getUSER(), push.getCREATED_DATE());
 	}

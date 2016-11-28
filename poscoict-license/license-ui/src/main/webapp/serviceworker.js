@@ -126,6 +126,23 @@ function subscribe() {
 
         console.log("endpoint : ", endpoint);
         console.log("key :", key);
+        console.log("subscription : ", subscription);
+
+        var postData = {
+          "endpoint" : endpoint
+        };
+        // 16.11.28 (Mon)
+        // send the endpoint to server
+        fetch('/solutionpot/push/subscription', {
+        	method: 'post',
+          headers: new Headers({
+            'Content-Type': 'application/json'
+          }),
+        	body: JSON.stringify(postData)
+          // body: subscription
+        }).catch(function(err) {
+        	console.log("Sending subscription error : ", err);
+        });
       }).catch(function(e) {
         if (Notification.permission === 'denied') {
           // The user denied the notification permission which
