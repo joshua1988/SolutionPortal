@@ -1,3 +1,4 @@
+// Scripts for Push
 var isPushEnabled = false,
     pushSwitch = document.querySelector('#pushSwitch'),
     pushStatus = document.querySelector('#pushStatus'),
@@ -94,17 +95,6 @@ function subscribe() {
         var key = subscription.getKey('p256dh');
         updateStatus(endpoint, key, 'subscribe');
 
-        // 16.11.28 (Mon)
-        // send the endpoint to server
-        // fetch('/solutionpot/push/subscription', {
-        // 	method: 'post',
-        //   headers: new Headers({
-        //     'Content-Type': 'application/json'
-        //   }),
-        // 	body: JSON.stringify(postData)
-        // }).catch(function(err) {
-        // 	console.log("Sending subscription error : ", err);
-        // });
       }).catch(function(e) {
         if (Notification.permission === 'denied') {
           // 사용자가 알람 권한을 설정하지 않은 경우
@@ -195,6 +185,8 @@ function updateStatus(endpoint, key, status) {
     "subscription_status" : status
   };
 
+  // 16.11.28 (Mon)
+  // send the endpoint to server
   fetch('/solutionpot/push/subscription', {
     method: 'post',
     headers: new Headers({

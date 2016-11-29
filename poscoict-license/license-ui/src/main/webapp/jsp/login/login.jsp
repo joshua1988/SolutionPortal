@@ -146,7 +146,7 @@
 			sessionStorage.setItem("treeActiveKey", "notice");
 			sessionStorage.setItem("navActiveKey", "Navnotice");
 	</script>
-  <script async src="${contextPath }/serviceworker.js"></script>
+  <script async src="${contextPath }/main.js" data-service-worker="${contextPath }/sw.js"></script>
 	<script src="${contextPath }/dist/jquery/jquery.min.js"></script>
 	<script src="${contextPath }/dist/materialize/js/materialize.min.js"></script>
 	<script async src="${contextPath }/dist/js/signin.js"></script>

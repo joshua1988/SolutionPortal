@@ -6,7 +6,8 @@ poscoict-license/license-ui/.settings/*
 poscoict-license/.settings/*
 poscoict-license/license-ui/src/test/*
 poscoict-license/license-ui/target/*
-
+node_modules
+poscoict-license/license-ui/src/main/webapp/dist/js/sw-toolbox/lib/*
 
 # Windows image file caches
 Thumbs.db

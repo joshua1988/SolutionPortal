@@ -1,3 +1,42 @@
+importScripts('dist/js/sw-toolbox/sw-toolbox.js');
+
+const precacheFiles = [
+    // app shell
+    './',
+    './main.js',
+    './sw.js',
+    // js
+    './dist/js/board.js',
+    './dist/js/common.js',
+    './dist/js/customUser.js',
+    './dist/js/file.js',
+    './dist/js/licenseManagement.js',
+    './dist/js/morgue2.js',
+    './dist/js/signin.js',
+    './dist/js/tree.js',
+    './dist/materialize/js/materialize.js',
+    './dist/materialize/js/materialize.min.js',
+    // css
+    './dist/bootstrap/css/bootstrap.css',
+    './dist/bootstrap/css/bootstrap.min.css',
+    './dist/materialize/css/materialize.css',
+    './dist/materialize/css/materialize.min.css',
+    // images
+    './dist/images/folder_structure.png',
+    './dist/images/GluePDJang.png',
+    './dist/images/GluePDKang.png',
+    './dist/images/GluePDCho.png',
+    './dist/images/GluePMHwang.png',
+    './dist/images/GlueShin.png',
+    './dist/images/guest.png',
+    './dist/images/PosBeeKang.png',
+    './dist/img/mainLogo.gif',
+    './dist/img/push.png'
+];
+
+// Precache the files
+toolbox.precache(precacheFiles);
+
 self.addEventListener('push', function(event) {
 //  console.log('Received a push message', event);
 
