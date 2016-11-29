@@ -1,5 +1,7 @@
 package com.poscoict.license.push;
 
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,13 +37,13 @@ public class PushController {
     
     @RequestMapping(value="/push/subscription", method=RequestMethod.POST, headers = {"content-type=application/json"})
     @ResponseBody
-    public PushSubscription updateSubscription(@RequestBody PushSubscription endpoint) {
+    public PushSubscription updateSubscription(@RequestBody Map<String,String> data) {
     	
-    	logger.info("post received : " + endpoint);
-    	logger.info("post received : " + endpoint.getENDPOINT());
-//    	return new PushSubscription("null", true);
-    	return endpoint;
+    	logger.info("endpoint received : " + data.get("endpoint"));
+    	logger.info("key received : " + data.get("key"));
+    	logger.info("status received : " + data.get("subscription_status"));
+    	
+    	return null;
     }
-    
     
 }

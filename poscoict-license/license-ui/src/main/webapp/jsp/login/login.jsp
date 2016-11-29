@@ -127,9 +127,8 @@
 						</form>
 	        </div>
 	      </div>
-				<a id="pushBtn" class="waves-effect waves-light btn"><i id="pushIcon" class="material-icons left">notifications_active</i>알림 설정</a>
-				<!-- notifications_off -->
-				<%-- <label for="pushAlert">게시판 & 답글 알림 설정</label> --%>
+				<%-- <a id="pushBtn" class="waves-effect waves-light btn"><i id="pushIcon" class="material-icons left">notifications_active</i>알림 설정</a> --%>
+				<label for="pushAlert">게시판 & 답글 알림 설정</label>
 				<div class="switch" id="pushAlert">
 			    <label>
 			      Off
@@ -138,7 +137,7 @@
 			      On
 			    </label>
 			  </div>
-				<br/>
+				<div id="pushStatus" style="margin-top:5px;"></div>
 	      <%-- <a href="#!">Help Desk</a> --%>
 	    </center>
 	  </main>
