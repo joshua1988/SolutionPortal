@@ -768,8 +768,8 @@ public class BoardService extends LmsUtil {
         try {
 	      	int pushObjectId = pushDao.getMessageCount() + 1;
 	      	String postType = new String("comment");
-	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), false, postType, folder, "solution type is not decided", 
-	      			"comment has no title", mainContent.replaceAll("\n", "<br>"), (String) session.getAttribute( "USER_NO" ), dateFormat());
+	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), false, postType, folder, "-", 
+	      			"-", mainContent.replaceAll("\n", "<br>"), (String) session.getAttribute( "USER_NO" ), dateFormat());
 		} catch (Exception e) {
 			// TODO: handle exception
 //			this.transactionManager.rollback(status);

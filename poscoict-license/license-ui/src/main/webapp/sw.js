@@ -45,7 +45,7 @@ self.addEventListener('push', function(event) {
   // var icon = 'dist/img/push.png';
   // var tag = 'simple-push-demo-notification-tag';
 
-  event.waitUntil(fetch("/solutionpot/greeting").then(function(response) {
+  event.waitUntil(fetch("/solutionpot/push/unsent").then(function(response) {
         if (response.status !== 200) {
           // Either show a message to the user explaining the error
           // or enter a generic message and handle the
@@ -56,14 +56,15 @@ self.addEventListener('push', function(event) {
 
         // Examine the text in the response
         return response.json().then(function(data) {
-          console.log("response data : ", data);
+
           if (!data === undefined) {
             console.error('The API returned an error.', data.error);
             throw new Error();
           }
+          console.log("response data : ", data);
 
           var title = 'Yay another message.';
-          var body = data.content;
+          var body = "message received"
           var icon = 'dist/img/push.png';
           var tag = 'simple-push-demo-notification-tag';
 
@@ -88,14 +89,6 @@ self.addEventListener('push', function(event) {
       })
     );
 
-  // original
-  // event.waitUntil(
-  //   self.registration.showNotification(title, {
-  //     body: body,
-  //     icon: icon,
-  //     tag: tag
-  //   })
-  // );
 });
 
 self.addEventListener('notificationclick', function(event) {

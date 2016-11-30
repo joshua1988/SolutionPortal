@@ -1,5 +1,7 @@
 package com.poscoict.license.push;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.poscoict.license.dao.PushDao;
 import com.poscoict.license.vo.PushMessage;
 import com.poscoict.license.vo.PushSubscription;
+import com.poscoict.license.push.PushSender;
 
 @RestController
 public class PushController {
@@ -31,19 +34,29 @@ public class PushController {
 
     @RequestMapping("/push/message")
     public PushMessage getMessage(@RequestParam(value="pushID", defaultValue="10") String name) {
+
     	pushDao.insertPushMessage(new PushMessage(1, 11, true, post_type, board_type, solution_type, post_title, name, name, name));
     	return new PushMessage(1, 11, true, post_type, board_type, solution_type, post_title, name, name, name);
     }
     
     @RequestMapping(value="/push/subscription", method=RequestMethod.POST, headers = {"content-type=application/json"})
     @ResponseBody
-    public PushSubscription updateSubscription(@RequestBody Map<String,String> data) {
+    public PushSubscription updateSubscription(@RequestBody Map<String,String> data) throws IOException {
     	
     	logger.info("endpoint received : " + data.get("endpoint"));
     	logger.info("key received : " + data.get("key"));
     	logger.info("status received : " + data.get("subscription_status"));
     	
+//    	PushSender.sendPOST();
+    	
     	return null;
+    }
+    
+    @RequestMapping("/push/unsent")
+    public List<Map<String, Object>> sendUnsentMessages() {
+    	List<Map<String, Object>> list =  pushDao.getUnsentPushMessages();
+    	
+		return list;
     }
     
 }

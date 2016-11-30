@@ -1,5 +1,8 @@
 package com.poscoict.license.dao;
 
+import java.util.List;
+import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.support.MessageSourceAccessor;
@@ -9,7 +12,7 @@ import com.poscoict.license.vo.PushMessage;
 
 public class PushDaoJdbc implements PushDao{
 
-    private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
     private MessageSourceAccessor msAccessor = null;
     private Logger logger = LoggerFactory.getLogger(getClass());
     
@@ -55,6 +58,12 @@ public class PushDaoJdbc implements PushDao{
 		this.jdbcTemplate.update(getQuery("push.insertMessage"), push.getOBJECT_ID(), push.getCONTENT_NO(), push.getSENT_FLAG(), 
 				push.getPOST_TYPE(), push.getBOARD_TYPE(), push.getSOLUTION_TYPE(), push.getPOST_TITLE(), 
 				push.getCONTENT(), push.getUSER(), push.getCREATED_DATE());
+	}
+	
+    @Override
+	public List<Map<String, Object>> getUnsentPushMessages() {
+		// TODO Auto-generated method stub
+		return this.jdbcTemplate.queryForList(getQuery(("push.getUnsentMessages")));
 	}
 	
     public String getQuery(String queryKey){

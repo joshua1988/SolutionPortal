@@ -193,6 +193,7 @@
 		<url-pattern>/greeting</url-pattern>
 		<url-pattern>/push/message</url-pattern>
 		<url-pattern>/push/subscription</url-pattern>
+		<url-pattern>/push/unsent</url-pattern>
 		
 	</servlet-mapping>
 </web-app>
