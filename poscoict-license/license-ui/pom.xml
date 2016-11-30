@@ -196,11 +196,21 @@
 		    <version>20160212</version>
 		</dependency>
 		
-		<!--  A Web Push library for Java  https://github.com/web-push-libs/webpush-java  -->
+		<!-- http://stackoverflow.com/questions/37426542/firebase-cloud-messaging-notification-from-java-instead-of-firebase-console -->		
 		<dependency>
-		    <groupId>nl.martijndwars</groupId>
-		    <artifactId>web-push</artifactId>
-		    <version>1.0.0</version>
+		  <groupId>com.google.gcm</groupId>
+		  <artifactId>gcm-server</artifactId>
+		  <version>1.0.0</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.googlecode.json-simple</groupId>
+		  <artifactId>json-simple</artifactId>
+		  <version>1.1.1</version>
+		</dependency>
+		<dependency>
+		  <groupId>com.google.firebase</groupId>
+		  <artifactId>firebase-server-sdk</artifactId>
+		  <version>3.0.0</version>
 		</dependency>
 		
 	</dependencies>
