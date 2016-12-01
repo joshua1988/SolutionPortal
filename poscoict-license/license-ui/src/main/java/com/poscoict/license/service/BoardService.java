@@ -874,7 +874,6 @@ public class BoardService extends LmsUtil {
     	return flag;
     }
     
-    
     public void insertPush(int object_id, int content_no, boolean sent_flag, String post_type, 
 			String board_type, String solution_type, String post_title, String content, String user, String created_date) {
 //      Insert this new board data into push message table 

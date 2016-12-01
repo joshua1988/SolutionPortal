@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.poscoict.license.vo.PushMessage;
+import com.poscoict.license.vo.PushSubscription;
 
 public interface PushDao {
 
@@ -12,4 +13,6 @@ public interface PushDao {
 	void insertPushMessage(PushMessage push);
 	
 	List<Map<String, Object>> getUnsentPushMessages();
+	
+	void insertPushSubscription(PushSubscription pushSubscription);
 }

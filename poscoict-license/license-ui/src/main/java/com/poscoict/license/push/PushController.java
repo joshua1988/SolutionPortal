@@ -47,7 +47,17 @@ public class PushController {
     	logger.info("key received : " + data.get("key"));
     	logger.info("status received : " + data.get("subscription_status"));
     	
-//    	PushSender.sendPOST();
+    	String endpoint = data.get("endpoint");
+    	String key = data.get("key");
+    	String subscription_status = data.get("subscription_status");
+    	
+//    	String type = str.getClass().getName();
+//    	logger.info("endpoint type check : " + type);
+//    	String str1 = data.get("key");
+//    	String type1 = str1.getClass().getName();
+//    	logger.info("key type check : " + type1);
+    	
+    	pushDao.insertPushSubscription(new PushSubscription(endpoint, key, subscription_status));
     	
     	return null;
     }

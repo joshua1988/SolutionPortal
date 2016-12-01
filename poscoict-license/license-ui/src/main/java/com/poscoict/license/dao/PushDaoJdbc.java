@@ -9,6 +9,7 @@ import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import com.poscoict.license.vo.PushMessage;
+import com.poscoict.license.vo.PushSubscription;
 
 public class PushDaoJdbc implements PushDao{
 
@@ -65,7 +66,16 @@ public class PushDaoJdbc implements PushDao{
 		// TODO Auto-generated method stub
 		return this.jdbcTemplate.queryForList(getQuery(("push.getUnsentMessages")));
 	}
-	
+    
+    
+    @Override
+	public void insertPushSubscription(PushSubscription pushSubscription) {
+		// TODO Auto-generated method stub
+		this.jdbcTemplate.update(getQuery("push.insertSubscription"), pushSubscription.getEND_POINT(), pushSubscription.getP256DH_KEY(), 
+				pushSubscription.getSUBSCRIPTION_STATUS());
+	}
+
+	//
     public String getQuery(String queryKey){
     	String query = this.msAccessor.getMessage(queryKey);
     	logger.debug(queryKey);

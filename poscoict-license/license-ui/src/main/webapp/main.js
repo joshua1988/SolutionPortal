@@ -176,8 +176,7 @@ function updateStatus(endpoint, key, status) {
   endpoint = endpoint.split("send/")[1];
   // Key 값 변환 (Array Buffer to Byte)
   key = btoa(String.fromCharCode.apply(null, new Uint8Array(key)));
-  // console.log(" updateStatus endpoint :" + endpoint + ".\n key : " + key + ".\n status : " + status);
-  console.log(status);
+  // console.log("## endpoint :" + endpoint + ".\n key : " + key + ".\n status : " + status);
 
   var data = {
     "endpoint" : endpoint,
