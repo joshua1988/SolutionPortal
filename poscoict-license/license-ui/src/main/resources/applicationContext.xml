@@ -42,7 +42,7 @@
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 	
-	<bean id="pushDao" class="com.poscoict.license.dao.PushDaoJdbc">
+	<bean id="pushDao" class="com.poscoict.license.push.PushDaoJdbc">
 		<property name="jdbcTemplate" ref="jdbcTemplate" />
 	</bean>
 
@@ -73,6 +73,8 @@
 	<bean id="generateExcelService" class="com.poscoict.license.service.GenerateExcelService"/>
 
 	<bean id="morgueService" class="com.poscoict.license.service.MorgueService"/>
+	
+	<bean id="pushService" class="com.poscoict.license.push.PushService"/>
 
 	<bean id="lmsUtil" class="com.poscoict.license.util.LmsUtil" />
 

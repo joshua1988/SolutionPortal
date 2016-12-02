@@ -37,15 +37,12 @@ const precacheFiles = [
 // Precache the files
 toolbox.precache(precacheFiles);
 
+var title, body, icon, tag;
+
 self.addEventListener('push', function(event) {
 //  console.log('Received a push message', event);
 
-  // var title = 'Yay a message.';
-  // var body = 'We have received a push message.';
-  // var icon = 'dist/img/push.png';
-  // var tag = 'simple-push-demo-notification-tag';
-
-  event.waitUntil(fetch("/solutionpot/push/unsent").then(function(response) {
+  event.waitUntil(fetch("/solutionpot/push/fetch/messages").then(function(response) {
         if (response.status !== 200) {
           // Either show a message to the user explaining the error
           // or enter a generic message and handle the
@@ -62,11 +59,19 @@ self.addEventListener('push', function(event) {
             throw new Error();
           }
           console.log("response data : ", data);
+          console.log("response data length : ", data.length);
 
-          var title = 'Yay another message.';
-          var body = "message received"
-          var icon = 'dist/img/push.png';
-          var tag = 'simple-push-demo-notification-tag';
+          var pushInfo = pushMessageConstructor(data);
+
+          // title = 'Yay another message.';
+          // body = "message received"
+          // icon = 'dist/img/push.png';
+          // tag = 'simple-push-demo-notification-tag';
+
+          title = pushInfo.title;
+          body = pushInfo.body;
+          icon = 'dist/img/push.png';
+          tag = pushInfo.tag;
 
           return self.registration.showNotification(title, {
             body: body,
@@ -77,10 +82,10 @@ self.addEventListener('push', function(event) {
       }).catch(function(err) {
         console.error('Unable to retrieve data', err);
 
-        var title = 'An error occurred';
-        var body = 'We were unable to get the information for this push message';
-        var icon = 'dist/img/push.png';
-        var notificationTag = 'notification-error';
+        title = 'An error occurred';
+        body = 'We were unable to get the information for this push message';
+        icon = 'dist/img/push.png';
+        notificationTag = 'notification-error';
         return self.registration.showNotification(title, {
             body: body,
             icon: icon,
@@ -100,3 +105,37 @@ self.addEventListener('notificationclick', function(event) {
     clients.openWindow('http://www.solutionpot.co.kr/')
   );
 });
+
+var pushMessageConstructor = function (data) {
+  var msg = {};
+
+  console.log("constructor's data : ", data);
+
+  // data = data[1];
+
+  if (data.length > 1) {
+    console.log("Push 메시지가 여러개입니다.");
+  } else {
+    console.log("새 메시지가 하나입니다.");;
+  }
+
+  // Title
+  // msg.post_type = data[1].post_type == "board" ? "게시글" : "댓글";
+  msg.post_type = data[1].post_type;
+  msg.title = "새로운 " + data[1].board_type + "이 게시되었습니다.";
+
+  // Body
+  msg.body = data[1].solution_type + " / " + data[1].board_type + " / " + data[1].post_title + " / " +  data[1].user + "가 작성";
+  console.log("data[1] solution_type : ", data[1].solution_type);
+
+  // Tag
+  msg.tag = msg.post_type;
+
+  console.log("constructor's msg : ", msg);
+
+  return msg;
+}
+
+function pushMessageConstructor(data) {
+//
+}

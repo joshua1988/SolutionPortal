@@ -1,4 +1,4 @@
-package com.poscoict.license.dao;
+package com.poscoict.license.push;
 
 import java.util.List;
 import java.util.Map;
@@ -15,4 +15,6 @@ public interface PushDao {
 	List<Map<String, Object>> getUnsentPushMessages();
 	
 	void insertPushSubscription(PushSubscription pushSubscription);
+	
+	List<Map<String, Object>> getSubscriptionUserList();
 }

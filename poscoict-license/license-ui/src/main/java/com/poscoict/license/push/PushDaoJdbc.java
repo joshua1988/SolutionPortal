@@ -1,4 +1,4 @@
-package com.poscoict.license.dao;
+package com.poscoict.license.push;
 
 import java.util.List;
 import java.util.Map;
@@ -73,6 +73,12 @@ public class PushDaoJdbc implements PushDao{
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update(getQuery("push.insertSubscription"), pushSubscription.getEND_POINT(), pushSubscription.getP256DH_KEY(), 
 				pushSubscription.getSUBSCRIPTION_STATUS());
+	}
+    
+	@Override
+	public List<Map<String, Object>> getSubscriptionUserList() {
+		// TODO Auto-generated method stub
+		return this.jdbcTemplate.queryForList(getQuery("push.getSubscriptionUserList"));
 	}
 
 	//
