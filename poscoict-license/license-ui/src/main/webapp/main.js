@@ -122,7 +122,7 @@ function unsubscribe() {
         var endpoint = subscription.endpoint;
         var key = subscription.getKey('p256dh');
         // Update the pushMsg info
-        updateStatus(endpoint,key,'unsubscribe');
+        updateStatus(endpoint, key, 'unsubscribe');
 
         // Check we have a subscription to unsubscribe
         if (!subscription) {
@@ -136,7 +136,8 @@ function unsubscribe() {
           isPushEnabled = false;
           updatePushSwitch();
 
-          console.log("unsubscribe clicked");
+          console.log("successful : ", successful);
+          // console.log("unsubscribe clicked");
         }).catch(function(e) {
           // We failed to unsubscribe, this can lead to
           // an unusual state, so may be best to remove

@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.poscoict.license.dao.PushDao;
 import com.poscoict.license.vo.PushMessage;
 import com.poscoict.license.vo.PushSubscription;
-import com.poscoict.license.push.PushSender;
 
 @RestController
 public class PushController {
@@ -41,7 +40,7 @@ public class PushController {
     
     @RequestMapping(value="/push/subscription", method=RequestMethod.POST, headers = {"content-type=application/json"})
     @ResponseBody
-    public PushSubscription updateSubscription(@RequestBody Map<String,String> data) throws IOException {
+    public void updateSubscription(@RequestBody Map<String,String> data) throws IOException {
     	
     	logger.info("endpoint received : " + data.get("endpoint"));
     	logger.info("key received : " + data.get("key"));
@@ -51,15 +50,7 @@ public class PushController {
     	String key = data.get("key");
     	String subscription_status = data.get("subscription_status");
     	
-//    	String type = str.getClass().getName();
-//    	logger.info("endpoint type check : " + type);
-//    	String str1 = data.get("key");
-//    	String type1 = str1.getClass().getName();
-//    	logger.info("key type check : " + type1);
-    	
     	pushDao.insertPushSubscription(new PushSubscription(endpoint, key, subscription_status));
-    	
-    	return null;
     }
     
     @RequestMapping("/push/unsent")

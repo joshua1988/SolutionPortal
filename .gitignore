@@ -9,6 +9,7 @@ poscoict-license/license-ui/target/*
 node_modules
 poscoict-license/license-ui/src/main/webapp/dist/js/sw-toolbox/lib/*
 *.text
+PushSender.java
 
 # Windows image file caches
 Thumbs.db
