@@ -37,7 +37,13 @@ const precacheFiles = [
 // Precache the files
 toolbox.precache(precacheFiles);
 
-var title, body, icon, tag;
+// var title, body, icon, tag;
+var pushData = {
+  title: "",
+  body: "",
+  icon: "",
+  tag: ""
+};
 
 self.addEventListener('push', function(event) {
 //  console.log('Received a push message', event);
@@ -61,22 +67,31 @@ self.addEventListener('push', function(event) {
           console.log("response data : ", data);
           console.log("response data length : ", data.length);
 
-          var pushInfo = pushMessageConstructor(data);
+          // Push Messages Constructor
+          var pushConstructor = {};
+          pushConstructor = data[0];
 
-          // title = 'Yay another message.';
-          // body = "message received"
-          // icon = 'dist/img/push.png';
-          // tag = 'simple-push-demo-notification-tag';
+          if (data.length > 1) {
+            console.log("Push 메시지가 여러개입니다.");
+          } else {
+            console.log("새 메시지가 하나입니다.");;
+          }
 
-          title = pushInfo.title;
-          body = pushInfo.body;
-          icon = 'dist/img/push.png';
-          tag = pushInfo.tag;
+          console.log("pushConstructor : ", pushConstructor);
 
-          return self.registration.showNotification(title, {
-            body: body,
-            icon: icon,
-            tag: tag
+          pushConstructor.post_type == "board" ? "게시글" : "댓글";
+          pushData.title = "새로운 " + pushConstructor.BOARD_TYPE + "이 게시되었습니다.";
+          pushData.body = pushConstructor.SOLUTION_TYPE + " / " + pushConstructor.BOARD_TYPE + " / " + pushConstructor.POST_TITLE + " / " +  pushConstructor.USER + "가 작성";
+          pushData.icon = 'dist/img/push.png';
+          pushData.tag = pushConstructor.POST_TYPE;
+          // constructor end
+
+          console.log("pushData : ", pushData);
+
+          return self.registration.showNotification(pushData.title, {
+            body: pushData.body,
+            icon: pushData.icon,
+            tag: pushData.tag
           });
         });
       }).catch(function(err) {
@@ -113,29 +128,9 @@ var pushMessageConstructor = function (data) {
 
   // data = data[1];
 
-  if (data.length > 1) {
-    console.log("Push 메시지가 여러개입니다.");
-  } else {
-    console.log("새 메시지가 하나입니다.");;
-  }
 
-  // Title
-  // msg.post_type = data[1].post_type == "board" ? "게시글" : "댓글";
-  msg.post_type = data[1].post_type;
-  msg.title = "새로운 " + data[1].board_type + "이 게시되었습니다.";
-
-  // Body
-  msg.body = data[1].solution_type + " / " + data[1].board_type + " / " + data[1].post_title + " / " +  data[1].user + "가 작성";
-  console.log("data[1] solution_type : ", data[1].solution_type);
-
-  // Tag
-  msg.tag = msg.post_type;
 
   console.log("constructor's msg : ", msg);
 
   return msg;
-}
-
-function pushMessageConstructor(data) {
-//
 }
