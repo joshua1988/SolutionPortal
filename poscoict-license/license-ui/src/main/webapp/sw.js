@@ -67,26 +67,7 @@ self.addEventListener('push', function(event) {
           console.log("response data : ", data);
           console.log("response data length : ", data.length);
 
-          // Push Messages Constructor
-          var pushConstructor = {};
-          pushConstructor = data[0];
-
-          if (data.length > 1) {
-            console.log("Push 메시지가 여러개입니다.");
-          } else {
-            console.log("새 메시지가 하나입니다.");;
-          }
-
-          console.log("pushConstructor : ", pushConstructor);
-
-          pushConstructor.post_type == "board" ? "게시글" : "댓글";
-          pushData.title = "새로운 " + pushConstructor.BOARD_TYPE + "이 게시되었습니다.";
-          pushData.body = pushConstructor.SOLUTION_TYPE + " / " + pushConstructor.BOARD_TYPE + " / " + pushConstructor.POST_TITLE + " / " +  pushConstructor.USER + "가 작성";
-          pushData.icon = 'dist/img/push.png';
-          pushData.tag = pushConstructor.POST_TYPE;
-          // constructor end
-
-          console.log("pushData : ", pushData);
+          pushMessageConstructor(data);
 
           return self.registration.showNotification(pushData.title, {
             body: pushData.body,
@@ -121,16 +102,22 @@ self.addEventListener('notificationclick', function(event) {
   );
 });
 
+// Push Messages Constructor
 var pushMessageConstructor = function (data) {
-  var msg = {};
+  var postTypeKR = "",
+      pushConstructor = data[0];
 
-  console.log("constructor's data : ", data);
+  if (data.length > 1) {
+    console.log("Push 메시지가 여러개입니다.");
+  } else {
+    console.log("새 메시지가 하나입니다.");;
+  }
 
-  // data = data[1];
+  postTypeKR = pushConstructor.POST_TYPE == "board" ? "게시글" : "댓글";
+  pushData.title = "새로운 " + postTypeKR + "이 게시되었습니다.";
+  pushData.body = pushConstructor.SOLUTION_TYPE + " / " + pushConstructor.BOARD_TYPE + " / " + pushConstructor.POST_TITLE + " / " +  pushConstructor.USER + "가 작성";
+  pushData.icon = 'dist/img/push.png';
+  pushData.tag = pushConstructor.POST_TYPE;
 
-
-
-  console.log("constructor's msg : ", msg);
-
-  return msg;
+  return pushData;
 }
