@@ -116,7 +116,8 @@
                   <span class="badge blue darken-3">new</span>
                 </c:if>
                 <c:if test="${list.CONTENT_SEQ!=1 }">
-                  <span class="badge grey darken-3"><i class="tiny material-icons">subdirectory_arrow_right</i></span>
+                  <%-- <span class="badge grey darken-3"><i class="tiny material-icons">subdirectory_arrow_right</i></span> --%>
+                  <span class="badge grey darken-3">RE</span>
                 </c:if>
                 <!-- 제목 -->
                 ${list.TITLE }

@@ -23,6 +23,10 @@ public class PushSender {
 //	private static final String USER_AGENT = "Chrome/54.0.2840.99";
 //	private static final String POST_URL = "https://android.googleapis.com/gcm/send/";
 	
+	/*
+	 * property 파일을 MessageSourceAccessor 로 처리할 수 있는지 확인
+	 * http://whybk.tistory.com/33
+	*/
 	public void getServerKey() throws IOException {
 		try {
 			prop = new Properties();

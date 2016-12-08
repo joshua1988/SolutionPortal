@@ -1,13 +1,13 @@
 package com.poscoict.license.push;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.PlatformTransactionManager;
 
 public class PushService {
 	
@@ -52,11 +52,27 @@ public class PushService {
 		}
 	}
 	
-	public List<Map<String, Object>> getUnsentPushMessages() {
-		List<Map<String, Object>> list = pushDao.getUnsentPushMessages();
+	public List<Map<String, Object>> getUnsentPushMessages() throws IOException{
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		
+		try {
+			list = pushDao.getUnsentPushMessages();
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("pushDao.getUnsentPushMessages: ", e);
+		}
 		
 		return list;
 	}
 	
+	public void updateSentMessages() throws IOException{
+		try {
+			pushDao.updateSentMessages();
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("pushDao.updateSentMessages: ", e);
+		}	
+	}
 	
 }

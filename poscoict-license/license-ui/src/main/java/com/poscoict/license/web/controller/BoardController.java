@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.poscoict.license.consts.Consts;
 import com.poscoict.license.exception.UserException;
+import com.poscoict.license.push.PushService;
 import com.poscoict.license.security.CustomUserDetails;
 import com.poscoict.license.service.BoardService;
 import com.poscoict.license.vo.UserPermission;
@@ -33,6 +34,9 @@ public class BoardController extends ExceptionControllerAdvice {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private PushService pushService;
 
     @RequestMapping( value = {"index"}, method = {RequestMethod.GET})
     public ModelAndView loginForm() throws Exception{
@@ -160,6 +164,8 @@ public class BoardController extends ExceptionControllerAdvice {
             @RequestParam(value="guestPW", required=false) String guestPW,
             HttpSession session ) throws Exception {
         boardService.insertBoard(title, openFlag, folder, subCategory, mainContent, menubar, boardAttach, guestID, guestPW, session);
+        pushService.sendPushMessage();
+        
 //        return getNoticeList(category,"1",null,null,"all");
         return "redirect:/board?folder="+folder+"&subCategory="+subCategory;
     }
@@ -389,6 +395,8 @@ public class BoardController extends ExceptionControllerAdvice {
     public void insertReply( String folder, String contentNo, String mainContent, HttpSession session, String guestReplyId, Writer writer ) throws IOException, UserException {
     	logger.info("****************************** guestReplyId :"+guestReplyId);
         writer.write( boardService.insertReply(folder, contentNo, URLDecoder.decode(mainContent, "UTF-8"), guestReplyId , session) );
+        
+        pushService.sendPushMessage();
     }
 
     // 리플 삭제

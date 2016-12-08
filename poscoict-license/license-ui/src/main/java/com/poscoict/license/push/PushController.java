@@ -57,6 +57,7 @@ public class PushController {
     @RequestMapping("/push/fetch/messages")
     public List<Map<String, Object>> fetchPushMessages() throws IOException {
     	List<Map<String, Object>> list = pushService.getUnsentPushMessages();
+    	pushService.updateSentMessages();
     	return list;
     }
     
@@ -65,5 +66,7 @@ public class PushController {
     public void sendMessages() throws IOException {
     	pushService.sendPushMessage();
     }
+    
+    
     
 }

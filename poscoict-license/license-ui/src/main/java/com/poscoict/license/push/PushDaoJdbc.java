@@ -69,6 +69,12 @@ public class PushDaoJdbc implements PushDao{
     
     
     @Override
+	public void updateSentMessages() {
+		// TODO Auto-generated method stub
+		this.jdbcTemplate.update(getQuery("push.updateSentMessages"));
+	}
+
+	@Override
 	public void insertPushSubscription(PushSubscription pushSubscription) {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update(getQuery("push.insertSubscription"), pushSubscription.getEND_POINT(), pushSubscription.getP256DH_KEY(), 

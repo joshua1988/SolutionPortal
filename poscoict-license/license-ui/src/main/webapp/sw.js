@@ -78,14 +78,14 @@ self.addEventListener('push', function(event) {
       }).catch(function(err) {
         console.error('Unable to retrieve data', err);
 
-        title = 'An error occurred';
-        body = 'We were unable to get the information for this push message';
-        icon = 'dist/img/push.png';
-        notificationTag = 'notification-error';
-        return self.registration.showNotification(title, {
-            body: body,
-            icon: icon,
-            tag: notificationTag
+        pushData.title = 'An error occurred';
+        pushData.body = 'We were unable to get the information for this push message';
+        pushData.icon = 'dist/img/push.png';
+        pushData.tag = 'notification-error';
+        return self.registration.showNotification(pushData.title, {
+            body: pushData.body,
+            icon: pushData.icon,
+            tag: pushData.tag
           });
       })
     );
@@ -107,12 +107,6 @@ var pushMessageConstructor = function (data) {
   var postTypeKR = "",
       pushConstructor = data[0];
 
-  if (data.length > 1) {
-    console.log("Push 메시지가 여러개입니다.");
-  } else {
-    console.log("새 메시지가 하나입니다.");;
-  }
-
   postTypeKR = pushConstructor.POST_TYPE == "board" ? "게시글" : "댓글";
   pushData.title = "새로운 " + postTypeKR + "이 게시되었습니다.";
   pushData.body = pushConstructor.SOLUTION_TYPE + " / " + pushConstructor.BOARD_TYPE + " / " + pushConstructor.POST_TITLE + " / " +  pushConstructor.USER + "가 작성";
@@ -120,4 +114,4 @@ var pushMessageConstructor = function (data) {
   pushData.tag = pushConstructor.POST_TYPE;
 
   return pushData;
-}
+};
