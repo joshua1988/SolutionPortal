@@ -31,6 +31,7 @@ import com.poscoict.license.consts.Consts;
 import com.poscoict.license.dao.UserDao;
 import com.poscoict.license.exception.UserException;
 import com.poscoict.license.push.PushDao;
+import com.poscoict.license.push.PushService;
 import com.poscoict.license.security.CustomUserDetails;
 import com.poscoict.license.util.LmsUtil;
 import com.poscoict.license.vo.Board;
@@ -50,6 +51,9 @@ public class BoardService extends LmsUtil {
 
 	@Autowired
 	private PlatformTransactionManager transactionManager;
+	
+	@Autowired
+	private PushService pushService;
 
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -422,6 +426,13 @@ public class BoardService extends LmsUtil {
 	      	throw new UserException("Push 메시지 등록 실패");
 		}
         
+        try {
+        	pushService.sendPushMessage();
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("sendPush error in insertBoard: ", e);
+		}
+        
     }
 
     public Map<String, Object> viewPost( String folder, String subCategory, String chartNum, String contentNo, String search,  String select, HttpSession session ) throws UserException {
@@ -769,7 +780,6 @@ public class BoardService extends LmsUtil {
         try {
 	      	int pushObjectId = pushDao.getMessageCount() + 1;
 	      	String postType = new String("comment");
-	      	logger.info("subCategory : "+subCategory);
 	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), false, postType, folder, subCategory, 
 	      			"-", mainContent.replaceAll("\n", "<br>"), (String) session.getAttribute( "USER_NAME" ), dateFormat());
 		} catch (Exception e) {
@@ -777,6 +787,13 @@ public class BoardService extends LmsUtil {
 //			this.transactionManager.rollback(status);
 	      	logger.error("pushDao.insertPushMessage : ", e);
 	      	throw new UserException("리플 등록 실패");
+		}
+        
+        try {
+        	pushService.sendPushMessage();
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("sendPush error in insertReply: ", e);
 		}
 
         return "end";

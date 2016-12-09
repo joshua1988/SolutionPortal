@@ -47,7 +47,6 @@ public class PushSender {
 	
 	public void sendPush(String endpoint) throws IOException {
 		getServerKey();
-		logger.info("@@ got serverKey : " + serverKey);
 		
 		try {
             Sender sender = new FCMSender(serverKey);
@@ -65,6 +64,7 @@ public class PushSender {
             Result result = sender.send(message, endpoint, 1);
             logger.info("Result: " + result.toString());
         } catch (Exception e) {
+        	logger.error("sendPush error: " + e);
             e.printStackTrace();
         }
 	}
