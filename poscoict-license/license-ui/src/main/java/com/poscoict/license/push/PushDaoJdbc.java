@@ -26,25 +26,6 @@ public class PushDaoJdbc implements PushDao{
         this.jdbcTemplate = jdbcTemplate;
     }
     
-    // Push Message
-//    private RowMapper<PushMessage> pushMapper = new RowMapper<PushMessage>() {
-//		@Override
-//		public PushMessage mapRow(ResultSet rs, int rowNum) throws SQLException {
-//			// TODO Auto-generated method stub
-//			PushMessage push = new PushMessage();
-//			push.setOBJECT_ID(rs.getInt("OBJECT_ID"));
-//			push.setCONTENT_NO(rs.getInt("CONTENT_NO"));
-//			push.setPOST_TYPE(rs.getString("POST_TYPE"));
-//			push.setBOARD_TYPE(rs.getString("BOARD_TYPE"));
-//			push.setSOLUTION_TYPE(rs.getString("SOLUTION_TYPE"));
-//			push.setPOST_TITLE(rs.getString("POST_TITLE"));
-//			push.setCONTENT(rs.getString("CONTENT"));
-//			push.setUSER(rs.getString("USER"));
-//			push.setCREATED_DATE(rs.getString("CREATED_DATE"));
-//			return push;
-//		}
-//    };
-
 	@Override
     // 푸쉬 메시지 개수 카운트
 	public int getMessageCount() {

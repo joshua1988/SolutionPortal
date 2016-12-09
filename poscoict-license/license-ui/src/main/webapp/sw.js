@@ -98,7 +98,7 @@ self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('http://www.solutionpot.co.kr/')
+    clients.openWindow('http://www.solutionpot.co.kr:8080/license')
   );
 });
 

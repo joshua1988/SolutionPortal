@@ -314,6 +314,7 @@ public class BoardService extends LmsUtil {
 
         CustomUserDetails userDetails = (CustomUserDetails)session.getAttribute("userDetails");
         String userNo = userDetails.getUserNo();
+        String userName = userDetails.getUsername();
         boolean extraAccount = userDetails.getAuthorities().toString().contains(Consts.rolePrefix+Consts.USERLV_GUEST);
 
         if(extraAccount){
@@ -413,7 +414,7 @@ public class BoardService extends LmsUtil {
         try {
 	      	int pushObjectId = pushDao.getMessageCount() + 1;
 	      	String postType = new String("board");
-	      	insertPush(pushObjectId, no, false, postType, folder, subCategory, title, mainContent.replaceAll("'", "&apos;"), userNo, dateFormat());
+	      	insertPush(pushObjectId, no, false, postType, folder, subCategory, title, mainContent.replaceAll("'", "&apos;"), userName, dateFormat());
 		} catch (Exception e) {
 			// TODO: handle exception
 			this.transactionManager.rollback(status);
@@ -770,7 +771,7 @@ public class BoardService extends LmsUtil {
 	      	String postType = new String("comment");
 	      	logger.info("subCategory : "+subCategory);
 	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), false, postType, folder, subCategory, 
-	      			"-", mainContent.replaceAll("\n", "<br>"), (String) session.getAttribute( "USER_NO" ), dateFormat());
+	      			"-", mainContent.replaceAll("\n", "<br>"), (String) session.getAttribute( "USER_NAME" ), dateFormat());
 		} catch (Exception e) {
 			// TODO: handle exception
 //			this.transactionManager.rollback(status);

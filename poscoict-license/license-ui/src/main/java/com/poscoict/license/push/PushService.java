@@ -31,11 +31,6 @@ public class PushService {
 	public List<Map<String, Object>> getSubscriptionUsers() {
 		List<Map<String, Object>> list = pushDao.getSubscriptionUserList();
 		
-//		Object[] endpoint_list = list.toArray();
-//		logger.info("endpoint_list array : " + endpoint_list.toString());
-//		int numberOfSubscription = list.size();
-//		logger.info("subscription number : " + numberOfSubscription);
-		
 		return list;
 	}
 	
