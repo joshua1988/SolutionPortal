@@ -737,7 +737,7 @@ public class BoardService extends LmsUtil {
         return list;
     }
 
-    public String insertReply( String folder, String contentNo, String mainContent, String guestReplyId, HttpSession session ) throws UserException {
+    public String insertReply( String folder, String contentNo, String subCategory, String mainContent, String guestReplyId, HttpSession session ) throws UserException {
         logger.info("insertReply: contentNo= " + contentNo + " category= " + folder);
         int no = userDao.getReplyCount( folder, Integer.parseInt( contentNo ) );
         Reply re = new Reply();
@@ -768,7 +768,8 @@ public class BoardService extends LmsUtil {
         try {
 	      	int pushObjectId = pushDao.getMessageCount() + 1;
 	      	String postType = new String("comment");
-	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), false, postType, folder, "-", 
+	      	logger.info("subCategory : "+subCategory);
+	      	insertPush(pushObjectId, Integer.parseInt( contentNo ), false, postType, folder, subCategory, 
 	      			"-", mainContent.replaceAll("\n", "<br>"), (String) session.getAttribute( "USER_NO" ), dateFormat());
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -78,8 +78,8 @@ self.addEventListener('push', function(event) {
       }).catch(function(err) {
         console.error('Unable to retrieve data', err);
 
-        pushData.title = 'An error occurred';
-        pushData.body = 'We were unable to get the information for this push message';
+        pushData.title = '오류 발생';
+        pushData.body = 'Push 메시지 정보를 받지 못하였습니다.';
         pushData.icon = 'dist/img/push.png';
         pushData.tag = 'notification-error';
         return self.registration.showNotification(pushData.title, {
@@ -108,8 +108,16 @@ var pushMessageConstructor = function (data) {
       pushConstructor = data[0];
 
   postTypeKR = pushConstructor.POST_TYPE == "board" ? "게시글" : "댓글";
-  pushData.title = "새로운 " + postTypeKR + "이 게시되었습니다.";
-  pushData.body = pushConstructor.SOLUTION_TYPE + " / " + pushConstructor.BOARD_TYPE + " / " + pushConstructor.POST_TITLE + " / " +  pushConstructor.USER + "가 작성";
+  pushData.title = "새로운 " + postTypeKR + " 등록";
+  if (postTypeKR == "게시글") {
+    pushData.body = "[" + pushConstructor.SOLUTION_TYPE + " " + pushConstructor.BOARD_TYPE + " 게시판] \n" +
+                      "제목: " + pushConstructor.POST_TITLE + " \n" +
+                      "작성자: " + pushConstructor.USER;
+  } else {
+    pushData.body = "[" + pushConstructor.SOLUTION_TYPE + " " + pushConstructor.BOARD_TYPE + " 게시판] \n" +
+                      "내용: " + pushConstructor.CONTENT + " \n" +
+                      "작성자: " + pushConstructor.USER;
+  }
   pushData.icon = 'dist/img/push.png';
   pushData.tag = pushConstructor.POST_TYPE;
 

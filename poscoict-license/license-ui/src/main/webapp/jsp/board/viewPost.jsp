@@ -95,7 +95,7 @@
 									<input type="text" id="replyText" class="form-control" style="height:36px;" placeholder="댓글을 입력하세요.">
 									<%-- <label for="replyText" style="">댓글을 입력하세요.</label> --%>
 									<a class="waves-effect waves-light btn valign"
-										onclick="javascript:insertReply('${folder}','${board.CONTENT_NO }'); return false;"><i class="material-icons">edit</i>
+										onclick="javascript:insertReply('${folder}','${board.CONTENT_NO }','${subCategory}'); return false;"><i class="material-icons">edit</i>
 									</a>
 				        </div>
 								<%-- 게스트 이름 변경하여 댓글 등록

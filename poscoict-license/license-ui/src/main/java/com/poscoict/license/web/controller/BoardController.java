@@ -392,9 +392,9 @@ public class BoardController extends ExceptionControllerAdvice {
 
     // 리플 등록
     @RequestMapping( value = "insertReply", method = RequestMethod.POST )
-    public void insertReply( String folder, String contentNo, String mainContent, HttpSession session, String guestReplyId, Writer writer ) throws IOException, UserException {
+    public void insertReply( String folder, String contentNo, String subCategory, String mainContent, HttpSession session, String guestReplyId, Writer writer ) throws IOException, UserException {
     	logger.info("****************************** guestReplyId :"+guestReplyId);
-        writer.write( boardService.insertReply(folder, contentNo, URLDecoder.decode(mainContent, "UTF-8"), guestReplyId , session) );
+        writer.write( boardService.insertReply(folder, contentNo, subCategory, URLDecoder.decode(mainContent, "UTF-8"), guestReplyId , session) );
         
         pushService.sendPushMessage();
     }

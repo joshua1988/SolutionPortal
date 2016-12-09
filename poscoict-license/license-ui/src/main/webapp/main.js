@@ -64,17 +64,15 @@ function initialiseState(reg) {
           // We aren't subscribed to push, so set UI
           // to allow the user to enable push
           return;
+        } else {
+          // subscription 상태인 경우
+          isPushEnabled = true;
+          updatePushSwitch();
+          console.log("subscription : ", subscription.toJSON());
+          var endpoint = subscription.endpoint;
+          var key = subscription.getKey('p256dh');
+          updateStatus(endpoint, key, 'subscribe');
         }
-
-        // subscription 상태인 경우
-        isPushEnabled = true;
-        updatePushSwitch();
-
-        console.log("subscription : ", subscription.toJSON());
-
-        var endpoint = subscription.endpoint;
-        var key = subscription.getKey('p256dh');
-        updateStatus(endpoint, key, 'init');
       }).catch(function(err) {
         console.log('Error during getSubscription()', err);
       });

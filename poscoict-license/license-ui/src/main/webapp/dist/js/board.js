@@ -249,7 +249,7 @@ function cmtList(no, folder) {
 	});
 }
 
-function insertReply(folder, contentNo){
+function insertReply(folder, contentNo, subCategory){
 	var content = document.getElementById("replyText").value.replace(/\s/g, "");
 //	var guestReplyId = $("#guest").val();
 //	console.log("guestReplyId : "+guestReplyId);
@@ -267,6 +267,7 @@ function insertReply(folder, contentNo){
     $.post(url, {
 									folder:folder,
 			    		 		contentNo:contentNo,
+									subCategory:subCategory,
 			           	mainContent:encodeURIComponent(content)
 			           	//	게스트 이름 변경후 댓글
 //									guestReplyId: guestReplyId
