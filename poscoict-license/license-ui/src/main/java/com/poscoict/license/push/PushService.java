@@ -61,6 +61,20 @@ public class PushService {
 		return list;
 	}
 	
+	public List<Map<String, Object>> getMostRecentMessage() throws IOException{
+		
+		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+		
+		try {
+			list = pushDao.getTheMostRecentPushMessages();
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("pushDao.getUnsentPushMessages: ", e);
+		}
+		
+		return list;
+	}
+	
 	public void updateSentMessages() throws IOException{
 		try {
 			pushDao.updateSentMessages();

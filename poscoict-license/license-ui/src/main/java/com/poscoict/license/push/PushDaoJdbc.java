@@ -50,6 +50,12 @@ public class PushDaoJdbc implements PushDao{
     
     
     @Override
+	public List<Map<String, Object>> getTheMostRecentPushMessages() {
+		// TODO Auto-generated method stub
+    	return this.jdbcTemplate.queryForList(getQuery(("push.getTheMostRecentMessage")));
+	}
+
+	@Override
 	public void updateSentMessages() {
 		// TODO Auto-generated method stub
 		this.jdbcTemplate.update(getQuery("push.updateSentMessages"));

@@ -14,6 +14,8 @@ public interface PushDao {
 	
 	List<Map<String, Object>> getUnsentPushMessages();
 	
+	List<Map<String, Object>> getTheMostRecentPushMessages();
+	
 	void updateSentMessages();
 	
 	void insertPushSubscription(PushSubscription pushSubscription);

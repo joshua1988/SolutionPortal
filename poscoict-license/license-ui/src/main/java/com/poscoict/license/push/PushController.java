@@ -41,14 +41,22 @@ public class PushController {
     	pushDao.insertPushSubscription(new PushSubscription(endpoint, key, subscription_status));
     }
     
-    // Send push messages to the each browser (users)
-    @RequestMapping("/push/fetch/messages")
-    public List<Map<String, Object>> fetchPushMessages() throws IOException {
-    	List<Map<String, Object>> list = pushService.getUnsentPushMessages();
+    // Send a push message to the each browser (users)
+    @RequestMapping("/push/fetch/message")
+    public List<Map<String, Object>> fetchPushMessage() throws IOException {
+    	List<Map<String, Object>> list = pushService.getMostRecentMessage();
     	
-    	// github issue #7 reference
-//    	pushService.updateSentMessages();
     	return list;
+    }
+    
+    // if you want to forward all the unsent messages to users,
+    // implement it here
+//    public List<Map<String, Object>> fetchPushMessages() {}
+    
+    // Send messages to google server
+    @RequestMapping("/push/send")
+    public void sendMessages() throws IOException {
+    	pushService.sendPushMessage();
     }
     
     @RequestMapping("/push/update/messages")
@@ -56,11 +64,6 @@ public class PushController {
     	pushService.updateSentMessages();
     }
     
-    // Send messages to google server
-    @RequestMapping("/push/send")
-    public void sendMessages() throws IOException {
-    	pushService.sendPushMessage();
-    }
     
     
     

@@ -192,6 +192,7 @@
 		<!-- Web Push -->
 		<url-pattern>/greeting</url-pattern>
 		<url-pattern>/push/subscription</url-pattern>
+		<url-pattern>/push/fetch/message</url-pattern>
 		<url-pattern>/push/fetch/messages</url-pattern>
 		<url-pattern>/push/send</url-pattern>
 		
