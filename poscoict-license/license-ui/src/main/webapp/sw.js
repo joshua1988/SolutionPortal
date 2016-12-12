@@ -108,7 +108,10 @@ self.addEventListener('notificationclick', function(event) {
 
   event.waitUntil(
     clients.openWindow('http://www.solutionpot.co.kr:8080/license')
-  );
+  )
+
+  // 노티를 클릭하고 나면, 읽기 체크가 가능하도록?
+  // fetch("/license/push/update/messages")
 });
 
 // Push Messages Constructor
@@ -127,7 +130,7 @@ var pushMessageConstructor = function (data) {
                       "내용: " + pushConstructor.CONTENT + " \n" +
                       "작성자: " + pushConstructor.USER;
   }
-  pushData.icon = 'dist/img/push.png';
+  pushData.icon = 'dist/images/icons/icon-48x48.png';
   pushData.tag = pushConstructor.POST_TYPE;
 
   return pushData;

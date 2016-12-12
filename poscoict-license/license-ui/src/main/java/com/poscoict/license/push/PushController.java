@@ -45,8 +45,15 @@ public class PushController {
     @RequestMapping("/push/fetch/messages")
     public List<Map<String, Object>> fetchPushMessages() throws IOException {
     	List<Map<String, Object>> list = pushService.getUnsentPushMessages();
-    	pushService.updateSentMessages();
+    	
+    	// github issue #7 reference
+//    	pushService.updateSentMessages();
     	return list;
+    }
+    
+    @RequestMapping("/push/update/messages")
+    public void updateSentMessages() throws IOException {
+    	pushService.updateSentMessages();
     }
     
     // Send messages to google server
