@@ -17,8 +17,6 @@
 						<input type="hidden" id="USER_NO" name="USER_NO" value="${userInfo.getUSER_NO() }">
 						<label for="USER_NO_D">* 아이디</label>
 
-						<%-- <input disabled="disabled" type="text" class="form-control input-sm" id="USER_NO_D" name="USER_NO_D" value="${userInfo.getUSER_NO() }">
-						<input type="hidden" id="USER_NO" name="USER_NO" value="${userInfo.getUSER_NO() }"> --%>
 					</div>
 					<div class="input-field col s6">
 						<input id="USER_NAME" type="text" class="validate" name="USER_NAME" value="${userInfo.getUSER_NAME() }" disabled>
@@ -168,14 +166,6 @@
 										 </li>
 							     </ul>
 										<ul>
-										<%--  이전 버전
-											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_NOTICE">글 등록 / 삭제 (공지사항)</label></div></li>
-											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_QNA" checked="checked">글 등록 / 삭제 (Q&amp;A)</label></div></li>
-											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_FAQ">글 등록 / 삭제 (FAQ)</label></div></li>
-											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_TECH">글 등록 / 삭제 (기술문서)</label></div></li>
-											<li><div class="checkbox"><label><input type="checkbox" value="true" id="GLUE_CHECK" name="FUNCTION_GLUE_WRITE_OLDTECH">글 등록 / 삭제 (예전 기술문서)</label></div></li>
-										</ul>
-										--%>
 									</div>
 								</div>
 							</div>
@@ -491,22 +481,6 @@
 										 </li>
 									 </ul>
 
-									 	<%-- 이전 버전 --%>
-										<%-- <ul class="list-unstyled">
-												<li><div class="checkbox"><label><input type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_COMPLETE">서브메뉴 / 고객 정보 보기 - <strong>완료 계약건</strong></label></div></li>
-												<li>
-														<ul>
-																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_MANAGEMENT_INPUT_USER">고객 등록 / 수정 / 삭제</label></div></li>
-														</ul>
-												</li>
-												<li><div class="checkbox"><label><input type="checkbox" value="true" id="MENU_MANAGEMENT_CHECK" name="SUB_MENU_MANAGEMENT_PROGRESS">서브메뉴 / 고객 정보 보기 - <strong>진행중 계약건</strong></label></div></li>
-												<li>
-														<ul>
-																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_PROGRESS_INPUT_USER">가계약 등록 / 수정 / 삭제</label></div></li>
-																<li><div class="checkbox"><label><input type="checkbox" value="true" name="FUNCTION_PROGRESS_COMMENT">Comment 등록</label></div></li>
-														</ul>
-												</li>
-										</ul> --%>
 									</div>
 								</div>
 							</div>

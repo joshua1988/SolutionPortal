@@ -20,10 +20,6 @@
 						<input type="checkbox" id="modify_openFlag" name="modify_openFlag" <c:if test="${board.OPEN_FLAG eq 'N' }">checked</c:if>/>
       			<label for="modify_openFlag">비공개</label>
 					</span>
-					<%-- <span  style="width:25%;">
-						<input type="checkbox" id="modify_openFlag" name="modify_openFlag" <c:if test="${board.OPEN_FLAG eq 'N' }">checked</c:if>/>
-      			<label for="modify_openFlag">비공개</label>
-					</span> --%>
 				</div>
 
 				<div class="section" style="padding:0 0;">
@@ -44,8 +40,6 @@
 						</c:forEach>
 					</c:if>
 
-					<%-- <input type="hidden" name="folder" value="${folder }">
-					<input type="hidden" name="subCategory" value="${subCategory }"> --%>
 				</div>
 
 				<input type="hidden" name="content_no" value="${board.CONTENT_NO }">

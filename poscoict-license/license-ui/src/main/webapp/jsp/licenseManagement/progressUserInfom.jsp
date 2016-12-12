@@ -19,11 +19,9 @@
 		<div class="card-panel">
 			<div class="card-header" style="padding-bottom:1rem;">
 				<h5>고객 정보</h5>
-				<%-- <small> --%>
 					<strong>작성자: ${user.COMPANY_NAME }<span style="color: #C0CFCB;"> | </span>
 					상태: <span style="color: #8B8BCC;">${user.ORDER_STATUS_TEXT }</span>
 					</strong>
-				<%-- </small> --%>
 			</div>
 			<div class="card-content">
 				<div class="panel-body" id="addContract">
@@ -74,15 +72,11 @@
 						<div class="row">
 							<div class="input-field col s6">
 								<i class="material-icons prefix">calendar</i>
-								<%-- <input id="startDatepicker2" name="P_USER_START_DATE" type="text" class="validate" value="${startDate }" disabled>
-								<label for="startDatepicker2">계약 예정일</label> --%>
 								<input type="date" class="datepicker" id="startDatepicker2" name="P_USER_START_DATE" value="${startDate }" disabled>
                 <label for="startDatepicker2">계약 예정일</label>
 							</div>
 							<div class="input-field col s6">
-								<%-- <label for="P_PRODUCT_FILE_NAME" class="control-label">계약 제품</label> --%>
 								<select class="browser-default" name="P_PRODUCT_FILE_ID" id="P_PRODUCT_FILE_NAME" disabled="disabled">
-									<%-- <option disabled selected value="">계약 제품 선택</option> --%>
 									<option value="N" selected>미 정</option>
 									<c:if test="${not empty file }">
 										<c:forEach var="file" items="${file }">

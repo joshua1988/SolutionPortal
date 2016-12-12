@@ -108,9 +108,4 @@
 	</div>
 
 	<div class="modal" id="companyInfoPop" aria-labelledby="#companyInfoModalLabel"></div>
-	<%-- <script src="${contextPath }/dist/jquery/jquery.min.js"></script>
-	<script src="${contextPath }/dist/materialize/js/materialize.min.js"></script>
-	<script type="text/javascript">
-		Materialize.updateTextFields();
-	</script> --%>
 </body>

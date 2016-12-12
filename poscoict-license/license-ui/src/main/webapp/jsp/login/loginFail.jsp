@@ -27,14 +27,6 @@
 
   </div>
 
-  <%-- <div class="jumbotron">
-    <div class="container">
-      <h1>로그인 실패!</h1>
-      <p>아이디 및 패스워드 정보가 일치하지 않습니다.</p>
-      <p><a class="btn btn-primary btn-lg" href="${contextPath }/index">Login</a></p>
-    </div>
-  </div> --%>
-
   <%-- Materialize CSS --%>
   <script src="${contextPath }/dist/jquery/jquery.min.js"></script>
   <script src="${contextPath }/dist/materialize/js/materialize.min.js"></script>

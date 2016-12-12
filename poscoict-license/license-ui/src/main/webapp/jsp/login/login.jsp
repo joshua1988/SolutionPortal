@@ -31,10 +31,6 @@
 	<link rel="apple-touch-startup-image" href="${contextPath}/dist/images/icons/apple-touch-icon.png">
 	<link rel="apple-touch-icon-precomposed" href="${contextPath}/dist/images/icons/apple-touch-icon.png">
 
-	<%-- <link rel="shortcut icon" sizes="192x192" href="${contextPath}/dist/images/icons/chrome-touch-icon.png">
-	<link rel="shortcut icon" sizes="128x128" href="icon-128x128.png">
-	<link rel="apple-touch-icon" sizes="128x128" href="${contextPath}/dist/images/icons/apple-touch-icon.png">
-	<link rel="apple-touch-icon-precomposed" sizes="128x128" href="icon-128x128.png"> --%>
 	<style>
     body {
       display: flex;
@@ -110,8 +106,6 @@
 	              <div class='row'>
 	                <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect blue darken-1' name="action" onclick="javascript:loginOK();">
 										Login</button><br><br><br>
-									<%-- <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo' name="action" onclick="javascript:guestLogin();">
-										Guest</button> --%>
 	              </div>
 	            </center>
 	          </form>
@@ -127,7 +121,6 @@
 						</form>
 	        </div>
 	      </div>
-				<%-- <a id="pushBtn" class="waves-effect waves-light btn"><i id="pushIcon" class="material-icons left">notifications_active</i>알림 설정</a> --%>
 				<label for="pushAlert">게시판 & 답글 알림 설정</label>
 				<div class="switch" id="pushAlert">
 			    <label>
@@ -138,7 +131,6 @@
 			    </label>
 			  </div>
 				<div id="pushStatus" style="margin-top:5px;"></div>
-	      <%-- <a href="#!">Help Desk</a> --%>
 	    </center>
 	  </main>
 	<script type="text/javascript">
@@ -152,7 +144,6 @@
 	<script async src="${contextPath }/dist/js/signin.js"></script>
 	<script type="text/javascript">
 	$(function(){
-		/* $('body').bind('touchmove', function(ev) { ev.preventDefault(); }); */
 		$(".text").focus();
 		$("input").keydown(function(e){
 			if(e.keyCode == 13) {

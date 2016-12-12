@@ -19,7 +19,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <!-- jquery-ui css -->
-<link rel="stylesheet" href="${contextPath }/dist/jquery-ui/jquery-ui.css">
 <link rel="stylesheet" href="${contextPath }/dist/modal/jquery.remodal.css">
 <link rel="stylesheet" href="${contextPath }/dist/css/docs.css">
 <style type="text/css">
@@ -30,11 +29,6 @@
     filter: alpha(opacity=50);
     opacity: 0.5;
 }
-/*#treemenu {
-	font-size: 12px;
-	padding-right: 0;
-    padding-left: 0;
-}*/
 
 /* fixed footer*/
 body {
@@ -56,8 +50,6 @@ footer.page-footer {
 	/*margin: 0 5%;*/
 }
 .row {
-	/*margin-top: 20px;*/
-	/*margin-bottom: 1rem;*/
 	margin-bottom: 0;
 }
 @media only screen and (min-width: 993px) {
@@ -153,16 +145,6 @@ td {
 <title>라이선스 관리 포털</title>
 </head>
 <body>
-<%
-	if( session.getAttribute("jstree") != null ){
-%>
-<script type="text/javascript">
- 	// 	localStorage.setItem('myJstree',
-		// 	'{"state":{"core":{"open":[],"scroll":{"left":0,"top":0},"selected":["notice"]}},"ttl":false,"sec":'+new Date().getTime()+'}');
-</script>
-<%	session.removeAttribute("jstree");
- 	}
-%>
   <div class="top"><a href="#"><label style="font-size: 12px; color: gray;">맨위</label><img src="${contextPath }/dist/img/arrow_top.gif" alt="맨위"/></a></div>
 	<header>
 		<nav class="blue darken-1">
@@ -182,7 +164,6 @@ td {
 	      </ul>
 				<ul class="side-nav" id="sidebar">
 					<li><a href="logout"><i class="material-icons">input</i>로그아웃</a></li>
-					<%-- <div class="divider"></div> --%>
 					${sessionScope.userNavMenu}
 	      </ul>
 	    </div>
@@ -194,51 +175,7 @@ td {
 			<div class="container">
 				<div class="col l3 m4 s12 hide-on-small-only" id="tree">
 					<ul class="collapsible" data-collapsible="accordion">
-					${sessionScope.userMenu}
-
-						<!--
-				    <li>
-				      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Outer Collapsible</div>
-				      <div class="collapsible-body">
-								<%-- <div class="collection">
-					        <a href="#!" class="collection-item active">Out List 1</a>
-					        <a href="#!" class="collection-item">
-										<ul class="collapsible" data-collapsible="accordion">
-											<li>
-											  <div class="collapsible-header"><i class="material-icons">filter_drama</i>Outer Collapsible</div>
-												<div class="collapsible-body">
-													<div class="collection">
-										        <a href="#!" class="collection-item active">1</a>
-										        <a href="#!" class="collection-item">2</a>
-										      </div>
-												</div>
-											</li>
-										</ul>
-									</a>
-					        <a href="#!" class="collection-item">Out List 3</a>
-					      </div> --%>
-
-								<%-- Doulbe Collapsible (Outer & Inner) --%>
-								<%-- <ul class="collapsible" data-collapsible="accordion">
-									<li>
-										<div class="collapsible-header"><i class="material-icons">filter_drama</i>Outer Collapsible</div>
-										<div class="collapsible-body">
-											<div class="collection">
-												<a href="#!" class="collection-item active">1</a>
-												<a href="#!" class="collection-item">2</a>
-											</div>
-										</div>
-									</li>
-								</ul> --%>
-							</div>
-				    </li>
-						-->
-
-						<%-- sb.append("<li>");
-						sb.append("<div class=\"collapsible-header\"><i class=\"material-icons\">filter_drama</i>자료실</div>");
-						sb.append("<div class=\"collapsible-body\">");
-						sb.append("<div class=\"collection\">"); --%>
-
+						${sessionScope.userMenu}
 				  </ul>
 				</div>
 				<div class="col l9 m8 s12">
@@ -250,7 +187,6 @@ td {
 	<footer class="page-footer blue darken-1" style="padding:18px 0;">
 		<div class="container center-align white-text">
 			ⓒ2014 POSCO ICT, All Rights Reserved.
-			<%-- <a href="mailto:help@solutionpot.co.kr">help@solutionpot.co.kr</a> --%>
 		</div>
   </footer>
 
@@ -261,14 +197,12 @@ td {
 	<div id="modal1" class="modal">
 	</div>
 
-	<%-- <div class="modal fade" id="passwordPop" tabindex="-1" role="dialog" aria-labelledby="passwordModalLabel" aria-hidden="true" data-backdrop="static"></div> --%>
 	<div class="remodal" data-remodal-id="modal" data-remodal-options="hashTracking: false"></div>
 
 <%-- Materialize CSS --%>
 <script src="${contextPath }/dist/jquery/jquery.min.js"></script>
 <script src="${contextPath }/dist/materialize/js/materialize.min.js"></script>
 <%-- etc libraries --%>
-<script async src="${contextPath }/dist/jquery-ui/jquery-ui-compressed.js"></script>
 <script src="${contextPath }/dist/js/common.js"></script>
 <script src="${contextPath }/dist/js/board.js"></script>
 <script src="${contextPath }/dist/js/file.js"></script>

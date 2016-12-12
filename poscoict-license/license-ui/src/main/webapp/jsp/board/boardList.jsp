@@ -61,7 +61,6 @@
 
     <div class="card-content">
     <c:if test="${not empty boardList }">
-      <%-- <table class="bordered responsive-table" style="font-size:14px;"> --%>
         <table class="bordered highlight" style="font-size:14px;">
           <tr>
             <th>No.</th>

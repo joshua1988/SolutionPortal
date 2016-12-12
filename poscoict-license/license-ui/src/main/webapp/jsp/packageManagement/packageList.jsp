@@ -84,25 +84,6 @@
 							<!-- 쿼리에 오류가 있어 Glue FW3 호출시, 공백 데이터가 10번 정도 호출되어 선이 이상하게 짙어짐 -->
 							<%-- <div class="divider"></div> --%>
 						</c:forEach>
-						<%-- <c:forEach var="patch" items="${patchList }" varStatus="status">
-							<c:if test="${packageL.OBJECT_ID eq patch.P_OBJECT_ID }">
-								<dl class="dl-horizontal">
-								  <dt>패치 파일명</dt>
-								  <dd>${patch.PACKAGE_FILE_NAME } (${patch.r_CREATION_DATE })</dd>
-								  <dt>설명</dt>
-								  <dd>${patch.MAIN_CONTENT }</dd>
-								  <dt>다운로드(패치)</dt>
-								  <dd>
-								  	<button type="button" class="btn btn-success btn-xs" onclick="javascript:fileDownload2('patch','${patch.OBJECT_ID }'); return false;">
-								  		<span class="glyphicon glyphicon-download-alt"></span> &nbsp;다운로드
-								  	</button>
-								  	<button type="button" class="btn btn-danger btn-xs" onclick="javascript:deletePatch('patch','${patch.OBJECT_ID }','${mode }'); return false;">
-								  		<span class="glyphicon glyphicon-trash"></span> &nbsp;삭제
-								  	</button>
-								  </dd>
-								</dl>
-							</c:if>
-						</c:forEach> --%>
 					</c:if>
 		    </div>
 			</div>

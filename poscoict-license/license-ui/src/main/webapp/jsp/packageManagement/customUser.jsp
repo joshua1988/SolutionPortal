@@ -54,5 +54,4 @@
 		</c:if>
 	</div>
 
-<%-- <script src="${contextPath }/dist/js/customUser.js"></script> --%>
 </body>

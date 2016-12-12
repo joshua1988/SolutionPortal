@@ -57,8 +57,6 @@
 									<span class="badge red">설치안됨</span>
 								</c:if>
 								<strong>계약번호: </strong>${list.USER_NO } / <strong>계약일자: </strong>${list.USER_START_DATE }
-								<%-- <span class="badge black">계약번호:</span> ${list.USER_NO } /
-								<span class="badge black">계약일자:</span> ${list.USER_START_DATE } --%>
 							</p>
 						</a>
 					</div>

@@ -115,11 +115,6 @@
 		});
 	}
 
-	// function dismissModal() {
-	// 	$(".lean-overlay").remove();
-	// 	$("#modal1").css("display", "none");
-	// 	console.log("clicked");
-	// }
 	</script>
 </body>
 </html>

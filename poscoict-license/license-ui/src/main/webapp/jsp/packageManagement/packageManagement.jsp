@@ -47,17 +47,6 @@
 						</div>
 						<div class="input-field col s9">
 							<input type="file" id="packageFile" name="file">
-							<%-- <form action="#">
-						    <div class="file-field input-field">
-						      <div class="btn">
-						        <span>파일 선택</span>
-						        <input type="file">
-						      </div>
-						      <div class="file-path-wrapper">
-						        <input class="file-path validate" type="text">
-						      </div>
-						    </div>
-						  </form> --%>
 						</div>
 					</div>
 					<div class="row">
@@ -126,7 +115,7 @@
   </div>
 </div>
 
-<script src="${contextPath }/dist/jquery-ui/jquery-1.10.2.js"></script>
+<script src="${contextPath }/dist/jquery/jquery.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	patchList("${mode}");

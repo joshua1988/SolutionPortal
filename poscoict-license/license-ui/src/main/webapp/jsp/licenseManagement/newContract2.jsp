@@ -11,25 +11,6 @@
 <c:set var="contextPath" value="<%=request.getContextPath()%>"/>
 <fmt:formatDate var="startDate" value="${userInfo.USER_START_DATE }" pattern="yyyy-MM-dd"/>
 <script type="text/javascript">
-// function addProduct(){
-// 	var no = $(".contract1").length;
-// 	$("#plus").append(
-// 			'<div class="well well-sm contract1">'+
-// 			'<div class="form-group"><label class="control-label">제품구분</label>'+
-// 			'<c:if test="${not empty file }"><select class="form-control input-sm" name="PRODUCT_FILE_ID['+no+']"><c:forEach var="file" items="${file }"><c:if test="${file.FILE_CATEGORY != \'etc\' }"><option value="${file.OBJECT_ID }">${file.FILE_CATEGORY } ${file.PACKAGE_VERSION }</option></c:if></c:forEach></select></c:if>'+
-// 			'</div><div class="form-group"><label class="control-label">제품키</label>'+
-// 			'<input class="form-control input-sm license'+no+'" type="text" name="LICENSE_KEY['+no+']"></div>'+
-// 			'<div class="form-group"><label class="control-label">수량</label>'+
-// 			'<select class="form-control input-sm" name="LICENSE_QUANTITY" id="LICENSE_QUANTITY['+no+']"><c:forEach begin="1" end="100" step="1" varStatus="status">'+
-// 			'<option value="${status.index }">${status.index }</option></c:forEach></select></div>'+
-// 			'<div class="form-group"><label class="control-label">라이센스파일 :: <input type="checkbox" onclick="javascript:fileCheck('+no+');" class="fileCheck'+no+'">'+
-// 			'<small style="color: gray;">라이센스 파일이 필요 없을 시 체크</small></label>'+
-// 			'<input type="hidden" name="CHECKBOX['+no+']" value="false" class="fileCheckVal'+no+'">'+
-// 			'<input type="file" class="form-control input-sm file'+no+'" name="file['+no+']"></div>'+
-// 			'</div>'
-// 			);
-// }
-
 function fileCheck(no){
 	var ischecked = $(".fileCheck"+no).is(":checked");
 	if(ischecked){
@@ -52,10 +33,8 @@ body{ padding-bottom: 90px;}
 	font-size: 12px;
 }
 </style>
-<title>Insert title here</title>
 </head>
 <body>
-<!-- <div class="container"> -->
 <form class="form-horizontal" role="form" name="convertUser" action="${contextPath }/convertUser" method="post" enctype="multipart/form-data">
 	<div class="panel panel-default">
    	  <div class="panel-heading"><strong>고객정보</strong></div>
@@ -163,19 +142,5 @@ body{ padding-bottom: 90px;}
 	  	<span class="glyphicon glyphicon-open"></span> &nbsp;등록
 	  </button>
 </form>
-<!-- </div> -->
-<script type="text/javascript">
-// $(function() {
-// 	$( "#startDatepicker" ).datepicker();
-// 	$( "#startDatepicker" ).change(function() {
-// 		$( "#startDatepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-// 	});
-//
-// 	$( "#setUpDatepicker" ).datepicker();
-// 	$( "#setUpDatepicker" ).change(function() {
-// 		$( "#setUpDatepicker" ).datepicker( "option", "dateFormat", "yy-mm-dd" );
-// 	});
-// });
-</script>
 </body>
 </html>

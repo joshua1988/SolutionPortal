@@ -22,6 +22,13 @@ const precacheFiles = [
     './dist/materialize/css/materialize.css',
     './dist/materialize/css/materialize.min.css',
     // images
+    './dist/images/icons/icon-32x32.png',
+    './dist/images/icons/icon-48x48.png',
+    './dist/images/icons/icon-128x128.png',
+    './dist/images/icons/icon.png',
+    './dist/images/icons/ch_icon.png',
+    './dist/images/icons/apple-touch-icon.png',
+    './dist/images/icons/chrome-touch-icon.png',
     './dist/images/folder_structure.png',
     './dist/images/GluePDJang.png',
     './dist/images/GluePDKang.png',
@@ -31,6 +38,8 @@ const precacheFiles = [
     './dist/images/guest.png',
     './dist/images/PosBeeKang.png',
     './dist/img/mainLogo.gif',
+    './dist/img/arrow_top.gif',
+    './dist/img/delete_reply.png',
     './dist/img/push.png'
 ];
 
@@ -80,7 +89,7 @@ self.addEventListener('push', function(event) {
 
         pushData.title = '오류 발생';
         pushData.body = 'Push 메시지 정보를 받지 못하였습니다.';
-        pushData.icon = 'dist/img/push.png';
+        pushData.icon = 'dist/images/icons/icon-48x48.png';
         pushData.tag = 'notification-error';
         return self.registration.showNotification(pushData.title, {
             body: pushData.body,

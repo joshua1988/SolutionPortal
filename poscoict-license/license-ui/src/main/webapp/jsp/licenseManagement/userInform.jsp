@@ -68,7 +68,6 @@ td {
 							<label for="MANAGER_EMAIL" data-error="이메일 형식을 준수하세요" data-success="올바른 이메일입니다">이메일</label>
 						</div>
 						<div class="input-field col s4">
-							<%-- <label>수주사</label> --%>
 							<c:if test="${not empty company }">
 								<select id="ORDER_COMPANY_CODE" name="ORDER_COMPANY_CODE" disabled>
 									<option disabled selected value="">수주사 선택</option>
@@ -82,13 +81,11 @@ td {
 					<div class="row">
 						<div class="input-field col s6">
 							<i class="material-icons prefix">event_note</i>
-							<%-- <input type="text" id="startDatepicker" class="form-control" placeholder="계약일자"  name="USER_START_DATE" value="${user.getUSER_START_DATE() }" disabled> --%>
 							<input type="date" class="datepicker" id="startDatepicker" name="USER_START_DATE" value="${user.getUSER_START_DATE() }" disabled>
 							<label for="startDatepicker">계약일자</label>
 						</div>
 						<div class="input-field col s6">
 							<i class="material-icons prefix">event_note</i>
-							<%-- <input type="text" id="setUpDatepicker" class="form-control" placeholder="제품설치일자"  name="PRODUCT_SETUP_DATE" value="${user.getPRODUCT_SETUP_DATE() }" disabled> --%>
 							<input type="date" class="datepicker" id="setUpDatepicker" name="PRODUCT_SETUP_DATE" value="${user.getPRODUCT_SETUP_DATE() }" disabled>
 							<label for="setUpDatepicker">제품설치일자</label>
 						</div>
@@ -105,16 +102,13 @@ td {
 		<div class="card-content">
 			<c:if test="${not empty etcUserFile }">
 				<c:forEach var="list" items="${etcUserFile }">
-					<%-- <c:if test="${list.FILE_CATEGORY eq 'etc' }"> --%>
 						<div class="">
 							<input type="checkbox" id="${list.OBJECT_ID }" value="${list.OBJECT_ID }" name="etcFile" disabled="disabled" <c:if test="${list.CT eq '1' }">checked</c:if>>
 							<label class="black-text" for="${list.OBJECT_ID }">
 								<i class="material-icons" style="vertical-align:top;">attachment</i>
-								<%-- ${list.FILE_CATEGORY } --%>
 								<strong>${list.PACKAGE_VERSION }</strong> ${list.MAIN_CONTENT }
 							</label>
 						</div>
-					<%-- </c:if> --%>
 				</c:forEach>
 			</c:if>
 		</div>
@@ -259,37 +253,13 @@ td {
 	 </div>
 	</div>
 
-<%-- Modal --%>
-<%-- <div class="modal fade" id="modifyPop" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-        <h4 class="modal-title"><p class="text-muted"><strong>제품 정보 수정</strong></p></h4>
-      </div>
-      <div class="modal-body">
-		<form name="modifyProduct" method="post" enctype="multipart/form-data" id="effect">
-
-		</form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
-        <button type="button" class="btn btn-primary" onclick="javascript:product(1);">변경</button>
-      </div>
-    </div>
-  </div>
-</div> --%>
-
-
 	<script type="text/javascript">
 	function addProduct(){
 		var no = $(".contract1").length;
 
 		if(no == 0){
 			$("#addProduct").prepend(
-				// ' <button class="btn btn-success btn-xs" onclick="javascript:moreProduct();" id="Enrollment">제품등록</button>'
 				'<a class="waves-effect waves-light btn right" onclick="javascript:moreProduct();" id="Enrollment">'+
-				// '<i class="material-icons left">cloud</i>제품등록</a>'
 				'제품등록</a>'
 			);
 		}
@@ -333,18 +303,6 @@ td {
 			'</div>'+
 			'</div>'
 
-			// '<div class="well well-sm contract1">'+
-			// '<div class="form-group"><label class="control-label">제품구분</label>'+
-			// '<c:if test="${not empty file }"><select class="form-control input-sm" name="PRODUCT_FILE_ID['+no+']"><c:forEach var="file" items="${file }"><c:if test="${file.FILE_CATEGORY != \'etc\'}"><option value="${file.OBJECT_ID }">${file.FILE_CATEGORY } ${file.PACKAGE_VERSION }</option></c:if></c:forEach></select></c:if>'+
-			// '</div><div class="form-group"><label class="control-label">제품키</label>'+
-			// '<input class="form-control input-sm license'+no+'" type="text" name="LICENSE_KEY['+no+']"></div>'+
-			// '<div class="form-group"><label class="control-label">수량</label>'+
-			// '<select class="form-control input-sm" name="LICENSE_QUANTITY" id="LICENSE_QUANTITY['+no+']"><c:forEach begin="1" end="100" step="1" varStatus="status">'+
-			// '<option value="${status.index }">${status.index }</option></c:forEach></select></div>'+
-			// '<div class="form-group"><label class="control-label">라이센스파일 :: <input type="checkbox" onclick="javascript:fileCheck('+no+');" class="fileCheck'+no+'">'+
-			// '<small style="color: gray;">라이센스 파일이 필요 없을 시 체크</small></label>'+
-			// '<input type="file" class="form-control input-sm file'+no+'" name="file['+no+']"></div>'+
-			// '<input type="hidden" name="CHECKBOX['+no+']" value="false" class="fileCheckVal'+no+'"></div>'
 			);
 
 			$("select").material_select();
@@ -361,24 +319,6 @@ td {
 				}
 			});
 	}
-
-	// function fileCheck(no){
-	// 	console.log("clicked");
-	//
-	// 	$("#fileCheck"+no).on('change', function () {
-	// 		console.log("checked");
-	// 	});
-	//
-	// 	var ischecked = $("#fileCheck"+no).prop("checked");
-	// 	console.log("ischecked : ", ischecked);
-	// 	if(ischecked){
-	// 		$(".file"+no).attr("disabled","disabled");
-	// 		$(".fileCheckVal"+no).val("true");
-	// 	}else{
-	// 		$(".file"+no).removeAttr("disabled");
-	// 		$(".fileCheckVal"+no).val("false");
-	// 	}
-	// }
 
 	function removeProduct(){
 		var no = $(".contract1").length;

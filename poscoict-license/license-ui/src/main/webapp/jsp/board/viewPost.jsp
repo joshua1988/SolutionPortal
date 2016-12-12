@@ -145,7 +145,7 @@
 		</div>
 	</div>
 
-	<script	src="${contextPath }/dist/jquery-ui/jquery-1.10.2-jquery.min.js"></script>
+	<script	src="${contextPath }/dist/jquery/jquery.min.js"></script>
 	<script type="text/javascript" charset="utf-8" src="${contextPath }/dist/se2/js/HuskyEZCreator.js"></script>
 	<script type="text/javascript">
 		$(function() {

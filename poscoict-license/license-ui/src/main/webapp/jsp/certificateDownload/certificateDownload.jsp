@@ -42,7 +42,6 @@ function techSupportCertificationInfo(id){
 </head>
 <body>
 
-<!-- <div class="row"> -->
 <c:if test="${empty list }">
 	<label style="font-size: 13px; color: gray;">패키지가 존재 하지 않습니다.</label>
 </c:if>
@@ -53,17 +52,17 @@ function techSupportCertificationInfo(id){
 		      <h4 class="panel-title">${packageL.PRODUCT_FILE_NAME }</h4>
 		    </div>
 		    <div id="collapseOne" class="panel-collapse collapse in">
-			  
+
 			  <div class="panel-body">
 				<dl class="dl-horizontal">
 				  <dt>패키지 버젼</dt>
-				  <dd>${packageL.PRODUCT_FILE_NAME }</dd>		
+				  <dd>${packageL.PRODUCT_FILE_NAME }</dd>
 				  <dt>설명</dt>
 				  <dd>${packageL.MAIN_CONTENT }</dd>
 				  <dt>다운로드(패키지)</dt>
 				  <dd><button type="button" class="btn btn-info btn-xs" onclick="javascript:fileDownload2('pakage','${packageL.PRODUCT_FILE_ID }')">
 				  		다운로드</button>
-				  </dd>	 	  
+				  </dd>
 				  <dt>라이선스</dt>
 				  <dd>
 				  	  <c:if test="${not empty packageL.LICENSE_FILE_NAME }">
@@ -80,15 +79,15 @@ function techSupportCertificationInfo(id){
 				<c:forEach var="temp" items="${list }">
 					<c:if test="${temp.key == packageL.PRODUCT_FILE_ID }">
 						<c:forEach var="patch" items="${temp.value }">
-							<dl class="dl-horizontal">	  
+							<dl class="dl-horizontal">
 							  <dt>설명</dt>
 							  <dd>${patch.MAIN_CONTENT }</dd>
 							  <dt>다운로드(패치)</dt>
 							  <dd>
 							  	<button type="button" class="btn btn-info btn-xs" onclick="javascript:fileDownload2('patch','${patch.OBJECT_ID }')">
 							  	다운로드</button>
-							  	${patch.PACKAGE_FILE_NAME } 
-							  </dd>		  	  
+							  	${patch.PACKAGE_FILE_NAME }
+							  </dd>
 							</dl>
 						</c:forEach>
 					</c:if>
@@ -96,12 +95,10 @@ function techSupportCertificationInfo(id){
 			  </div>
 		    </div>
 		  </div>
-		  
+
 	</c:forEach>
 	</c:if>
-<!-- </div>	 -->
 
-<!-- <div class="row">	 -->
 	<c:if test="${not empty list.etcList && list.etcList.size()>0 }">
 		<div class="panel panel-default">
 		    <div class="panel-heading">
@@ -113,7 +110,7 @@ function techSupportCertificationInfo(id){
 			  	<dt>다운로드</dt>
 			    <dd>
 			    	<button type="button" class="btn btn-info btn-xs" onclick="javascript:fileDownload2('pakage','${list.ETC_ID }')">
-			    	다운로드</button> 
+			    	다운로드</button>
 			    	<strong>${list.ETC_FILE_NAME }</strong> ${list.MAIN_CONTENT }
 			    </dd>
 			  </dl>
@@ -121,7 +118,6 @@ function techSupportCertificationInfo(id){
 			</div>
 		 </div>
 	</c:if>
-<!-- </div>   -->
 
 <div class="modal fade" id="licensedPop" tabindex="-1" role="dialog" aria-labelledby="licensedPopModalLabel" aria-hidden="true" data-backdrop="static"></div>
 
