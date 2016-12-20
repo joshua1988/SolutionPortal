@@ -205,8 +205,12 @@ function expireOrderCompany(companyId){
 
 function getVersionInfo(f){
 	var text = f.folderCategory.value;
+	console.log("text : ", text);
 	var list = f.packageVersion;
-	$(".addOption").empty();
+	var header = "<select class='addOption' name='packageVersion' id='packageVersion'>";
+	var footer = "</select>";
+
+	$(".selectBox").empty();
 	if(text!='0'){
 		var url = "versionList";
 		jQuery.ajax({
@@ -221,14 +225,22 @@ function getVersionInfo(f){
 					for(var i=0;i<strArray.length;i++){
 						temp += "<option value='"+strArray[i]+"'>"+strArray[i]+"</option>";
 					}
-					$(list).append(temp);
+
+					temp = header + temp + footer;
+					console.log("temp : ", temp);
+					$(".selectBox").append(temp);
 				}else{
-					$(list).append('<option value="0" selected="selected">없 음</option>');
+					$(".select-wrapper addOption").append('<option value="0" selected="selected">없 음</option>');
 					alertPopup("버젼정보가 없습니다.");
 				}
+				$('select').material_select();
 			}
 		});
+	} else {
+		var fragmentElement = header + "<option value='999' selected='selected'>패키지 버젼</option>" + footer ;
+		$(".selectBox").append(fragmentElement);
 	}
+	$('select').material_select();
 }
 
 function deletePackage(category, id, mode){

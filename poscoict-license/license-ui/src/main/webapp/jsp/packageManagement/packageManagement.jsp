@@ -83,8 +83,12 @@
 								</c:if>
 							</select>
 						</div>
-						<div class="input-field col s9">
-							<input type="text" name="packageVersion" id="packageVersion" placeholder="패키지 버젼" class="validate">
+						<div class="input-field col s9 selectBox">
+							<%-- <input type="text" class="" name="packageVersion" id="packageVersion" placeholder="패키지 버젼" class="validate"> --%>
+								<%-- <label for="packageVersion"></label> --%>
+								<select class="addOption" name="packageVersion" id="packageVersion">
+									<option value="999" selected="selected">패키지 버젼</option>
+								</select>
 						</div>
 					</div>
 					<div class="row">
