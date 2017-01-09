@@ -107,7 +107,7 @@
 							<textarea rows="3" name="comment" id="packageInfo"></textarea>
 						</div>
 					</div>
-					<input type="hidden" name="solutionMode" value="package">
+					<input type="hidden" name="solutionMode" value="patch">
 					<input type="hidden" name="mode" value="${mode}">
 				</form>
 			</div>
