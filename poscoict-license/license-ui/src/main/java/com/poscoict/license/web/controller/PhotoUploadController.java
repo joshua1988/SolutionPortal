@@ -7,12 +7,15 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,6 +27,8 @@ import com.poscoict.license.vo.PhotoFile;
 public class PhotoUploadController {
 	final String backupFolder = "D:"+File.separator+"files"+File.separator+"photoUpload"+File.separator+"editor"+File.separator+"upload"+File.separator;
 	final String backupFolderHTML5 = "D:"+File.separator+"files"+File.separator+"photoUpload"+File.separator+"editor"+File.separator+"multiupload"+File.separator;
+	
+//	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping(value="photoUploadCallback", method=RequestMethod.GET)
 	public ModelAndView photoUploadCallback(){
@@ -81,6 +86,8 @@ public class PhotoUploadController {
 					return3 += "&bNewLine=true";
 					return3 += "&sFileName="+name;
 					return3 += "&sFileURL="+serverPath+"/editor/upload/"+folderPath+"/"+realFileNm;
+					
+					System.out.println("@@ PhotoUpload serverPath : " + serverPath);
 				}
     		}else{
     			return3 += "&errstr=error";
@@ -117,8 +124,14 @@ public class PhotoUploadController {
         		print.print("NOTALLOW_"+filename);
         		print.flush();
         		print.close();
-        	}else{
-        		String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+        	} else {
+        		
+//        		String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+        		String dftFilePath = "C:/Tomcat7/webapps/license/";
+        		
+        		// servlet location
+        		System.out.println(" dftFilePath : " + dftFilePath);
+        		
         		String folderPath = new SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
         		String filePath = dftFilePath+"editor"+File.separator+"multiupload"+File.separator+folderPath+File.separator;
         		File file = new File(filePath);
@@ -155,6 +168,8 @@ public class PhotoUploadController {
         		System.out.println("____________backupFolderHTML5: "+backupFolderHTML5+folderPath+File.separator+realFileNm);
         		
         		String serverPath = request.getContextPath();
+        		
+        		System.out.println("@@ PhotoUploadHTML5 serverPath : " + serverPath);
         		sFileInfo += "&bNewLine=true";
         		sFileInfo += "&sFileName="+ filename;
         		sFileInfo += "&sFileURL="+serverPath+"/editor/multiupload/"+folderPath+"/"+realFileNm;

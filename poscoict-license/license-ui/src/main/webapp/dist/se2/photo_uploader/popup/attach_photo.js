@@ -340,10 +340,16 @@
 			// console.log("Full URL : ", sUploadURL);
 
 			// 서버 테스트
-    	sUploadURL= '/license/PhotoUploadHTML5';  // 서버 URL
+    	// sUploadURL= '/license/PhotoUploadHTML5';  // 서버 URL
 
 			// 서버
-			sUploadURL= '/PhotoUploadHTML5';  // 서버 URL
+			// sUploadURL= '/PhotoUploadHTML5';  // 서버 URL
+
+			// 17.01.10(화) 추가 for test
+//			sUploadURL= "https://" + location.host + "/" + location.pathname.split("/")[1] + "/PhotoUpload";
+    		sUploadURL = "/solutionpot/PhotoUploadHTML5";
+
+			console.log("@@ HTML5 upload URL : ", sUploadURL);
 
     	//파일을 하나씩 보내고, 결과를 받음.
     	for(var j=0, k=0; j < nImageInfoCnt; j++) {
@@ -361,28 +367,29 @@
 
     function callAjaxForHTML5 (tempFile, sUploadURL){
     	var oAjax = jindo.$Ajax(sUploadURL, {
-			type: 'xhr',
-			method : "post",
-			onload : function(res){ // 요청이 완료되면 실행될 콜백 함수
-				var sResString = res._response.responseText;
-				if (res.readyState() == 4) {
-					if(sResString.indexOf("NOTALLOW_") > -1){
-						var sFileName = sResString.replace("NOTALLOW_", "");
-						alert("이미지 파일(jpg,gif,png,bmp)만 업로드 하실 수 있습니다. ("+sFileName+")");
-					}else{
-						//성공 시에  responseText를 가지고 array로 만드는 부분.
-						makeArrayFromString(res._response.responseText);
+				type: 'xhr',
+				method : "post",
+				onload : function(res){ // 요청이 완료되면 실행될 콜백 함수
+					var sResString = res._response.responseText;
+					if (res.readyState() == 4) {
+						if(sResString.indexOf("NOTALLOW_") > -1){
+							var sFileName = sResString.replace("NOTALLOW_", "");
+							alert("이미지 파일(jpg,gif,png,bmp)만 업로드 하실 수 있습니다. ("+sFileName+")");
+						} else {
+							//성공 시에  responseText를 가지고 array로 만드는 부분.
+							makeArrayFromString(res._response.responseText);
+						}
 					}
-				}
-			},
-			timeout : 3,
-			onerror :  jindo.$Fn(onAjaxError, this).bind()
-		});
-		oAjax.header("contentType","multipart/form-data");
-		oAjax.header("file-name",encodeURIComponent(tempFile.name));
-		oAjax.header("file-size",tempFile.size);
-		oAjax.header("file-Type",tempFile.type);
-		oAjax.request(tempFile);
+				},
+				timeout : 3,
+				onerror : jindo.$Fn(onAjaxError, this).bind()
+			});
+			oAjax.header("contentType","multipart/form-data");
+			// oAjax.header("file-name",encodeURIComponent(tempFile.name));
+			oAjax.header("file-name",tempFile.name);
+			oAjax.header("file-size",tempFile.size);
+			oAjax.header("file-Type",tempFile.type);
+			oAjax.request(tempFile);
     }
 
     function makeArrayFromString(sResString){
@@ -491,7 +498,12 @@
    // 	var sUploadURL= 'http://'+location.host+'/'+name[1]+'/PhotoUpload'; 	// 로컬 URL
 
 		// 서버 테스트용
-		var sUploadURL= '/license/PhotoUpload';
+		// var sUploadURL= '/license/PhotoUpload';
+
+		// 17.01.10(화) 추가
+//		var sUploadURL = "https://" + location.host + "/" + location.pathname.split("/")[1] + "/PhotoUpload";
+		var sUploadURL = "/solutionpot/PhotoUpload";
+
 
 		// 서버 URL
  		// 	var sUploadURL= '/PhotoUpload';

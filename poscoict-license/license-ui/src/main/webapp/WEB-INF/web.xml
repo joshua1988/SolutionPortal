@@ -195,7 +195,6 @@
 		<url-pattern>/push/fetch/message</url-pattern>
 		<url-pattern>/push/fetch/messages</url-pattern>
 		<url-pattern>/push/send</url-pattern>
-		
 		<url-pattern>/push/unsent</url-pattern>
 		
 	</servlet-mapping>
