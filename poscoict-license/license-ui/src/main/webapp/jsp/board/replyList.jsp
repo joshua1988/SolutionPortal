@@ -36,13 +36,17 @@
 						<div class="chip">
 					    <img src="${contextPath }/dist/images/${list.USER_NAME}.png" alt="${list.USER_NAME}">
 					    ${list.USER_NAME}
-					  </div><br class="hide-on-med-and-up"/>
+				  	</div><br class="hide-on-med-and-up"/>
 						${list.RE_MAIN_CONTENT }
 						<%-- &nbsp;&nbsp; --%>
 						<span class="blue-text text-darken-3">${list.r_CREATION_DATE.substring(2,16) }</span>
-						<i class="material-icons" style="vertical-align:middle;"
-							onclick="javascript:deleteReply('${list.ORI_FOLDER_ID }','${list.RE_CONTENT_NO}','${list.CONTENT_NO }'); return false;">close</i>
-				  </div>
+		  			  	<security:authorize ifAnyGranted="ROLE_U,ROLE_S,ROLE_D,ROLE_C">
+							<c:if test="${sessionScope.USER_NO == list.r_CREATION_USER }">
+								<i class="material-icons" style="vertical-align:middle;"
+									onclick="javascript:deleteReply('${list.ORI_FOLDER_ID }','${list.RE_CONTENT_NO}','${list.CONTENT_NO }'); return false;">close</i>
+							</c:if>
+		  			  	</security:authorize>
+			  		</div>
 				</form>
 			</c:forEach>
 		</c:if>
