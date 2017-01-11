@@ -541,6 +541,7 @@
  	    		// }
  	    		var aResult = [];
  	    		aResult[0] = oCustomEvent.htResult;
+
  	    		setPhotoToEditor(aResult);
  	    		//버튼 비활성화
  	    		goReadyMode();
@@ -617,6 +618,8 @@
 			var editeFileInfo="";
 			for(var i=0; i<oFileInfo.length; i++){
 				editeFileInfo += '<img class="img-responsive" style="height: auto;" src="'+oFileInfo[i].sFileURL+'" title="'+oFileInfo[i].sFileName+'" >';
+				// editeFileInfo += '<img class="img-responsive" style="height: auto;" src="'+ "C:/Tomcat7/webapps/license" + oFileInfo[i].sFileURL.split("/solutionpot")[1] + '" title="'+oFileInfo[i].sFileName+'" >';
+
 				if(oFileInfo[i].bNewLine){
 					editeFileInfo += '<br style="clear:both;">';
 				}

@@ -27,6 +27,8 @@ import com.poscoict.license.vo.PhotoFile;
 public class PhotoUploadController {
 	final String backupFolder = "D:"+File.separator+"files"+File.separator+"photoUpload"+File.separator+"editor"+File.separator+"upload"+File.separator;
 	final String backupFolderHTML5 = "D:"+File.separator+"files"+File.separator+"photoUpload"+File.separator+"editor"+File.separator+"multiupload"+File.separator;
+	final String renualTempFolder = "C:"+ File.separator + "Tomcat7" + File.separator + "webapps" + File.separator + "license" + File.separator + "editor" + File.separator + "upload" + File.separator;
+	final String renualTempFolderHTML5 = "C:"+ File.separator + "Tomcat7" + File.separator + "webapps" + File.separator + "license" + File.separator + "editor" + File.separator + "multiupload" + File.separator;
 	
 //	private Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -81,7 +83,15 @@ public class PhotoUploadController {
 					if(!file.exists()){
 						file.mkdirs();
 					}
-					fileCopy(rlFileNm, backupFolder+folderPath+File.separator+realFileNm);
+					
+					// 17.01.11(수)
+					// file copy to the file path for the original site (renual)
+					file = new File(renualTempFolder+folderPath+File.separator);
+					if(!file.exists()){
+						file.mkdirs();
+					}
+					
+					fileCopy(rlFileNm, backupFolder+folderPath+File.separator+realFileNm, renualTempFolder+folderPath+File.separator+realFileNm);
 					
 					return3 += "&bNewLine=true";
 					return3 += "&sFileName="+name;
@@ -126,11 +136,11 @@ public class PhotoUploadController {
         		print.close();
         	} else {
         		
-//        		String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-        		String dftFilePath = "C:/Tomcat7/webapps/license/";
+        		String dftFilePath = request.getSession().getServletContext().getRealPath("/");
+//        		String dftFilePath = "C:"+File.separator+"Tomcat7"+File.separator+"webapps"+File.separator+"license"+File.separator;
         		
         		// servlet location
-        		System.out.println(" dftFilePath : " + dftFilePath);
+//        		System.out.println(" dftFilePath : " + dftFilePath);
         		
         		String folderPath = new SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
         		String filePath = dftFilePath+"editor"+File.separator+"multiupload"+File.separator+folderPath+File.separator;
@@ -163,7 +173,15 @@ public class PhotoUploadController {
 				if(!file.exists()){
 					file.mkdirs();
 				}
-				fileCopy(rlFileNm, backupFolderHTML5+folderPath+File.separator+realFileNm);
+				
+				// 17.01.11(수)
+				// file copy to the file path for the original site (renual)
+				file = new File(renualTempFolderHTML5+folderPath+File.separator);
+				if(!file.exists()){
+					file.mkdirs();
+				}
+				
+				fileCopy(rlFileNm, backupFolderHTML5+folderPath+File.separator+realFileNm, renualTempFolderHTML5+folderPath+File.separator+realFileNm);
         		System.out.println("___________rlFileNm: "+rlFileNm);
         		System.out.println("____________backupFolderHTML5: "+backupFolderHTML5+folderPath+File.separator+realFileNm);
         		
@@ -183,17 +201,20 @@ public class PhotoUploadController {
     	}
     }
     
-	 public void fileCopy(String inFileName, String outFileName) {
+	 public void fileCopy(String inFileName, String outFileName, String outRenualFileName) {
 		try {
 			FileInputStream fis = new FileInputStream(inFileName);
 			FileOutputStream fos = new FileOutputStream(outFileName);
+			FileOutputStream fros = new FileOutputStream(outRenualFileName);
 			
 			int data = 0;
 			while((data=fis.read())!=-1) {
 				fos.write(data);
+				fros.write(data);
 			}
 			fis.close();
 			fos.close();
+			fros.close();
 		} catch (IOException e) {
 //			logger.error("파일복사 실패: "+inFileName, e);
 			e.printStackTrace();
