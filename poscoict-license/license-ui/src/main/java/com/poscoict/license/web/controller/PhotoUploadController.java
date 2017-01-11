@@ -200,8 +200,7 @@ public class PhotoUploadController {
     		e.getStackTrace();
     	}
     }
-    
-	 public void fileCopy(String inFileName, String outFileName, String outRenualFileName) {
+    public void fileCopy(String inFileName, String outFileName, String outRenualFileName) {
 		try {
 			FileInputStream fis = new FileInputStream(inFileName);
 			FileOutputStream fos = new FileOutputStream(outFileName);

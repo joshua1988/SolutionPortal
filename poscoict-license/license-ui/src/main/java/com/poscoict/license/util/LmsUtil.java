@@ -98,9 +98,9 @@ public class LmsUtil {
 		// 17.01.11(수), 소스 추가
 		// Glue Mobile 신규 솔루션으로 추가할 때, 패키지 저장하는 file path 누락하였음
 		// 결론 : 새로 file path 지정 후 추가 조치
-		if(folder.equals("GlueMobile")){
-			path = Consts.GLUE_MOBILE_FILE_HOME;
-		}
+//		if(folder.equals("GlueMobile")){
+//			path = Consts.GLUE_MOBILE_FILE_HOME;
+//		}
 		if(folder.equals("etc")){
 			path = Consts.ETC_FILE_HOME;
 		}
@@ -110,7 +110,7 @@ public class LmsUtil {
 		if(folder.equals("BoardAttach")){
 			path = Consts.BOARD_ATTACH_FILE_HOME;
 		}
-		
+
     	return path;
     }
 
@@ -443,7 +443,7 @@ public class LmsUtil {
 
 	public StringBuffer getMenuSolutionUpload(StringBuffer sb, UserPermission up){
         sb.append("<li>");
-        sb.append("<div class=\"collapsible-header\" id=\"Sol\"><i class=\"material-icons\" id=\"Sol\">menu</i>솔루션 패키지 관리</div>");
+        sb.append("<div class=\"collapsible-header\" id=\"Sol\"><i class=\"material-icons\" id=\"Sol\">menu</i>솔루션 패키지</div>");
         sb.append("<div class=\"collapsible-body\">");
         sb.append("<div class=\"collection\">");
         if(up.isFUNCTION_SOLUTION_UPLOAD_GLUE()) sb.append("<a href=\"#\" id=\"SolGluePackageManager\" onclick=\"javascript:packageManager('2','GluePackageManager')\" class=\"collection-item\"><i class=\"material-icons left\">filter_1</i>Glue</a>");

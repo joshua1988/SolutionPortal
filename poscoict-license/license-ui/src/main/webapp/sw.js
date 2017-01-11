@@ -117,18 +117,24 @@ self.addEventListener('notificationclick', function(event) {
 // Push Messages Constructor
 var pushMessageConstructor = function (data) {
   var postTypeKR = "",
-      pushConstructor = data[0];
+      pushConstructor = data[0],
+      pushContent= "",
+      pushTitle="";
 
+  // streamlining the raw push data
   postTypeKR = pushConstructor.POST_TYPE == "board" ? "게시글" : "댓글";
+  pushConstructor.POST_TITLE.length > 16 ? pushTitle = pushConstructor.POST_TITLE.substring(0,15) + "..." : pushTitle = pushConstructor.POST_TITLE;
+  pushConstructor.CONTENT.length > 16 ? pushContent = pushConstructor.CONTENT.substring(0,15) + "..." : pushContent = pushConstructor.CONTENT;
+
   pushData.title = "새로운 " + postTypeKR + " 등록";
   if (postTypeKR == "게시글") {
     pushData.body = "[" + pushConstructor.SOLUTION_TYPE + " " + pushConstructor.BOARD_TYPE + " 게시판] \n" +
-                      "제목: " + pushConstructor.POST_TITLE + " \n" +
-                      "작성자: " + pushConstructor.USER;
-  } else {
+                      "제목: " + pushTitle + " \n" +
+                      "작성자: " + pushConstructor.USER.substring(0, 15);
+  } else if (postTypeKR == "댓글") {
     pushData.body = "[" + pushConstructor.SOLUTION_TYPE + " " + pushConstructor.BOARD_TYPE + " 게시판] \n" +
-                      "내용: " + pushConstructor.CONTENT + " \n" +
-                      "작성자: " + pushConstructor.USER;
+                      "내용: " + pushContent + " \n" +
+                      "작성자: " + pushConstructor.USER.substring(0, 15);
   }
   pushData.icon = 'dist/images/icons/icon-48x48.png';
   pushData.tag = pushConstructor.POST_TYPE;

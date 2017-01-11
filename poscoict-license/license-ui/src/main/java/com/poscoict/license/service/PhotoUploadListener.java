@@ -31,6 +31,8 @@ public class PhotoUploadListener implements ServletContextListener {
 		String serverPath = event.getServletContext().getRealPath("/");
 		String backupFolder = "D:"+File.separator+"files"+File.separator+"photoUpload";
 		File temp = new File(serverPath+File.separator+"editor");
+		
+		logger.info("@@@@@@@@@@@ serverPath : " + serverPath);
 		if(!temp.exists()){
 			File backup = new File(backupFolder);
 			File server = new File(serverPath);
@@ -48,7 +50,9 @@ public class PhotoUploadListener implements ServletContextListener {
 			if(file.isDirectory()){
 				logger.info("Photo copy(Directory): "+file.getName());
 				temp.mkdir();
+				
 				copy(file, temp, serverPath + File.separator + file.getName());
+//				copy(file, temp, serverPath + file.getName());
 			} else {
 				logger.info("Photo copy(File): "+file.getName());
 				FileInputStream fis = null;
