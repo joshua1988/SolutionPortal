@@ -2,6 +2,7 @@ package com.poscoict.license.push;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -36,15 +37,15 @@ public class PushService {
 	
 	public void sendPushMessage() throws IOException {
 		List<Map<String, Object>> list = getSubscriptionUsers();
+		List<String> regIds = new ArrayList<String>();
 		
-		for (Map<String, Object> map : list) {
-		    for (Map.Entry<String, Object> entry : map.entrySet()) {
-		        String endpoint = entry.getValue().toString();
-		        push.sendPush(endpoint);
-		        
-		        logger.info("each endpoint : " + endpoint.toString());
+		for (Map<String, Object> m : list) {
+			for (Map.Entry<String, Object> e : m.entrySet()) {
+				regIds.add((String) e.getValue());
 		    }
 		}
+		
+		push.sendPush(regIds);
 	}
 	
 	public List<Map<String, Object>> getUnsentPushMessages() throws IOException{

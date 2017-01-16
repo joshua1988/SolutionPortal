@@ -188,10 +188,24 @@ function updateStatus(endpoint, key, status) {
   fetch('/solutionpot/push/subscription', {
     method: 'post',
     headers: new Headers({
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
     }),
     body: JSON.stringify(data)
   }).catch(function(err) {
     console.log("Sending subscription error : ", err);
   });
+
+  // 17.01.16 (Mon)
+  // register this browser with the topic
+  // fetch("https://iid.googleapis.com/iid/v1/" + data.endpoint + "/rel/topics/updates", {
+  //   method: 'post',
+  //   headers: new Headers({
+  //     'Content-Type': 'application/json',
+  //     'Authorization': "key=AIzaSyBLu1iuV3vP0Z5W2NKBUjadlO9oJQYha64"
+  //   }),
+  //   body: JSON.stringify(data)
+  // }).catch(function(err) {
+  //   console.log("Sending subscription error : ", err);
+  // });
+
 }

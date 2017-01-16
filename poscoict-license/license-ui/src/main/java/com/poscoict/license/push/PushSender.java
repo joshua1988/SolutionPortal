@@ -3,12 +3,14 @@ package com.poscoict.license.push;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.Properties;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.android.gcm.server.Message;
+import com.google.android.gcm.server.MulticastResult;
 import com.google.android.gcm.server.Result;
 import com.google.android.gcm.server.Sender;
 
@@ -45,7 +47,7 @@ public class PushSender {
 		}
 	}
 	
-	public void sendPush(String endpoint) throws IOException {
+	public void sendPush(List<String> regIds) throws IOException {
 		getServerKey();
 		
 		try {
@@ -61,8 +63,14 @@ public class PushSender {
             // Use the same token(or registration id) that was earlier
             // used to send the message to the client directly from
             // Firebase Console's Notification tab.
-            Result result = sender.send(message, endpoint, 1);
-            logger.info("Result: " + result.toString());
+            
+            // send a msg to a single device
+            // Result result = sender.send(message, endpoint, 1);
+            
+            
+            // send a msg to many devices
+            MulticastResult result = sender.send(message, regIds, 1);
+            logger.info("Send push message result: " + result.toString());
         } catch (Exception e) {
         	logger.error("sendPush error: " + e);
             e.printStackTrace();
