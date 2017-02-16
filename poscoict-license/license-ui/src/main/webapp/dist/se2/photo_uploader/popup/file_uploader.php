@@ -14,8 +14,7 @@ if(bSuccessUpload) {
 	if(!in_array($filename_ext, $allow_file)) {
 		$url .= '&errstr='.$name;
 	} else {
-		// $uploadDir = '../../upload/';
-		$uploadDir = 'C:/Tomcat7/webapps/license/editor/upload/';
+		$uploadDir = '../../upload/';
 		if(!is_dir($uploadDir)){
 			mkdir($uploadDir, 0777);
 		}

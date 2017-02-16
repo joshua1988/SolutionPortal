@@ -7,15 +7,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -27,10 +24,6 @@ import com.poscoict.license.vo.PhotoFile;
 public class PhotoUploadController {
 	final String backupFolder = "D:"+File.separator+"files"+File.separator+"photoUpload"+File.separator+"editor"+File.separator+"upload"+File.separator;
 	final String backupFolderHTML5 = "D:"+File.separator+"files"+File.separator+"photoUpload"+File.separator+"editor"+File.separator+"multiupload"+File.separator;
-	final String renualTempFolder = "C:"+ File.separator + "Tomcat7" + File.separator + "webapps" + File.separator + "license" + File.separator + "editor" + File.separator + "upload" + File.separator;
-	final String renualTempFolderHTML5 = "C:"+ File.separator + "Tomcat7" + File.separator + "webapps" + File.separator + "license" + File.separator + "editor" + File.separator + "multiupload" + File.separator;
-	
-//	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping(value="photoUploadCallback", method=RequestMethod.GET)
 	public ModelAndView photoUploadCallback(){
@@ -83,21 +76,11 @@ public class PhotoUploadController {
 					if(!file.exists()){
 						file.mkdirs();
 					}
-					
-					// 17.01.11(수)
-					// file copy to the file path for the original site (renual)
-					file = new File(renualTempFolder+folderPath+File.separator);
-					if(!file.exists()){
-						file.mkdirs();
-					}
-					
-					fileCopy(rlFileNm, backupFolder+folderPath+File.separator+realFileNm, renualTempFolder+folderPath+File.separator+realFileNm);
+					fileCopy(rlFileNm, backupFolder+folderPath+File.separator+realFileNm);
 					
 					return3 += "&bNewLine=true";
 					return3 += "&sFileName="+name;
 					return3 += "&sFileURL="+serverPath+"/editor/upload/"+folderPath+"/"+realFileNm;
-					
-					System.out.println("@@ PhotoUpload serverPath : " + serverPath);
 				}
     		}else{
     			return3 += "&errstr=error";
@@ -134,14 +117,8 @@ public class PhotoUploadController {
         		print.print("NOTALLOW_"+filename);
         		print.flush();
         		print.close();
-        	} else {
-        		
+        	}else{
         		String dftFilePath = request.getSession().getServletContext().getRealPath("/");
-//        		String dftFilePath = "C:"+File.separator+"Tomcat7"+File.separator+"webapps"+File.separator+"license"+File.separator;
-        		
-        		// servlet location
-//        		System.out.println(" dftFilePath : " + dftFilePath);
-        		
         		String folderPath = new SimpleDateFormat("yyyyMMdd").format(new java.util.Date());
         		String filePath = dftFilePath+"editor"+File.separator+"multiupload"+File.separator+folderPath+File.separator;
         		File file = new File(filePath);
@@ -173,21 +150,11 @@ public class PhotoUploadController {
 				if(!file.exists()){
 					file.mkdirs();
 				}
-				
-				// 17.01.11(수)
-				// file copy to the file path for the original site (renual)
-				file = new File(renualTempFolderHTML5+folderPath+File.separator);
-				if(!file.exists()){
-					file.mkdirs();
-				}
-				
-				fileCopy(rlFileNm, backupFolderHTML5+folderPath+File.separator+realFileNm, renualTempFolderHTML5+folderPath+File.separator+realFileNm);
+				fileCopy(rlFileNm, backupFolderHTML5+folderPath+File.separator+realFileNm);
         		System.out.println("___________rlFileNm: "+rlFileNm);
         		System.out.println("____________backupFolderHTML5: "+backupFolderHTML5+folderPath+File.separator+realFileNm);
         		
         		String serverPath = request.getContextPath();
-        		
-        		System.out.println("@@ PhotoUploadHTML5 serverPath : " + serverPath);
         		sFileInfo += "&bNewLine=true";
         		sFileInfo += "&sFileName="+ filename;
         		sFileInfo += "&sFileURL="+serverPath+"/editor/multiupload/"+folderPath+"/"+realFileNm;
@@ -200,20 +167,18 @@ public class PhotoUploadController {
     		e.getStackTrace();
     	}
     }
-    public void fileCopy(String inFileName, String outFileName, String outRenualFileName) {
+    
+	 public void fileCopy(String inFileName, String outFileName) {
 		try {
 			FileInputStream fis = new FileInputStream(inFileName);
 			FileOutputStream fos = new FileOutputStream(outFileName);
-			FileOutputStream fros = new FileOutputStream(outRenualFileName);
 			
 			int data = 0;
 			while((data=fis.read())!=-1) {
 				fos.write(data);
-				fros.write(data);
 			}
 			fis.close();
 			fos.close();
-			fros.close();
 		} catch (IOException e) {
 //			logger.error("파일복사 실패: "+inFileName, e);
 			e.printStackTrace();

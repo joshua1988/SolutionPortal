@@ -18,6 +18,32 @@
 <!--Let browser know website is optimized for mobile-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+<title>POSCO ICT 솔루션 포탈</title>
+
+<!-- Facebook Open Graph -->
+<meta property="og:title" content="POSCO ICT Solution Portal" />
+<meta property="og:description" content="A place where solution experts are waiting to answer your questions regarding POSCO ICT solutions" />
+<meta property="og:site_name" content="Solution Portal"/>
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://www.solutionpot.co.kr" />
+<meta property="og:image" content="${contextPath}/dist/images/favicon/apple-icon-120x120.png" />
+
+<!-- Favicon -->
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="${contextPath}/dist/images/favicon/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="${contextPath}/dist/images/favicon/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="${contextPath}/dist/images/favicon/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="${contextPath}/dist/images/favicon/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="${contextPath}/dist/images/favicon/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="${contextPath}/dist/images/favicon/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="${contextPath}/dist/images/favicon/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="${contextPath}/dist/images/favicon/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="${contextPath}/dist/images/favicon/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="${contextPath}/dist/images/favicon/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="${contextPath}/dist/images/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="${contextPath}/dist/images/favicon/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="${contextPath}/dist/images/favicon/favicon-16x16.png">
+
 <!-- jquery-ui css -->
 <link rel="stylesheet" href="${contextPath }/dist/modal/jquery.remodal.css">
 <link rel="stylesheet" href="${contextPath }/dist/css/docs.css">
@@ -142,7 +168,6 @@ td {
 		<c:set var="sPage" value="${param.page==null?page:param.page }.jsp"/>
 	</c:when>
 </c:choose>
-<title>라이선스 관리 포털</title>
 </head>
 <body>
   <div class="top"><a href="#"><label style="font-size: 12px; color: gray;">맨위</label><img src="${contextPath }/dist/img/arrow_top.gif" alt="맨위"/></a></div>

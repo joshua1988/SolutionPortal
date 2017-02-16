@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!--Import materialize.css-->
   <link type="text/css" rel="stylesheet" href="${contextPath}/dist/materialize/css/materialize.min.css"  media="screen,projection"/>
+  <title>POSCO ICT 솔루션 포탈</title>
   <!--Let browser know website is optimized for mobile-->
 </head>
 <body>

@@ -40,7 +40,28 @@ const precacheFiles = [
     './dist/img/mainLogo.gif',
     './dist/img/arrow_top.gif',
     './dist/img/delete_reply.png',
-    './dist/img/push.png'
+    './dist/img/push.png',
+    // favicon
+    './dist/images/favicon/android-icon-36x36.png',
+    './dist/images/favicon/android-icon-48x48.png',
+    './dist/images/favicon/android-icon-72x72.png',
+    './dist/images/favicon/android-icon-96x96.png',
+    './dist/images/favicon/android-icon-144x144.png',
+    './dist/images/favicon/android-icon-192x192.png',
+    './dist/images/favicon/apple-icon-57x57.png',
+    './dist/images/favicon/apple-icon-60x60.png',
+    './dist/images/favicon/apple-icon-72x72.png',
+    './dist/images/favicon/apple-icon-76x76.png',
+    './dist/images/favicon/apple-icon-114x114.png',
+    './dist/images/favicon/apple-icon-120x120.png',
+    './dist/images/favicon/apple-icon-144x144.png',
+    './dist/images/favicon/apple-icon-152x152.png',
+    './dist/images/favicon/apple-icon-180x180.png',
+    './dist/images/favicon/apple-icon-precomposed.png',
+    './dist/images/favicon/apple-icon.png',
+    './dist/images/favicon/favicon-16x16.png',
+    './dist/images/favicon/favicon-32x32.png',
+    './dist/images/favicon/favicon-96x96.png'
 ];
 
 // Precache the files
@@ -57,7 +78,7 @@ var pushData = {
 self.addEventListener('push', function(event) {
 //  console.log('Received a push message', event);
 
-  event.waitUntil(fetch("/solutionpot/push/fetch/message").then(function(response) {
+  event.waitUntil(fetch("/push/fetch/message").then(function(response) {
         if (response.status !== 200) {
           // Either show a message to the user explaining the error
           // or enter a generic message and handle the
@@ -107,7 +128,7 @@ self.addEventListener('notificationclick', function(event) {
   event.notification.close();
 
   event.waitUntil(
-    clients.openWindow('http://www.solutionpot.co.kr:8080/license')
+    clients.openWindow('https://www.solutionpot.co.kr')
   )
 
   // 노티를 클릭하고 나면, 읽기 체크가 가능하도록?
