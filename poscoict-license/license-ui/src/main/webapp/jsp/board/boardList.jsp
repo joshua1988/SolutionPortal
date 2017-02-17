@@ -25,6 +25,7 @@
     color: white;
     padding: 0 3px;
     font-size: 14px;
+    border-radius: 2px;
   }
 
   @media (max-width:736px) {
