@@ -50,10 +50,10 @@
 <style type="text/css">
 .top { position:fixed;right:5%;bottom:10%; z-index:999; display:none; }
 .top IMG {
-	width: 30px; height: 30px;
-	zoom: 1;
-    filter: alpha(opacity=50);
-    opacity: 0.5;
+  width: 30px; height: 30px;
+  zoom: 1;
+  filter: alpha(opacity=50);
+  opacity: 0.5;
 }
 
 /* fixed footer*/
@@ -61,103 +61,169 @@ body {
   display: flex;
   min-height: 100vh;
   flex-direction: column;
+  background: whitesmoke;
 }
 main {
   flex: 1 0 auto;
-	font-size: 14px;
+  font-size: 14px;
+  margin-top: 0.6rem;
 }
 footer.page-footer {
-	margin-top: 0;
+  margin-top: 0;
 }
 /*container*/
 .container {
-	width: 90%;
-	max-width: 1600px;
-	/*margin: 0 5%;*/
+  width: 90%;
+  max-width: 1600px;
+  /*margin: 0 5%;*/
 }
 .row {
-	margin-bottom: 0;
+  margin-bottom: 0;
+}
+.brand-logo img {
+  height: 32px;
+  margin-top: 10px;
 }
 @media only screen and (min-width: 993px) {
   .container {
     width: 90%;
   }
-	.brand-logo {
-		margin-left:0.75em;
-	}
+  .brand-logo {
+    margin-left:0.75em;
+  }
 }
 /*table layout*/
 td {
-	padding: 5px 5px;
+  padding: 5px 5px;
 }
+
 /*tree collection padding*/
 .collection .collection-item {
-	padding: 10px 30px;
+  padding: 10px 30px;
 }
+
 /*side nav icon alignment*/
 .side-nav a {
-	display: flex;
+  display: flex;
 }
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+  box-shadow: 0 2px 11px 3px rgba(0, 0, 0, 0.06), 0 2px 14px 2px rgba(0, 0, 0, 0);
+}
+nav, nav .nav-wrapper i, nav a.button-collapse, nav a.button-collapse i {
+  height: 53px;
+  line-height: 53px;
+}
+nav a {
+  color: #b3b3b3;
+}
+nav ul a {
+  color: #929292;
+}
+/* collapsible */
+.collapsible {
+  border: none;
+}
+.collapsible-header {
+  border-bottom: 1px solid #e2e2e2;
+}
+.collapsible-body {
+  padding: 0;
+}
+.collection a.collection-item {
+  color: #5284a5;
+}
+.collection .collection-item.active {
+  background-color: rgb(130, 152, 179);
+  color: white;
+}
+.collection i.material-icons {
+  font-size: 19px;
+}
+
+.side-nav li>a>i, .side-nav li>a>[class^="mdi-"], .side-nav li>a>[class*="mdi-"], .side-nav li>a>i.material-icons {
+  color: rgba(148, 148, 148, 0.54);
+  font-size: 20px;
+  margin: 0 14px 0 0;
+}
+.pagination li.active {
+  background-color: #c7c7c7;
+}
+
+/* 카드 */
+.card-panel {
+  padding: 0 24px 33px;
+}/* 버튼 */
+.btn, .btn-large {
+  background-color: rgb(130, 152, 179);
+  padding: 0 1.1rem;
+}
+.btn:hover, .btn-large:hover {
+  background-color: rgb(83, 117, 158);
+}
+.btn:focus, .btn-large:focus, .btn-floating:focus {
+  background-color: rgb(83, 117, 158);
+}
+a {
+  color: #4492c5;
+}
+
 /*mobile 비공개 button*/
 @media (max-width:600px) {
-	header, nav, nav .button-collapse i {
-		height:40px;
-		line-height: 40px;
-	}
-	[type="checkbox"]+label {
-		padding-left: 1.8rem;
-		font-size: 0.8rem;
-	}
-	#unopened {
-		width:32% !important;
-		padding-left:5px !important;
-	}
+  [type="checkbox"]+label {
+    padding-left: 1.8rem;
+    font-size: 0.8rem;
+  }
+  #unopened {
+    width:32% !important;
+    padding-left:5px !important;
+  }
 }
 /*mobile button*/
 @media (max-width:736px) {
-	.btn {
-		padding : 0 1.5rem;
-	}
-	.btnSection {
-		text-align: center;
-	}
-	.btnGroup {
-		float: none !important;
-	}
-	.viewInfo {
-		text-align: center;
-		padding: 0;
-	}
-	.replyInfo {
-		padding: 0;
-	}
-	/*mobile UI*/
-	.container {
-		width: 100%;
-	}
-	.card-panel {
-		padding: 0;
-	}
-	/*layout optimization based on mobile width*/
-	.card .card-title {
-		font-size:20px;
-		font-weight:600 !important;
-	}
-	.card .card-content {
-		padding:10px;
-	}
-	/*side nav divider*/
-	.side-nav .divider {
-		margin: 0;
-	}
+  .btnSection {
+    text-align: center;
+  }
+  .btnGroup {
+    float: none !important;
+  }
+  .viewInfo {
+    text-align: center;
+    padding: 0;
+  }
+  .replyInfo {
+    padding: 0;
+  }
+  /*mobile UI*/
+  .container {
+    width: 100%;
+  }
+  .card-panel {
+    padding: 0;
+  }
+  /*layout optimization based on mobile width*/
+  .card .card-title {
+    font-size:20px;
+    font-weight:600 !important;
+  }
+  .card .card-content {
+    padding:10px;
+  }
+  /*side nav divider*/
+  .side-nav .divider {
+    margin: 0;
+  }
+  .brand-logo img {
+    height: 29px;
+    margin-top: 15px;
+  }
 }
 @media (min-width:800px) {
-	.btnGroup {
-		padding-top:5px;
-	}
-	.viewInfo {
-		padding:5px;
-	}
+  .btnGroup {
+    padding-top:5px;
+  }
+  .viewInfo {
+    padding:5px;
+  }
 }
 </style>
 <c:choose>
@@ -172,9 +238,9 @@ td {
 <body>
   <div class="top"><a href="#"><label style="font-size: 12px; color: gray;">맨위</label><img src="${contextPath }/dist/img/arrow_top.gif" alt="맨위"/></a></div>
 	<header>
-		<nav class="blue darken-1">
+		<nav class="white">
 	    <div class="nav-wrapper">
-	      <a href="#!" class="brand-logo" onclick="javascript:boardList('notice','NOTICE'); return false;">Solution Portal</a>
+	      <a href="#!" class="brand-logo" onclick="javascript:boardList('notice','NOTICE'); return false;"><img src="${contextPath }/dist/img/logo.svg" alt="Solution Portal Logo"></a>
 				<a href="#" data-activates="sidebar" class="button-collapse"><i class="material-icons">menu</i></a>
 	      <ul class="right hide-on-med-and-down">
 					<security:authorize ifAnyGranted="ROLE_U,ROLE_S,ROLE_D, ROLE_C">
@@ -209,7 +275,7 @@ td {
 			</div>
 	  </div>
 	</main>
-	<footer class="page-footer blue darken-1" style="padding:18px 0;">
+	<footer class="page-footer grey darken-4" style="padding:18px 0;">
 		<div class="container center-align white-text">
 			ⓒ2014 POSCO ICT, All Rights Reserved.
 		</div>
