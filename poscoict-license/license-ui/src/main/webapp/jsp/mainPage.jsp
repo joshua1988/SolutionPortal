@@ -84,7 +84,6 @@ footer.page-footer {
   height: 32px;
   margin-top: 10px;
 }
-
 @media only screen and (min-width: 993px) {
   .container {
     width: 90%;
@@ -92,7 +91,6 @@ footer.page-footer {
   .brand-logo {
     margin-left:0.75em;
   }
-
 }
 /*table layout*/
 td {
@@ -240,9 +238,9 @@ a {
 <body>
   <div class="top"><a href="#"><label style="font-size: 12px; color: gray;">맨위</label><img src="${contextPath }/dist/img/arrow_top.gif" alt="맨위"/></a></div>
 	<header>
-		<nav class="blue darken-1">
+		<nav class="white">
 	    <div class="nav-wrapper">
-	      <a href="#!" class="brand-logo" onclick="javascript:boardList('notice','NOTICE'); return false;">Solution Portal</a>
+	      <a href="#!" class="brand-logo" onclick="javascript:boardList('notice','NOTICE'); return false;"><img src="${contextPath }/dist/img/logo.svg" alt="Solution Portal Logo"></a>
 				<a href="#" data-activates="sidebar" class="button-collapse"><i class="material-icons">menu</i></a>
 	      <ul class="right hide-on-med-and-down">
 					<security:authorize ifAnyGranted="ROLE_U,ROLE_S,ROLE_D, ROLE_C">
@@ -277,7 +275,7 @@ a {
 			</div>
 	  </div>
 	</main>
-	<footer class="page-footer blue darken-1" style="padding:18px 0;">
+	<footer class="page-footer grey darken-4" style="padding:18px 0;">
 		<div class="container center-align white-text">
 			ⓒ2014 POSCO ICT, All Rights Reserved.
 		</div>
