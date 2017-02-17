@@ -78,7 +78,7 @@ var pushData = {
 self.addEventListener('push', function(event) {
 //  console.log('Received a push message', event);
 
-  event.waitUntil(fetch("/license/push/fetch/message").then(function(response) {
+  event.waitUntil(fetch("/push/fetch/message").then(function(response) {
         if (response.status !== 200) {
           // Either show a message to the user explaining the error
           // or enter a generic message and handle the

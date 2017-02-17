@@ -81,12 +81,12 @@ td {
 					<div class="row">
 						<div class="input-field col s6">
 							<i class="material-icons prefix">event_note</i>
-							<input type="date" class="datepicker" id="startDatepicker" name="USER_START_DATE" value="${user.getUSER_START_DATE() }" disabled>
+							<input type="text" class="datepicker" id="startDatepicker" name="USER_START_DATE" value="${user.getUSER_START_DATE() }" disabled>
 							<label for="startDatepicker">계약일자</label>
 						</div>
 						<div class="input-field col s6">
 							<i class="material-icons prefix">event_note</i>
-							<input type="date" class="datepicker" id="setUpDatepicker" name="PRODUCT_SETUP_DATE" value="${user.getPRODUCT_SETUP_DATE() }" disabled>
+							<input type="text" class="datepicker" id="setUpDatepicker" name="PRODUCT_SETUP_DATE" value="${user.getPRODUCT_SETUP_DATE() }" disabled>
 							<label for="setUpDatepicker">제품설치일자</label>
 						</div>
 					</div>
