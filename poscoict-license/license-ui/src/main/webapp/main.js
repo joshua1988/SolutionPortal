@@ -14,7 +14,7 @@ window.addEventListener('load', function() {
   });
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('https://'+location.host+'/sw.js').then(function(reg) {
+    navigator.serviceWorker.register('https://' + location.host + '/license/sw.js').then(function(reg) {
       if(reg.installing) {
         console.log('Service worker installing');
       } else if(reg.waiting) {
@@ -96,12 +96,13 @@ function subscribe() {
       }).catch(function(e) {
         if (Notification.permission === 'denied') {
           // 사용자가 알람 권한을 설정하지 않은 경우
-          console.log('Permission for Notifications was denied');
+          console.log('알람 표시 설정이 되어 있지 않습니다.');
+          pushStatus.innerHTML = "알림 표시 설정이 필요합니다.";
         } else {
           // subscription 관련한 에러 발생시,
           // gcm_sender_id 또는 gcm_user_visible_only 를 확인
           console.log('Unable to subscribe to push.', e);
-          pushStatus.innerHTML = "알림 설정이 필요합니다";
+          pushStatus.innerHTML = "알림 구독이 실패하였습니다.";
         }
       });
   });
@@ -162,10 +163,10 @@ function unsubscribe() {
 function updatePushSwitch() {
   if (isPushEnabled) {
     pushSwitch.checked = true;
-    pushStatus.innerHTML = "Push is on";
+    pushStatus.innerHTML = "알림이 설정되었습니다.";
   } else {
     pushSwitch.checked = false;
-    pushStatus.innerHTML = "Push is off";
+    pushStatus.innerHTML = "알림이 꺼졌습니다.";
   }
 }
 
@@ -185,7 +186,7 @@ function updateStatus(endpoint, key, status) {
 
   // 16.11.28 (Mon)
   // send the endpoint to server
-  fetch('/push/subscription', {
+  fetch('/license/push/subscription', {
     method: 'post',
     headers: new Headers({
       'Content-Type': 'application/json',

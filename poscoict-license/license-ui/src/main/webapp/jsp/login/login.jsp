@@ -154,7 +154,7 @@
 			      On
 			    </label>
 			  </div>
-				<div id="pushStatus" style="margin-top:5px;"></div>
+				<div id="pushStatus" style="margin-top:5px; font-size:0.9rem;"></div>
 	    </center>
 	  </main>
 	<script type="text/javascript">
