@@ -93,12 +93,8 @@
 	  <main>
 	    <center>
 				<div class="section hide-on-small-only"></div>
-				<img class="responsive-img" style="width: 250px;" src="${contextPath}/dist/img/mainLogo.gif" />
+				<img class="responsive-img" style="width: 250px;" src="${contextPath }/dist/img/logo.svg" alt="Solution Portal Logo" />
 	      <div class="section hide-on-small-only"></div>
-
-	      <h5 class="blue-text text-darken-1">Welcome to Solution Portal</h5>
-	      <div class="section hide-on-small-only"></div>
-
 	      <div class="container">
 	        <div class="z-depth-1 grey lighten-4 row hoverable" style="display: inline-block; padding: 32px 48px 0px 48px; border: 1px solid #EEE;">
 
@@ -121,7 +117,7 @@
 	                <label for='password'>비밀번호를 입력하세요</label>
 	              </div>
 	              <label style='float: right;'>
-									<a class='pink-text text-darken-1' href='#!'><b>비밀번호 잊으셨나요?</b></a>
+									<a class='pink-text text-darken-1' href="mailto:onetwo@poscoict.com"><b>비밀번호 잊으셨나요?</b></a>
 								</label>
 	            </div>
 

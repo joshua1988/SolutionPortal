@@ -7,7 +7,7 @@ function treeActive () {
 		console.log("nothing has been active yet");
 	} else if(activeKey == "notice" || activeKey == "presentation" || activeKey == "sdkDownload") {
 		var activeKeyDom = $("#"+activeKey);
-		activeKeyDom.css('background-color', '#26a69a');
+		activeKeyDom.css('background-color', 'rgb(83, 117, 158)');
 		activeKeyDom.css('color', '#eafaf9');
 	} else {
 		// console.log("else : nothing active");
