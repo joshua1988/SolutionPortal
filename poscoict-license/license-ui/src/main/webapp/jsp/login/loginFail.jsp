@@ -13,6 +13,14 @@
   <link type="text/css" rel="stylesheet" href="${contextPath}/dist/materialize/css/materialize.min.css"  media="screen,projection"/>
   <title>POSCO ICT 솔루션 포탈</title>
   <!--Let browser know website is optimized for mobile-->
+
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="apple-touch-icon" sizes="76x76" href="${contextPath}/dist/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="${contextPath}/dist/favicons/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="${contextPath}/dist/favicons/favicon-16x16.png" sizes="16x16">
+  <link rel="mask-icon" href="${contextPath}/dist/favicons/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#ffffff">
 </head>
 <body>
 

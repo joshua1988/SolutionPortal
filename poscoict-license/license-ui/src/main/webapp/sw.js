@@ -37,31 +37,40 @@ const precacheFiles = [
     './dist/images/GlueShin.png',
     './dist/images/guest.png',
     './dist/images/PosBeeKang.png',
-    './dist/img/mainLogo.gif',
     './dist/img/arrow_top.gif',
     './dist/img/delete_reply.png',
     './dist/img/push.png',
+    // POSCO favicon
+    './dist/favicons/android-chrome-72x72.png',
+    './dist/favicons/apple-touch-icon.png',
+    './dist/favicons/browserconfig.xml',
+    './dist/favicons/favicon-16x16.png',
+    './dist/favicons/favicon-32x32.png',
+    './dist/favicons/favicon-48x48.png',
+    './dist/favicons/mstile-150x150.png',
+    './dist/favicons/safari-pinned-tab.svg'
+
     // favicon
-    './dist/images/favicon/android-icon-36x36.png',
-    './dist/images/favicon/android-icon-48x48.png',
-    './dist/images/favicon/android-icon-72x72.png',
-    './dist/images/favicon/android-icon-96x96.png',
-    './dist/images/favicon/android-icon-144x144.png',
-    './dist/images/favicon/android-icon-192x192.png',
-    './dist/images/favicon/apple-icon-57x57.png',
-    './dist/images/favicon/apple-icon-60x60.png',
-    './dist/images/favicon/apple-icon-72x72.png',
-    './dist/images/favicon/apple-icon-76x76.png',
-    './dist/images/favicon/apple-icon-114x114.png',
-    './dist/images/favicon/apple-icon-120x120.png',
-    './dist/images/favicon/apple-icon-144x144.png',
-    './dist/images/favicon/apple-icon-152x152.png',
-    './dist/images/favicon/apple-icon-180x180.png',
-    './dist/images/favicon/apple-icon-precomposed.png',
-    './dist/images/favicon/apple-icon.png',
-    './dist/images/favicon/favicon-16x16.png',
-    './dist/images/favicon/favicon-32x32.png',
-    './dist/images/favicon/favicon-96x96.png'
+    // './dist/images/favicon/android-icon-36x36.png',
+    // './dist/images/favicon/android-icon-48x48.png',
+    // './dist/images/favicon/android-icon-72x72.png',
+    // './dist/images/favicon/android-icon-96x96.png',
+    // './dist/images/favicon/android-icon-144x144.png',
+    // './dist/images/favicon/android-icon-192x192.png',
+    // './dist/images/favicon/apple-icon-57x57.png',
+    // './dist/images/favicon/apple-icon-60x60.png',
+    // './dist/images/favicon/apple-icon-72x72.png',
+    // './dist/images/favicon/apple-icon-76x76.png',
+    // './dist/images/favicon/apple-icon-114x114.png',
+    // './dist/images/favicon/apple-icon-120x120.png',
+    // './dist/images/favicon/apple-icon-144x144.png',
+    // './dist/images/favicon/apple-icon-152x152.png',
+    // './dist/images/favicon/apple-icon-180x180.png',
+    // './dist/images/favicon/apple-icon-precomposed.png',
+    // './dist/images/favicon/apple-icon.png',
+    // './dist/images/favicon/favicon-16x16.png',
+    // './dist/images/favicon/favicon-32x32.png',
+    // './dist/images/favicon/favicon-96x96.png'
 ];
 
 // Precache the files
@@ -157,7 +166,8 @@ var pushMessageConstructor = function (data) {
                       "내용: " + pushContent + " \n" +
                       "작성자: " + pushConstructor.USER.substring(0, 15);
   }
-  pushData.icon = 'dist/images/icons/icon-48x48.png';
+//  pushData.icon = 'dist/images/icons/icon-48x48.png';
+  pushData.icon = 'dist/favicons/favicon-48x48.png';
   pushData.tag = pushConstructor.POST_TYPE;
 
   return pushData;

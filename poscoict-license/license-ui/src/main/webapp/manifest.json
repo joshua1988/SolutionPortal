@@ -1,40 +1,26 @@
 {
-  "short_name": "SolutionPot",
-  "name": "#ict_solution_portal",
+  "short_name": "Solution Pot",
+  "name": "Solution Portal",
   "icons": [
+  	{
+      "src": "dist/favicons/favicon-16x16.png",
+      "type": "image/png",
+      "sizes": "16x16"
+    },
     {
-      "src": "dist/images/icons/icon-32x32.png",
+      "src": "dist/favicons/favicon-32x32.png",
       "type": "image/png",
       "sizes": "32x32"
     },
     {
-      "src": "dist/images/images/favicon/apple-icon-60x60.png",
-      "type": "image/png",
-      "sizes": "60x60"
-    },
-    {
-      "src": "dist/images/icons/icon-128x128.png",
-      "type": "image/png",
-      "sizes": "128x128"
-    },
-    {
-      "src": "dist/images/favicon/apple-icon-144x144.png",
-      "type": "image/png",
-      "sizes": "144x144"
-    },
-    {
-      "src": "dist/images/icons/apple-touch-icon.png",
-      "type": "image/png",
-      "sizes": "152x152"
-    },
-    {
-      "src": "dist/images/icons/chrome-touch-icon.png",
-      "type": "image/png",
-      "sizes": "192x192"
+      "src": "dist/favicons/android-chrome-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png"
     }
   ],
   "background_color": "#1E88E5",
   "display": "standalone",
-  "gcm_sender_id": "331744684549",
+  "gcm_sender_id": "150348877894",
+  "gcm_user_visible_only": true,
   "start_url": "./"
 }
