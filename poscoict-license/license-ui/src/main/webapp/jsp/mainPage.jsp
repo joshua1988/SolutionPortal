@@ -59,20 +59,25 @@
 /* fixed footer*/
 body {
 	display: flex;
-	min-height: 100vh;
 	flex-direction: column;
+	min-height: 100vh;
 	background: whitesmoke;
+}
+
+footer.page-footer {
+	margin-top: 0;
+	bottom: 0;
 }
 
 main {
 	flex: 1 0 auto;
 	font-size: 14px;
 	margin-top: 0.6rem;
+	
+	/* for IE */
+	min-height: calc(100vh - 120px);
 }
 
-footer.page-footer {
-	margin-top: 0;
-}
 /*container*/
 .container {
 	width: 90%;
@@ -309,7 +314,7 @@ a {
 		<div class="container center-align white-text">
 			ⓒ2014 POSCO ICT, All Rights Reserved.
 		</div>
-  </footer>
+  	</footer>
 
 	<%-- 비번 변경 팝업 --%>
 	<!-- Modal Trigger -->
