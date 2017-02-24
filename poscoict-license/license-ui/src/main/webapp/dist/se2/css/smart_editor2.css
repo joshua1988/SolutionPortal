@@ -334,3 +334,20 @@ body, #smart_editor2, #smart_editor2 p, #smart_editor2 h1, #smart_editor2 h2, #s
 #smart_editor2 .se2_text_tool .hover .se2_text_tool_more { background-position: -13px -41px; }
 
 #smart_editor2 .se2_text_tool .active .se2_text_tool_more { background-position: -26px -41px; }
+
+/* CODE HILIGHT BUTTON */
+#smart_editor2 .se2_text_tool .se2_code_highlighter { background:url("../img/code-logo.png") no-repeat }
+
+#smart_editor2 .husky_seditor_CodeHighlighter_layer .se_input_code { display: block; width: 230px; height: 16px; margin: 0 5px 0 5px; *margin: -1px 5px 5px 0; padding: 5px 2px 0 4px; }
+
+#smart_editor2 .husky_seditor_CodeHighlighter_layer .se_input_code_language { width: 150px; height: 16px; margin-top: 10px; *margin: -1px 5px 5px 0; padding: 5px 2px 0 4px; }
+
+#smart_editor2 .husky_seditor_CodeHighlighter_layer .se2_close { position: absolute; top: 5px; right: 8px; width: 20px; height: 20px; background: url("../img/ko_KR/btn_set.png?130306") -151px -1px no-repeat; }
+
+#smart_editor2 .husky_seditor_CodeHighlighter_layer { width: 281px; padding: 11px 11px 6px 11px; color: #666; }
+
+#smart_editor2 .husky_seditor_CodeHighlighter_layer h3 { margin: 0; padding: 10px 0 13px 10px; background: url("../img/bg_find_h3.gif") 0 -1px repeat-x; font-size: 12px; line-height: 14px; letter-spacing: -1px; }
+
+#smart_editor2 .husky_seditor_CodeHighlighter_layer .se_code_textarea { margin-left: 5px; margin-top: 5px; }
+
+#smart_editor2 .husky_seditor_CodeHighlighter_layer .se_button_insert_code { margin-bottom: 6px; margin-left: 5px; width: 41px; height: 24px; margin-right: 3px; vertical-align: middle; background: url("../img/ko_KR/btn_set.png?130306") no-repeat;}

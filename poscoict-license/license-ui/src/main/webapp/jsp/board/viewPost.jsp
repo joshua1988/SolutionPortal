@@ -7,6 +7,10 @@
 		uri="http://www.springframework.org/security/tags"%>
 	<c:set var="contextPath" value="<%=request.getContextPath()%>" />
 	<link rel="stylesheet" type="text/css" href="${contextPath }/dist/se2/css/smart_editor2_out.css">
+
+	<!-- code highlighting -->
+
+	<link href="${contextPath}/dist/se2/code_highlight/prism.css" rel="stylesheet" />
 	<title>일반 게시판</title>
 </head>
 <body>
@@ -156,4 +160,5 @@
 					'<div class="table-responsive" />');
 		});
 	</script>
+	<script src="${contextPath}/dist/se2/code_highlight/prism.js"></script>
 </body>
