@@ -336,7 +336,7 @@ body, #smart_editor2, #smart_editor2 p, #smart_editor2 h1, #smart_editor2 h2, #s
 #smart_editor2 .se2_text_tool .active .se2_text_tool_more { background-position: -26px -41px; }
 
 /* CODE HILIGHT BUTTON */
-#smart_editor2 .se2_text_tool .se2_code_highlighter { background:url("../img/code-logo.png") no-repeat }
+#smart_editor2 .husky_seditor_ui_CodeHighlighter .se2_code_highlighter { background:url("../img/code-logo-21x21.png") no-repeat }
 
 #smart_editor2 .husky_seditor_CodeHighlighter_layer .se_input_code { display: block; width: 230px; height: 16px; margin: 0 5px 0 5px; *margin: -1px 5px 5px 0; padding: 5px 2px 0 4px; }
 
