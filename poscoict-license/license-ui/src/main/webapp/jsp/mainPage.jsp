@@ -312,7 +312,7 @@ a {
 	</main>
 	<footer class="page-footer grey darken-4" style="padding:18px 0;">
 		<div class="container center-align white-text">
-			ⓒ2014 POSCO ICT, All Rights Reserved.
+			ⓒ2017 POSCO ICT, All Rights Reserved.
 		</div>
   	</footer>
 

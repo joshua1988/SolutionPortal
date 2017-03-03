@@ -50,7 +50,7 @@
 				<span class="card-title" style="display:block;">${board.TITLE }</span>
 			</div>
 			<div class="section viewInfo">
-				<span class="badge hide-on-med-and-down" style="font-size:0.8em;">
+				<span class="badge hide-on-med-and-down" style="font-size:0.8em; position: inherit;">
 				<%-- <span style="font-size:0.8em;"> --%>
 					<%-- <b>분류 : ${folder} -> ${board.SUBCATEGORY==null?'공지':board.SUBCATEGORY } | </b>
 					<b>번호 : ${board.CONTENT_NO } | </b>

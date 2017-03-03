@@ -421,7 +421,7 @@ public class BoardService extends LmsUtil {
 	      	insertPush(pushObjectId, no, false, postType, folder, subCategory, title, mainContent.replaceAll("'", "&apos;"), userName, dateFormat());
 		} catch (Exception e) {
 			// TODO: handle exception
-			this.transactionManager.rollback(status);
+//			this.transactionManager.rollback(status);
 	      	logger.error("pushDao.insertPushMessage : ", e);
 	      	throw new UserException("Push 메시지 등록 실패");
 		}
