@@ -14,7 +14,7 @@ window.addEventListener('load', function() {
   });
 
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('https://' + location.host + '/sw.js').then(function(reg) {
+    navigator.serviceWorker.register('https://' + location.host + '/license/sw.js').then(function(reg) {
       if(reg.installing) {
         console.log('Service worker installing');
       } else if(reg.waiting) {
@@ -186,7 +186,7 @@ function updateStatus(endpoint, key, status) {
 
   // 16.11.28 (Mon)
   // send the endpoint to server
-  fetch('/push/subscription', {
+  fetch('/license/push/subscription', {
     method: 'post',
     headers: new Headers({
       'Content-Type': 'application/json',

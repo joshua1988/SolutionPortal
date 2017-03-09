@@ -12,6 +12,7 @@
     </modules>
     <properties>
         <spring-version>4.2.4.RELEASE</spring-version>
+        <spring-security-version>3.2.3.RELEASE</spring-security-version>
         <license-api-version>1.1.5</license-api-version>
     </properties>
     <name>POSCO ICT License</name>

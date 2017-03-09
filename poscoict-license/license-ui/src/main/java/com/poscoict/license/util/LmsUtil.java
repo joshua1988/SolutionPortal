@@ -535,44 +535,20 @@ public class LmsUtil {
 		ArrayList<String> lev1 = new ArrayList<String>();
 		ArrayList<String> lev2 = new ArrayList<String>();
 
-		if( list!=null && list.size()>0 ){
-			for( Map<String, Object> ma: list ){
-				if(ma.get("lev1_up").equals(rootId)) {
-					if(confirmKey(lev1,(String)ma.get("lev1"))  && ma.get("lev1_DELETED_DATE")==null){
-						lev1.add((String)ma.get("lev1"));
-//						<a href="#" class="collection-item active">Alvin</a>
-						temp+="<a href=\"#\" class=\"collection-item\"><i class=\"material-icons left\">folder_special</i>"+ma.get("lev1Name");
-
-							for( Map<String, Object> ma2: list ){
-								if( ma2.get("lev2_up")!=null && ma2.get("lev1").equals(ma.get("lev2_up")) ){
-									if(confirmKey(lev2,(String)ma2.get("lev2"))  && ma2.get("lev2_DELETED_DATE")==null){
-										lev2.add((String)ma2.get("lev2"));
-										if(ma2.get("lev2Name")!=null) {
-											temp+="<a href=\"#\" class=\"collection-item\" style=\"margin: 0 1.5em;\"><i class=\"material-icons left\">subdirectory_arrow_right</i>"+ma2.get("lev2Name");
-
-											if( ma2.get("lev3_up")!=null && ma2.get("lev2").equals(ma2.get("lev3_up")) ){
-//												temp+="<ul>";
-												for( Map<String, Object> ma3: list ){
-													if(ma3.get("lev3Name")!=null && ma3.get("lev3_up").equals(ma2.get("lev2")) && ma3.get("lev3_DELETED_DATE")==null) {
-														temp+="<a href=\"#\" class=\"collection-item\" style=\"margin: 0 3.0em;\"><i class=\"material-icons left\">folder</i>"+ma3.get("lev3Name")
-															+setProjectBoard( (String)ma3.get("lev3"), boardList, userDetails )
-															+"<a>";
-													}
-												}
-											}
-											temp+=setProjectBoard( (String)ma2.get("lev2"), boardList, userDetails );
-											temp+="</a>";
-										}
-										temp+="</a>"; // 수정
-									}
-								}
-							}
-							temp+=setProjectBoard( (String)ma.get("lev1"), boardList, userDetails );
-						temp+="</a>";
-					}
-				}
-			}
-		}
+//		if( list!=null && list.size()>0 ){
+//			for( Map<String, Object> ma: list ){
+//				if(ma.get("lev1_up").equals(rootId)) {
+//					if(confirmKey(lev1,(String)ma.get("lev1"))  && ma.get("lev1_DELETED_DATE")==null){
+//						lev1.add((String)ma.get("lev1"));
+////						<a href="#" class="collection-item active">Alvin</a>
+//						temp+="<a href=\"#\" class=\"collection-item\"><i class=\"material-icons left\">folder_special</i>"+ma.get("lev1Name");
+//						temp+=setProjectBoard( (String)ma.get("lev1"), boardList, userDetails );
+//						temp+="</a>";
+//					}
+//				}
+//			}
+//		}
+		
 		temp+=setProjectBoard( rootId, boardList, userDetails );
 		return temp;
 	}
@@ -583,69 +559,70 @@ public class LmsUtil {
 		List<Map<String, Object>> boardList = morgueDao.getProjectBoard(Consts.PROJECT_ROOT_ID);
 		String temp = "";
 
-		ArrayList<String> lev1 = new ArrayList<String>();
-		ArrayList<String> lev2 = new ArrayList<String>();
+//		ArrayList<String> lev1 = new ArrayList<String>();
+//		ArrayList<String> lev2 = new ArrayList<String>();
 
 		if( (list!=null && list.size()>0) || (boardList!=null && boardList.size()>0) ){
 //			temp+="<ul>";
-			for( Map<String, Object> ma: list ){
-				if(ma.get("lev1_up").equals(rootId)) {
-					if(confirmKey(lev1,(String)ma.get("lev1")) && ma.get("lev1_DELETED_DATE")==null){
-						lev1.add((String)ma.get("lev1"));
-
-						temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">folder_special</i>"+ma.get("lev1Name")
-								+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev1\' style=\"margin:5px 5px;\">관리</a>"
-								+"<ul id=\'folder_lev1\' class=\'dropdown-content\'>"
-								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('F','"+ma.get("lev1")+"')\">이안에 폴더 생성</a></li>"
-								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma.get("lev1")+"')\">이안에 게시판 생성</a></li>"
-								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma.get("lev1")+"')\">폴더명 변경</a></li>"
-								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma.get("lev1")+"')\">폴더 삭제</a></li>"
-								+"</ul>";
-
-							for( Map<String, Object> ma2: list ) {
-								if( ma2.get("lev2_up")!=null && ma2.get("lev1").equals(ma.get("lev2_up")) ){
-									temp+="<ul style=\"margin: 0 1.5em;\">";
-									if(confirmKey(lev2,(String)ma2.get("lev2")) && ma2.get("lev2_DELETED_DATE")==null) {
-										lev2.add((String)ma2.get("lev2"));
-										if(ma2.get("lev2Name")!=null) {
-											temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">subdirectory_arrow_right</i>"+ma2.get("lev2Name")
-											+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev2\' style=\"margin:5px 5px;\">관리</a>"
-											+"<ul id=\'folder_lev2\' class=\'dropdown-content\'>"
-												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('F','"+ma2.get("lev2")+"')\">이안에 폴더 생성</a></li>"
-												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma2.get("lev2")+"')\">이안에 게시판 생성</a></li>"
-												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma2.get("lev2")+"')\">폴더명 변경</a></li>"
-												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma2.get("lev2")+"')\">폴더 삭제</a></li>"
-											+"</ul>";
-
-											if( ma2.get("lev3_up")!=null && ma2.get("lev2").equals(ma2.get("lev3_up"))){
-												temp+="<ul style=\"margin: 0 1.5em;\">";
-												for( Map<String, Object> ma3: list ){
-													if(ma3.get("lev3Name")!=null && ma3.get("lev3_up").equals(ma2.get("lev2")) && ma3.get("lev3_DELETED_DATE")==null) {
-														temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">subdirectory_arrow_right</i>"+ma3.get("lev3Name")
-														+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev3\' style=\"margin:5px 5px;\">관리</a>"
-														+"<ul id=\'folder_lev3\' class=\'dropdown-content\'>"
-															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma3.get("lev3")+"')\">이안에 게시판 생성</a></li>"
-															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma3.get("lev3")+"')\">폴더명 변경</a></li>"
-															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma3.get("lev3")+"')\">폴더 삭제</a></li>"
-														+"</ul><br>"
-														+setDefaultProjectBoard( (String)ma3.get("lev3"), boardList, userDetails );
-													}
-												}
-												temp+="</ul>";
-											}
-
-											temp+=setDefaultProjectBoard( (String)ma2.get("lev2"), boardList, userDetails );
-											temp+="</li>";
-										}
-									}
-									temp+="</ul>";
-								}
-							}
-							// 1레벨 폴더 -> 2레벨 게시판
-							temp+=setDefaultProjectBoard( (String)ma.get("lev1"), boardList, userDetails );
-						}
-					}
-			}
+			
+//			for( Map<String, Object> ma: list ){
+//				if(ma.get("lev1_up").equals(rootId)) {
+//					if(confirmKey(lev1,(String)ma.get("lev1")) && ma.get("lev1_DELETED_DATE")==null){
+//						lev1.add((String)ma.get("lev1"));
+//
+//						/*temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">folder_special</i>"+ma.get("lev1Name")
+//								+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev1\' style=\"margin:5px 5px;\">관리</a>"
+//								+"<ul id=\'folder_lev1\' class=\'dropdown-content\'>"
+//								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('F','"+ma.get("lev1")+"')\">이안에 폴더 생성</a></li>"
+//								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma.get("lev1")+"')\">이안에 게시판 생성</a></li>"
+//								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma.get("lev1")+"')\">폴더명 변경</a></li>"
+//								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma.get("lev1")+"')\">폴더 삭제</a></li>"
+//								+"</ul>";*/
+//
+//							/*for( Map<String, Object> ma2: list ) {
+//								if( ma2.get("lev2_up")!=null && ma2.get("lev1").equals(ma.get("lev2_up")) ){
+//									temp+="<ul style=\"margin: 0 1.5em;\">";
+//									if(confirmKey(lev2,(String)ma2.get("lev2")) && ma2.get("lev2_DELETED_DATE")==null) {
+//										lev2.add((String)ma2.get("lev2"));
+//										if(ma2.get("lev2Name")!=null) {
+//											temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">subdirectory_arrow_right</i>"+ma2.get("lev2Name")
+//											+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev2\' style=\"margin:5px 5px;\">관리</a>"
+//											+"<ul id=\'folder_lev2\' class=\'dropdown-content\'>"
+//												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('F','"+ma2.get("lev2")+"')\">이안에 폴더 생성</a></li>"
+//												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma2.get("lev2")+"')\">이안에 게시판 생성</a></li>"
+//												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma2.get("lev2")+"')\">폴더명 변경</a></li>"
+//												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma2.get("lev2")+"')\">폴더 삭제</a></li>"
+//											+"</ul>";
+//
+//											if( ma2.get("lev3_up")!=null && ma2.get("lev2").equals(ma2.get("lev3_up"))){
+//												temp+="<ul style=\"margin: 0 1.5em;\">";
+//												for( Map<String, Object> ma3: list ){
+//													if(ma3.get("lev3Name")!=null && ma3.get("lev3_up").equals(ma2.get("lev2")) && ma3.get("lev3_DELETED_DATE")==null) {
+//														temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">subdirectory_arrow_right</i>"+ma3.get("lev3Name")
+//														+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev3\' style=\"margin:5px 5px;\">관리</a>"
+//														+"<ul id=\'folder_lev3\' class=\'dropdown-content\'>"
+//															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma3.get("lev3")+"')\">이안에 게시판 생성</a></li>"
+//															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma3.get("lev3")+"')\">폴더명 변경</a></li>"
+//															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma3.get("lev3")+"')\">폴더 삭제</a></li>"
+//														+"</ul><br>"
+//														+setDefaultProjectBoard( (String)ma3.get("lev3"), boardList, userDetails );
+//													}
+//												}
+//												temp+="</ul>";
+//											}
+//
+//											temp+=setDefaultProjectBoard( (String)ma2.get("lev2"), boardList, userDetails );
+//											temp+="</li>";
+//										}
+//									}
+//									temp+="</ul>";
+//								}
+//							}*/
+//							// 1레벨 폴더 -> 2레벨 게시판
+//							temp+=setDefaultProjectBoard( (String)ma.get("lev1"), boardList, userDetails );
+//						}
+//					}
+//			}
 //			temp+="</br>";
 			temp+=setDefaultProjectBoard( rootId, boardList, userDetails );
 		}
