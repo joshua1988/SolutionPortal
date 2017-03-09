@@ -14,15 +14,6 @@
 			<a class="waves-effect waves-light btn modal-trigger" style="margin: 0 0.5em; padding: 0 5px;" href="#board_admin"
 				onclick="javascript:createProjectFun('B','root')"><i class="material-icons left">developer_board</i>게시판 생성</a>
 		</div>
-		<span class="card-title">
-			<%-- <h5>게시판 관리</h5>
-			<a class="waves-effect waves-light btn"
-				onclick="javascript:createProjectFun('F','root')"><i class="material-icons left">cloud</i>루트폴더 생성</a>
-			<a class="waves-effect waves-light btn"
-				onclick="javascript:createProjectFun('B','root')"><i class="material-icons left">cloud</i>게시판 생성</a> --%>
-			<%-- <button type="button" onclick="javascript:createProjectFun('F','root')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#projectFolderModal">루트폴더 생성</button>
-			<button type="button" onclick="javascript:createProjectFun('B','root')" class="btn btn-default btn-sm" data-toggle="modal" data-target="#projectFolderModal">게시판 생성</button> --%>
-		</span>
 		<div class="card-content" style="margin: 1em 1em;">
 			<c:if test="${empty projectFolders || projectFolders==null }">목록이 없습니다.</c:if>
 			<c:if test="${not empty projectFolders && projectFolders!=null }">

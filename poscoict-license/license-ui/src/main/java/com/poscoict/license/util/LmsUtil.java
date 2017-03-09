@@ -10,6 +10,8 @@ import java.util.Map;
 
 import javax.crypto.Cipher;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.StandardPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ import com.poscoict.license.vo.UserPermission;
 public class LmsUtil {
 	@Autowired
 	private MorgueDao morgueDao;
+	
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	public String dateFormat() {
         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy/MM/dd HH:mm:ss" );
@@ -528,104 +532,21 @@ public class LmsUtil {
 
 	// Main Page 좌측 Tree 구성 메서드
 	public String getProjectFolderTree( String rootId, CustomUserDetails userDetails ){
-		List<Map<String, Object>> list = morgueDao.getProjectFolders(rootId);
 		List<Map<String, Object>> boardList = morgueDao.getProjectBoard(Consts.PROJECT_ROOT_ID);
 		String temp = "";
-
-		ArrayList<String> lev1 = new ArrayList<String>();
-		ArrayList<String> lev2 = new ArrayList<String>();
-
-//		if( list!=null && list.size()>0 ){
-//			for( Map<String, Object> ma: list ){
-//				if(ma.get("lev1_up").equals(rootId)) {
-//					if(confirmKey(lev1,(String)ma.get("lev1"))  && ma.get("lev1_DELETED_DATE")==null){
-//						lev1.add((String)ma.get("lev1"));
-////						<a href="#" class="collection-item active">Alvin</a>
-//						temp+="<a href=\"#\" class=\"collection-item\"><i class=\"material-icons left\">folder_special</i>"+ma.get("lev1Name");
-//						temp+=setProjectBoard( (String)ma.get("lev1"), boardList, userDetails );
-//						temp+="</a>";
-//					}
-//				}
-//			}
-//		}
-		
-		temp+=setProjectBoard( rootId, boardList, userDetails );
+		temp += setProjectBoard( rootId, boardList, userDetails );
 		return temp;
 	}
 
     // 게시판 관리 Page 의 폴더 구조
 	public String getDefaultProjectFolderTree( String rootId, CustomUserDetails userDetails ){
-		List<Map<String, Object>> list = morgueDao.getProjectFolders(rootId);
 		List<Map<String, Object>> boardList = morgueDao.getProjectBoard(Consts.PROJECT_ROOT_ID);
 		String temp = "";
 
-//		ArrayList<String> lev1 = new ArrayList<String>();
-//		ArrayList<String> lev2 = new ArrayList<String>();
-
-		if( (list!=null && list.size()>0) || (boardList!=null && boardList.size()>0) ){
-//			temp+="<ul>";
-			
-//			for( Map<String, Object> ma: list ){
-//				if(ma.get("lev1_up").equals(rootId)) {
-//					if(confirmKey(lev1,(String)ma.get("lev1")) && ma.get("lev1_DELETED_DATE")==null){
-//						lev1.add((String)ma.get("lev1"));
-//
-//						/*temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">folder_special</i>"+ma.get("lev1Name")
-//								+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev1\' style=\"margin:5px 5px;\">관리</a>"
-//								+"<ul id=\'folder_lev1\' class=\'dropdown-content\'>"
-//								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('F','"+ma.get("lev1")+"')\">이안에 폴더 생성</a></li>"
-//								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma.get("lev1")+"')\">이안에 게시판 생성</a></li>"
-//								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma.get("lev1")+"')\">폴더명 변경</a></li>"
-//								+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma.get("lev1")+"')\">폴더 삭제</a></li>"
-//								+"</ul>";*/
-//
-//							/*for( Map<String, Object> ma2: list ) {
-//								if( ma2.get("lev2_up")!=null && ma2.get("lev1").equals(ma.get("lev2_up")) ){
-//									temp+="<ul style=\"margin: 0 1.5em;\">";
-//									if(confirmKey(lev2,(String)ma2.get("lev2")) && ma2.get("lev2_DELETED_DATE")==null) {
-//										lev2.add((String)ma2.get("lev2"));
-//										if(ma2.get("lev2Name")!=null) {
-//											temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">subdirectory_arrow_right</i>"+ma2.get("lev2Name")
-//											+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev2\' style=\"margin:5px 5px;\">관리</a>"
-//											+"<ul id=\'folder_lev2\' class=\'dropdown-content\'>"
-//												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('F','"+ma2.get("lev2")+"')\">이안에 폴더 생성</a></li>"
-//												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma2.get("lev2")+"')\">이안에 게시판 생성</a></li>"
-//												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma2.get("lev2")+"')\">폴더명 변경</a></li>"
-//												+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma2.get("lev2")+"')\">폴더 삭제</a></li>"
-//											+"</ul>";
-//
-//											if( ma2.get("lev3_up")!=null && ma2.get("lev2").equals(ma2.get("lev3_up"))){
-//												temp+="<ul style=\"margin: 0 1.5em;\">";
-//												for( Map<String, Object> ma3: list ){
-//													if(ma3.get("lev3Name")!=null && ma3.get("lev3_up").equals(ma2.get("lev2")) && ma3.get("lev3_DELETED_DATE")==null) {
-//														temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">subdirectory_arrow_right</i>"+ma3.get("lev3Name")
-//														+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'folder_lev3\' style=\"margin:5px 5px;\">관리</a>"
-//														+"<ul id=\'folder_lev3\' class=\'dropdown-content\'>"
-//															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('B','"+ma3.get("lev3")+"')\">이안에 게시판 생성</a></li>"
-//															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EF','"+ma3.get("lev3")+"')\">폴더명 변경</a></li>"
-//															+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DF','"+ma3.get("lev3")+"')\">폴더 삭제</a></li>"
-//														+"</ul><br>"
-//														+setDefaultProjectBoard( (String)ma3.get("lev3"), boardList, userDetails );
-//													}
-//												}
-//												temp+="</ul>";
-//											}
-//
-//											temp+=setDefaultProjectBoard( (String)ma2.get("lev2"), boardList, userDetails );
-//											temp+="</li>";
-//										}
-//									}
-//									temp+="</ul>";
-//								}
-//							}*/
-//							// 1레벨 폴더 -> 2레벨 게시판
-//							temp+=setDefaultProjectBoard( (String)ma.get("lev1"), boardList, userDetails );
-//						}
-//					}
-//			}
-//			temp+="</br>";
-			temp+=setDefaultProjectBoard( rootId, boardList, userDetails );
+		if(boardList!=null && boardList.size() > 0){
+			temp += setDefaultProjectBoard( rootId, boardList, userDetails );
 		}
+		
 		return temp;
 	}
 
@@ -650,21 +571,13 @@ public class LmsUtil {
 								&& !folderId.equals(Consts.PROJECT_POSBEE_ROOT_ID)) temp+="<ul style=\"margin: 0 1.5em;\">";
 
 						temp+="<i class=\"material-icons\" style=\"vertical-align:middle;\">view_list</i>"+map.get("BOARD_NAME")
-						+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'board_opt\' style=\"margin: 5px 5px;\">관리</a>"
-						+"<ul id=\'board_opt\' class=\'dropdown-content\'>"
-						+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EB','"+map.get("BOARD_ID")+"')\">게시판명 변경</a></li>"
-						+"<li><a href=\"#board_admin\" class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DB','"+map.get("BOARD_ID")+"')\">게시판 삭제</a></li>"
+						+"<a class=\'dropdown-button btn\' href=\'#\' data-activates=\'board_opt_"+map.get("BOARD_ID")+"\' style=\"margin: 5px 5px;\">관리</a>"
+						+"<ul id=\'board_opt_"+map.get("BOARD_ID")+"\' class=\'dropdown-content\'>"
+						+"<li><a href=\'#board_admin\' class=\"modal-trigger\" onclick=\"javascript:createProjectFun('EB','"+map.get("BOARD_ID")+"')\">게시판명 변경</a></li>"
+						+"<li><a href=\'#board_admin\' class=\"modal-trigger\" onclick=\"javascript:createProjectFun('DB','"+map.get("BOARD_ID")+"')\">게시판 삭제</a></li>"
 						+"</ul><br>";
-
-//						temp+="<li><span class=\"glyphicon glyphicon-list\"></span>&nbsp;&nbsp;"+map.get("BOARD_NAME")
-//								+"&nbsp;&nbsp;"
-//								+"<div class=\"btn-group btn-group-xs\">"
-//								+"<button type=\"button\" class=\"btn btn-warning dropdown-toggle\" data-toggle=\"dropdown\">"
-//								+"관리<span class=\"caret\"></span></button>"
-//								+"<ul class=\"dropdown-menu\">"
-//								+"<li><a href=\"#\" onclick=\"javascript:createProjectFun('EB','"+map.get("BOARD_ID")+"')\" data-toggle=\"modal\" data-target=\"#projectFolderModal\">게시판명 변경</a></li>"
-//								+"<li><a href=\"#\" onclick=\"javascript:createProjectFun('DB','"+map.get("BOARD_ID")+"')\" data-toggle=\"modal\" data-target=\"#projectFolderModal\">게시판 삭제</a></li>"
-//								+"</ul></div>";
+						
+						logger.info("@@ Board_id :" + map.get("BOARD_ID"));
 
 						if(!folderId.equals(Consts.PROJECT_GLUE_ROOT_ID) && !folderId.equals(Consts.PROJECT_GLUEMASTER_ROOT_ID)
 								&& !folderId.equals(Consts.PROJECT_GLUEMOBILE_ROOT_ID)
