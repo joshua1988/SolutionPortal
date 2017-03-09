@@ -18,7 +18,7 @@
 	<c:if test="${not empty packageList && packageList.size()>0 }">
 		<c:forEach var="packageL" items="${packageList }">
 			<div class="card-panel">
-	      <h5>
+	      <h5 style="padding-top:24px;">
       	  <c:if test="${packageL.FILE_CATEGORY != 'etc' }">
           ${packageL.FILE_CATEGORY }
           </c:if>

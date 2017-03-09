@@ -20,10 +20,10 @@
 			<c:if test="${packageL.FILE_CATEGORY != 'etc' }">
 				<div class="card-panel">
 					<div class="card-content">
-						<h5>
-		          ${packageL.FILE_CATEGORY }
+						<h5 style="padding-top:24px;">
 		          ${packageL.PACKAGE_VERSION }
-			      </h5>
+		          ${packageL.FILE_CATEGORY }
+	      		</h5>
 						<div class="section">
 							<table class="highlight">
 								<tbody>
