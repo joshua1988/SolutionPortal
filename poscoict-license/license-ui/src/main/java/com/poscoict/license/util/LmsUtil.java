@@ -629,7 +629,7 @@ public class LmsUtil {
 				if(secretmode){
 					if( map.get("FOLDER_ID").equals(folderId) ){
 //						temp+="<li data-jstree='{\"icon\":\"glyphicon glyphicon-list\"}' id=\""+map.get("BOARD_ID")+"\" onclick=\"javascript:getCustomBoardList('"+map.get("BOARD_ID")+"')\">"+map.get("BOARD_NAME")+"</li>";
-						temp+="<a href=\"#\" id=\""+map.get("BOARD_ID")+"\" onclick=\"javascript:getCustomBoardList('"+map.get("BOARD_ID")+"')\" class=\"collection-item\"><i class=\"material-icons left\">details</i>"+map.get("BOARD_NAME")+"</a>";
+						temp+="<a href=\"#\" id=\""+map.get("BOARD_ID")+"\" onclick=\"javascript:getCustomBoardList('"+map.get("BOARD_ID")+"')\" class=\"collection-item\"><i class=\"material-icons left\">view_list</i>"+map.get("BOARD_NAME")+"</a>";
 					}
 				}
 			}
