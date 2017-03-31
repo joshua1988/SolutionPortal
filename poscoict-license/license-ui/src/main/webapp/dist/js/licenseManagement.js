@@ -201,14 +201,18 @@ function addUser(){
 				return false;
 			}
 
-			var temp = $(".fileCheck"+i).is(":checked");
-			if(!temp){
-				if($(".file"+i).val()==""){
-					alertPopup("파일을 선택해 주세요.");
-					check = false;
-					return false;
-				}
-			}
+			// 17.03.31(금),
+			// 제품등록 탭 추가 후 라이센스 파일 체크 안하면 그냥 등록 되어야 하는데,
+			// 파일 선택하라는 경보떠서 일단 주석 처리
+
+			// var temp = $(".fileCheck"+i).is(":checked");
+			// if(!temp){
+			// 	if($(".file"+i).val()==""){
+			// 		alertPopup("파일을 선택해 주세요.");
+			// 		check = false;
+			// 		return false;
+			// 	}
+			// }
 		}
 	}
 

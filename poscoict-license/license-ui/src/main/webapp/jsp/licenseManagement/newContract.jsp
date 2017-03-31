@@ -333,7 +333,7 @@
 						'<div class="col s6">'+
 							'라이센스 파일'+
 							'<input type="checkbox" class="filled-in" id="filledIn" onclick="javascript:fileCheck('+no+');" class="fileCheck'+no+'" checked="checked"/>'+
-							'<label for="filledIn">Filled in</label>'+
+							'<label for="filledIn">라이센스 없을 시 체크</label>'+
 							'<input type="file" class="file'+no+'" name="file['+no+']">'+
 							'<input type="hidden" name="CHECKBOX['+no+']" value="false" class="fileCheckVal'+no+'">'+
 						'</div>'+
