@@ -102,9 +102,9 @@ public class LmsUtil {
 		// 17.01.11(수), 소스 추가
 		// Glue Mobile 신규 솔루션으로 추가할 때, 패키지 저장하는 file path 누락하였음
 		// 결론 : 새로 file path 지정 후 추가 조치
-//		if(folder.equals("GlueMobile")){
-//			path = Consts.GLUE_MOBILE_FILE_HOME;
-//		}
+		if(folder.equals("GlueMobile")){
+			path = Consts.GLUE_MOBILE_FILE_HOME;
+		}
 		if(folder.equals("etc")){
 			path = Consts.ETC_FILE_HOME;
 		}

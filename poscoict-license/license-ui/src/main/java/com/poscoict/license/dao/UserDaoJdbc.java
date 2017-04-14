@@ -281,7 +281,8 @@ public class UserDaoJdbc implements UserDao {
 
     // 리플 삭제
     public void deleteReply( String userNo, int contentNo, String folder, int reContentNo ) {
-        this.jdbcTemplate.update( getQuery("board.deleteReply"), userNo, contentNo, folder, reContentNo, userNo);
+//        this.jdbcTemplate.update( getQuery("board.deleteReply"), userNo, contentNo, folder, reContentNo, userNo);
+    	this.jdbcTemplate.update( getQuery("board.deleteReply"), userNo, contentNo, folder, reContentNo);
     }
 
     // 비밀번호 확인

@@ -361,8 +361,8 @@ public class BoardService extends LmsUtil {
                 int attachSize = (int) boardAttach[i].getSize();
                 if(attachSize==0) continue;
 
-                if(attachSize>100*1024*1000)
-                	throw new UserException("첨부파일 크기가 100MB를 초과 하였습니다.");
+                if(attachSize>500*1024*1000)
+                	throw new UserException("첨부파일 크기가 500MB를 초과 하였습니다.");
 
                 attachPath+="("+(i+1)+")_"+UUID.randomUUID().toString().replaceAll("-", "").substring(0, 12);
 
@@ -800,8 +800,11 @@ public class BoardService extends LmsUtil {
     }
 
     public String deleteReply( String folder, String reContentNo, String contentNo, HttpSession session ) {
-        logger.info("deleteReply: contentNo= " + reContentNo);
+    	logger.info("deleteReply: folder =============== " + folder);
+    	logger.info("deleteReply: reContentNo= " + reContentNo);
+        logger.info("deleteReply: contentNo =============== " + contentNo);
         logger.info("deleteReply: USER_NO =============== " + (String) session.getAttribute( "USER_NO" ));
+        
         userDao.deleteReply((String) session.getAttribute( "USER_NO" ), Integer.parseInt(contentNo), folder, Integer.parseInt(reContentNo));
         return "end";
     }
