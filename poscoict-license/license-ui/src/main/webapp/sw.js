@@ -34,7 +34,7 @@ const precacheFiles = [
     './dist/images/GluePDKang.png',
     './dist/images/GluePDCho.png',
     './dist/images/GluePMHwang.png',
-    './dist/images/GlueShin.png',
+    './dist/images/GluePMShin.png',
     './dist/images/guest.png',
     './dist/images/PosBeeKang.png',
     './dist/img/arrow_top.gif',

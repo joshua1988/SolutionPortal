@@ -47,7 +47,7 @@ function treeActiveValidation () {
 			sessionStorage.setItem("treeKey", "Glue");
 		} else if (/^uCUBE/.test(event.target.id)) {
 			sessionStorage.setItem("treeKey", "uCUBE");
-		} else if (/^PosBee/.test(event.target.id)) {
+		} else if (/posbee/i.test(event.target.id)) {
 			sessionStorage.setItem("treeKey", "PosBee");
 		} else if (/^Sol/.test(event.target.id)) {
 			sessionStorage.setItem("treeKey", "Sol");

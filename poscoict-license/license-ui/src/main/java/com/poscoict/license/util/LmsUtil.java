@@ -347,7 +347,7 @@ public class LmsUtil {
 		sb.append("<a href=\"#\" id=\"GlueMobileFaq\" onclick=\"javascript:boardList('faq','GLUEMOBILE','GlueMobileFaq')\" class=\"collection-item\"><i class=\"material-icons left\" id=\"GlueMobileFaq\">help_outline</i>FAQ</a>");
 		sb.append("<a href=\"#\" id=\"GlueMobileTech\" onclick=\"javascript:boardList('technical','GLUEMOBILE','GlueMobileTech')\" class=\"collection-item\"><i class=\"material-icons left\" id=\"GlueMobileTech\">library_books</i>기술문서</a>");
         if(up.isFUNCTION_GLUEMOBILE_ADMIN()) sb.append("<a href=\"#\" id=\"GlueMobileManager\" onclick=\"javascript:projectManagement('GLUEMOBILE','GlueMobileManager')\" class=\"collection-item\"><i class=\"material-icons left\" id=\"GlueMobileManager\">supervisor_account</i>관리</a>");
-         if(up.isFUNCTION_GLUEMOBILE_ADMIN()) sb.append( getProjectFolderTree(Consts.PROJECT_GLUEMOBILE_ROOT_ID, userDetails) );
+        if(up.isFUNCTION_GLUEMOBILE_ADMIN()) sb.append( getProjectFolderTree(Consts.PROJECT_GLUEMOBILE_ROOT_ID, userDetails) );
         sb.append("</div></div>");
         sb.append("</li>");
 
@@ -629,7 +629,7 @@ public class LmsUtil {
 				if(secretmode){
 					if( map.get("FOLDER_ID").equals(folderId) ){
 //						temp+="<li data-jstree='{\"icon\":\"glyphicon glyphicon-list\"}' id=\""+map.get("BOARD_ID")+"\" onclick=\"javascript:getCustomBoardList('"+map.get("BOARD_ID")+"')\">"+map.get("BOARD_NAME")+"</li>";
-						temp+="<a href=\"#\" id=\""+map.get("BOARD_ID")+"\" onclick=\"javascript:getCustomBoardList('"+map.get("BOARD_ID")+"')\" class=\"collection-item\"><i class=\"material-icons left\">view_list</i>"+map.get("BOARD_NAME")+"</a>";
+						temp+="<a href=\"#\" id=\""+map.get("BOARD_ID")+map.get("FOLDER_ID")+"\" onclick=\"javascript:getCustomBoardList('"+map.get("BOARD_ID")+"')\" class=\"collection-item\"><i class=\"material-icons left\">view_list</i>"+map.get("BOARD_NAME")+"</a>";
 					}
 				}
 			}
